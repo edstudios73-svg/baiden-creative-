@@ -138,3 +138,20 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;paddin
 .founder h3{font-size:clamp(1.6rem,3vw,2.4rem)}
 .founder p{color:var(--mute);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;margin-top:.4rem}
 @media(max-width:800px){.aud,.founders{grid-template-columns:1fr}}
+
+/* pricing rows (compact) */
+.plans{display:block!important;border-top:1px solid #333;margin-bottom:2rem!important}
+.plan{display:grid!important;grid-template-columns:1.1fr 2fr 140px 30px;gap:1.5rem;align-items:center;padding:1.6rem 0!important;background:none!important;border:0!important;border-bottom:1px solid #333!important;border-radius:0!important;transition:.3s!important;color:#fff!important}
+.plan:hover{padding-left:1rem!important;background:#fff!important;color:#000!important}
+.plan:hover .best,.plan:hover .feats,.plan:hover small{color:#444!important}
+.plan h3{font-size:1.5rem;display:flex;align-items:center;gap:.8rem}
+.plan .badge{position:static;font-size:.6rem;padding:.2rem .6rem;border-color:currentColor;background:none;color:inherit}
+.plan .best{margin:.2rem 0 0!important}
+.plan .feats{color:var(--mute);font-size:.9rem}
+.plan .price{margin:0!important;font-size:1.5rem!important;text-align:right;white-space:nowrap}
+.plan .price small{height:auto;font-size:.65rem;display:inline;margin-right:.4rem}
+.plan .go{font-size:1.4rem;text-align:right}
+@media(max-width:800px){.plan{grid-template-columns:1fr auto!important;gap:.6rem!important}.plan .feats{grid-column:1/-1;order:3}.plan .go{display:none}}
+.plan{grid-template-columns:1.1fr 2fr 200px 30px!important}
+.plan.featured .best,.plan.featured .feats{color:var(--mute)!important}
+.plan.featured:hover .best,.plan.featured:hover .feats{color:#444!important}
