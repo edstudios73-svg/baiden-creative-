@@ -20,3 +20,15 @@ $('#form').addEventListener('submit',e=>{
   const body=`Name: ${f.get('name')}\nPhone: ${f.get('phone')||'-'}\nService: ${f.get('service')}\n\n${f.get('msg')}`;
   location.href=`mailto:edstudios77@gmail.com?subject=${encodeURIComponent('New project inquiry from '+f.get('name'))}&body=${encodeURIComponent(body)}`;
 });
+
+// horizontal scrollers: arrows + drag
+document.querySelectorAll('[data-scroll]').forEach(sc=>{
+  const arrows=sc.previousElementSibling&&sc.previousElementSibling.querySelector('[data-arrows]');
+  if(arrows){const [b1,b2]=arrows.querySelectorAll('button');const step=()=>sc.firstElementChild.getBoundingClientRect().width+20;
+    b1.onclick=()=>sc.scrollBy({left:-step(),behavior:'smooth'});b2.onclick=()=>sc.scrollBy({left:step(),behavior:'smooth'});}
+  let down=false,sx=0,sl=0,moved=false;
+  sc.addEventListener('mousedown',e=>{down=true;moved=false;sx=e.pageX;sl=sc.scrollLeft});
+  addEventListener('mouseup',()=>{down=false;sc.classList.remove('drag')});
+  sc.addEventListener('mousemove',e=>{if(!down)return;const d=e.pageX-sx;if(Math.abs(d)>5){moved=true;sc.classList.add('drag')}sc.scrollLeft=sl-d});
+  sc.addEventListener('click',e=>{if(moved){e.preventDefault();e.stopPropagation();moved=false}},true);
+});
