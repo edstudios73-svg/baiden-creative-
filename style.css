@@ -97,3 +97,28 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;paddin
  .step{border-right:0;border-bottom:1px solid var(--line)}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+/* pricing */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;margin-bottom:4rem}
+.plan{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:2rem;display:flex;flex-direction:column;transition:border-color .3s,transform .15s}
+.plan:hover{border-color:#fff}
+.plan.featured{background:#fff;color:#000}
+.plan.featured .best,.plan.featured li{color:#333;border-color:#ddd}
+.plan.featured .btn{background:#000;color:#fff;border-color:#000}
+.badge{position:absolute;top:-12px;left:2rem;background:#000;color:#fff;border:1px solid #fff;font:700 .7rem var(--h);letter-spacing:.15em;text-transform:uppercase;padding:.3rem .8rem;border-radius:999px}
+.plan h3{font-size:1.6rem}.best{color:var(--mute);font-size:.9rem;margin:.3rem 0 1.2rem}
+.price{font:700 2.6rem var(--h);letter-spacing:-.03em;margin-bottom:1.2rem}
+.price small{display:block;font:500 .8rem Inter;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);height:1rem}
+.plan.featured .price small{color:#555}
+.plan ul{margin-bottom:1.8rem;flex:1}
+.plan li{padding:.55rem 0;border-top:1px solid var(--line);font-size:.9rem;color:#ccc}
+.plan li::before{content:"✓ ";font-weight:700}
+.plan .btn{text-align:center}
+.sub{font-size:1.8rem;margin-bottom:1.5rem}
+.table{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:2.5rem}
+.row{display:grid;grid-template-columns:1.1fr 2fr auto;gap:1rem;padding:1rem 1.4rem;border-bottom:1px solid var(--line);align-items:center;transition:.2s}
+.row:last-child{border:0}.row:hover{background:#111}
+.row b{font-family:var(--h)}.row span{color:var(--mute);font-size:.9rem}.row em{font:700 1rem var(--h);font-style:normal;text-align:right}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem}
+.notes h4{font:700 .8rem var(--h);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.5rem}
+.notes p,.foot{color:var(--mute);font-size:.92rem}
+@media(max-width:800px){.row{grid-template-columns:1fr auto}.row span{grid-column:1/-1;order:3}}
