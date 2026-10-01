@@ -86,3 +86,10 @@ hero.addEventListener('mousemove',e=>{const r=hero.getBoundingClientRect();hero.
     requestAnimationFrame(loop)}
   loop();
 })();
+
+// scroll cue + edge fade for the hero strip
+(function(){const sc=document.querySelector('.disc .hscroll'),cue=document.querySelector('.cue');if(!sc)return;
+  const upd=()=>{const max=sc.scrollWidth-sc.clientWidth,p=max>0?sc.scrollLeft/max:1;
+    cue.style.setProperty('--p',(.33+.67*p).toFixed(3));sc.classList.toggle('at-end',p>.97);
+    if(sc.scrollLeft>40)cue.querySelector('.txt').firstChild.textContent=p>.97?'That\u2019s all three ':'Keep going '};
+  sc.addEventListener('scroll',upd,{passive:true});upd();addEventListener('resize',upd)})();
