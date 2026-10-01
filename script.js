@@ -27,7 +27,7 @@ document.querySelectorAll('[data-scroll]').forEach(sc=>{
 
 /* ===== v2 interactions ===== */
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-// scroll progress + nav active
+// nav: highlight current section
 const links=[...document.querySelectorAll('#menu a[href^="#"]:not(.btn)')];
 const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
 links.forEach(a=>{const s=document.querySelector(a.getAttribute('href'));s&&so.observe(s)});
@@ -37,7 +37,7 @@ document.querySelectorAll('.hero h1 > span:not(.sr)').forEach((sp,k)=>{
   sp.innerHTML=words.map((w,i)=>`<span class="w"><i style="--i:${k*3+i}">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</i></span>`).join(' ');
 });
 const hero=document.querySelector('.hero');
-// interactive network canvas: signals, click bursts, cursor attraction
+// hero network animation
 (function(){
   const cv=document.getElementById('net');if(!cv||reduce)return;
   const ctx=cv.getContext('2d');let W,H,pts=[],sig=[],rip=[],mouse={x:-999,y:-999},run=true,t=0;
@@ -75,3 +75,10 @@ const hero=document.querySelector('.hero');
 (function(){const fit=()=>document.querySelectorAll('.work .frame').forEach(f=>{const s=f.clientWidth/1440;f.style.setProperty('--s',s.toFixed(4))});
   fit();addEventListener('resize',fit);
   if('ResizeObserver' in window){const ro=new ResizeObserver(fit);document.querySelectorAll('.work .frame').forEach(f=>ro.observe(f))}})();
+
+// WhatsApp: open a chat with the form details pre-filled
+document.getElementById('wa').addEventListener('click',()=>{
+  const f=new FormData(document.getElementById('form'));
+  const t=`Hello Baiden Creatives, I'd like to start a project.\nName: ${f.get('name')||''}\nService: ${f.get('service')}\n${f.get('msg')||''}`;
+  open('https://wa.me/233558362423?text='+encodeURIComponent(t),'_blank','noopener');
+});
