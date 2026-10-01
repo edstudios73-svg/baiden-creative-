@@ -70,3 +70,8 @@ const hero=document.querySelector('.hero');
 (function(){const h=document.querySelector('.hero'),n=document.getElementById('nav');
   const f=()=>n.classList.toggle('over-hero',scrollY<h.offsetHeight-120&&!document.getElementById('menu').classList.contains('open'));
   addEventListener('scroll',f,{passive:true});addEventListener('resize',f);f()})();
+
+// scale live site previews to fit their card
+(function(){const fit=()=>document.querySelectorAll('.work .frame').forEach(f=>{const s=f.clientWidth/1440;f.style.setProperty('--s',s.toFixed(4))});
+  fit();addEventListener('resize',fit);
+  if('ResizeObserver' in window){const ro=new ResizeObserver(fit);document.querySelectorAll('.work .frame').forEach(f=>ro.observe(f))}})();

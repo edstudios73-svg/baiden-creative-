@@ -422,3 +422,17 @@ a.work p{color:var(--mute);font-size:.9rem}
 a.work .meta>span{color:var(--mute);font-size:.82rem;text-align:right}
 @media(max-width:800px){.hero{padding-top:5rem!important}.hero h1{font-size:clamp(2.3rem,11vw,3.6rem)!important}.visit{opacity:1;transform:none}a.work .meta{flex-direction:column;gap:.2rem}a.work .meta>span{text-align:left}}
 @media(prefers-reduced-motion:reduce){.scrollhint i{animation:none}}
+
+/* ===== v10: live previews in portfolio ===== */
+.work .shot{display:flex;flex-direction:column;position:relative;aspect-ratio:16/10;border-radius:14px;overflow:hidden;border:1px solid #2a2a2a;transition:border-color .25s}
+.work:hover .shot{border-color:#fff}
+.work .frame{position:relative;flex:1;overflow:hidden;background:inherit}
+.work .frame .mock-title{position:absolute;left:1.6rem;top:50%;transform:translateY(-50%);margin:0}
+.work .frame iframe{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;background:transparent;transform:scale(var(--s,.38));transform-origin:0 0;pointer-events:none}
+.work .cover{position:absolute;inset:0;z-index:3;display:block}
+.work .cover:focus-visible{outline:2px solid #fff;outline-offset:-4px}
+.work .visit{position:absolute;right:1rem;bottom:1rem}
+.work:hover .visit,.work .cover:focus-visible .visit{opacity:1;transform:none}
+.work .meta h3 a{color:#fff}
+.work .meta h3 a:hover{text-decoration:underline;text-underline-offset:4px}
+.work .shot::after{display:none!important}
