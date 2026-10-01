@@ -28,8 +28,6 @@ document.querySelectorAll('[data-scroll]').forEach(sc=>{
 /* ===== v2 interactions ===== */
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 // scroll progress + nav active
-const bar=document.querySelector('.progress');
-addEventListener('scroll',()=>{const h=document.documentElement;bar.style.transform=`scaleX(${scrollY/(h.scrollHeight-innerHeight||1)})`},{passive:true});
 const links=[...document.querySelectorAll('#menu a[href^="#"]:not(.btn)')];
 const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
 links.forEach(a=>{const s=document.querySelector(a.getAttribute('href'));s&&so.observe(s)});
@@ -67,13 +65,6 @@ const hero=document.querySelector('.hero');
     requestAnimationFrame(loop)}
   loop();
 })();
-
-// scroll cue + edge fade for the hero strip
-(function(){const sc=document.querySelector('.disc .hscroll'),cue=document.querySelector('.cue');if(!sc)return;
-  const upd=()=>{const max=sc.scrollWidth-sc.clientWidth,p=max>0?sc.scrollLeft/max:1;
-    cue.style.setProperty('--p',(.33+.67*p).toFixed(3));sc.classList.toggle('at-end',p>.97);
-    if(sc.scrollLeft>40)cue.querySelector('.txt').firstChild.textContent=p>.97?'That\u2019s all three ':'Keep going '};
-  sc.addEventListener('scroll',upd,{passive:true});upd();addEventListener('resize',upd)})();
 
 // logo stays out of the hero, appears once you scroll past it
 (function(){const h=document.querySelector('.hero'),n=document.getElementById('nav');

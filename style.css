@@ -369,3 +369,56 @@ nav a.active{text-decoration:underline;text-underline-offset:8px}
 .founder h3{font-weight:600}
 .dot{display:none}
 .cursor{display:none!important}
+
+/* ===== v9: one-screen hero, calm sections, real portfolio ===== */
+.hero{display:flex!important;flex-direction:column;height:100vh;height:100svh;min-height:560px!important;padding:5.5rem 6vw 0!important;justify-content:flex-start!important}
+.hero>.eyebrow{margin-top:auto}
+.hero .cta{margin-bottom:0!important}
+.hero h1{font-size:clamp(2.6rem,7.4vw,6.4rem)!important;margin-bottom:1.4rem!important}
+.hero .lead{font-size:clamp(1rem,1.3vw,1.15rem)!important;max-width:540px;margin-bottom:2rem!important}
+.hero .ticker{margin:auto -6vw 0!important}
+.scrollhint{display:flex;align-items:center;gap:.8rem;margin-top:auto;padding:1.5rem 0 1.25rem;font:500 .72rem Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.scrollhint i{display:block;width:1px;height:28px;background:linear-gradient(#fff,transparent);animation:drip 1.8s ease-in-out infinite;transform-origin:top}
+@keyframes drip{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+.hero .ticker{margin-top:0!important}
+/* services section (moved out of hero) */
+.disc{position:static;z-index:auto;margin-top:0}
+.disc .head{margin-bottom:var(--gap-h)!important;align-items:flex-end}
+.disc .arrows button{width:52px;height:52px}
+.disc h2{font-size:clamp(1.9rem,3.4vw,2.8rem)!important}
+.disc .card{padding:2rem;background:#0c0c0c;backdrop-filter:none}
+.disc .card h3{font-size:1.6rem;margin:1rem 0 .8rem}
+.disc .card p{display:block;font-size:1rem;margin-bottom:1.2rem}
+.disc .card li{padding:.5rem 0;font-size:.92rem}
+.disc .card:nth-child(2) p{color:#444}
+.disc .hscroll{-webkit-mask-image:none;mask-image:none}
+.link{color:#fff;text-decoration:underline;text-underline-offset:4px}
+.link:hover{text-decoration-thickness:2px}
+/* no scroll animations below the hero */
+.sec .reveal,.sec [class*=reveal]{opacity:1!important;transform:none!important;transition:none!important}
+.nav .logo{transition:opacity .3s}
+.nav.over-hero .logo{transform:none}
+/* portfolio cards */
+a.work{color:inherit;display:flex;flex-direction:column;gap:1rem;flex:0 0 min(520px,84vw)}
+a.work .shot{aspect-ratio:16/10;border-radius:14px;position:relative;overflow:hidden;display:flex;flex-direction:column;border:1px solid #2a2a2a;transition:border-color .25s}
+a.work:hover .shot{border-color:#fff}
+.mock-bar{display:flex;align-items:center;gap:.4rem;padding:.7rem .9rem;border-bottom:1px solid rgba(128,128,128,.25);font:400 .7rem Inter,sans-serif;opacity:.85}
+.mock-bar i{width:9px;height:9px;border-radius:50%;background:currentColor;opacity:.35}
+.mock-bar em{font-style:normal;margin-left:.6rem;opacity:.7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mock-title{margin:auto 1.6rem;font:600 clamp(1.5rem,3.4vw,2.5rem) var(--h);letter-spacing:-.03em;line-height:1.08;max-width:14ch}
+.visit{position:absolute;right:1rem;bottom:1rem;background:#fff;color:#000;font:600 .78rem Inter,sans-serif;padding:.5rem .9rem;border-radius:999px;opacity:0;transform:translateY(6px);transition:.25s}
+a.work:hover .visit,a.work:focus-visible .visit{opacity:1;transform:none}
+.work.skin .shot{background:#f7f1e8;color:#2b2520}
+.work.skin .mock-title{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.02em}
+.work.baidx .shot{background:#0D1B2A;color:#F4F0E6}
+.work.baidx .mock-title{color:#F4F0E6}
+.work.baidx .shot::after{content:"";position:absolute;left:1.6rem;bottom:1.4rem;width:44px;height:3px;background:#F5A623;border-radius:2px}
+.work.jcutzz .shot{background:#15120E;color:#F3EBDD}
+.work.jcutzz .shot::after{content:"";position:absolute;left:1.6rem;bottom:1.4rem;width:44px;height:3px;background:#C9A24B;border-radius:2px}
+.work.skin .shot::after{content:"";position:absolute;left:1.6rem;bottom:1.4rem;width:44px;height:2px;background:#2b2520}
+a.work .meta{display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+a.work h3{font-size:1.2rem;font-weight:600}
+a.work p{color:var(--mute);font-size:.9rem}
+a.work .meta>span{color:var(--mute);font-size:.82rem;text-align:right}
+@media(max-width:800px){.hero{padding-top:5rem!important}.hero h1{font-size:clamp(2.3rem,11vw,3.6rem)!important}.visit{opacity:1;transform:none}a.work .meta{flex-direction:column;gap:.2rem}a.work .meta>span{text-align:left}}
+@media(prefers-reduced-motion:reduce){.scrollhint i{animation:none}}
