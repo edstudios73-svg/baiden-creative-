@@ -299,3 +299,23 @@ footer{display:block!important;padding:4rem 6vw 2rem!important}
 .disc .card:nth-child(2)::after{content:"Scroll →";position:absolute;top:1.3rem;right:1.4rem;font:700 .65rem var(--h);letter-spacing:.18em;text-transform:uppercase;background:#000;color:#fff;padding:.3rem .7rem;border-radius:999px}
 .nav .logo{transition:opacity .35s,transform .35s}
 .nav.over-hero .logo{opacity:0;transform:translateY(-8px);visibility:hidden}
+
+/* ===== v6: consistent spacing system ===== */
+:root{--sp:clamp(3.5rem,6vw,5rem);--gap-h:2.5rem}
+.sec{padding-top:var(--sp)!important;padding-bottom:var(--sp)!important}
+h2{margin-bottom:var(--gap-h)}
+.head{margin-bottom:var(--gap-h)}
+.head h2{margin-bottom:0}
+.eyebrow{margin-bottom:1rem;line-height:1.7}
+.big{margin-bottom:var(--gap-h)}
+.about{margin:-1rem 0 var(--gap-h)!important}
+.foot{margin-top:1.25rem!important}
+.links{margin-bottom:var(--gap-h)}
+.ticker{margin-top:.75rem}
+footer{padding-top:3.5rem!important}
+.fgrid{margin-bottom:2.5rem}
+@media(max-width:800px){
+  :root{--gap-h:2rem}
+  .sec{padding-left:6vw;padding-right:6vw}
+  .hero .eyebrow{font-size:.7rem;letter-spacing:.18em}
+}
