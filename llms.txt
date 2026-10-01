@@ -1,6 +1,6 @@
 # Baiden Creatives
 
-> Baiden Creatives is a Ghanaian digital creative studio offering web development, web design and graphic design for businesses, organisations, entrepreneurs and individuals across Ghana. Tagline: "Your business. Digitally elevated."
+> Baiden Creatives is a digital creative studio based in East Legon, Accra, Ghana, offering web development, web design and graphic design for businesses, organisations, entrepreneurs and individuals across Ghana. Tagline: "Your business. Digitally elevated."
 
 Founders: Baiden David and Baiden Daniel.
 Website: https://baiden-creatives.vercel.app/
@@ -8,7 +8,8 @@ Email: edstudios77@gmail.com
 Phone / WhatsApp: +233 55 836 2423
 Instagram: https://www.instagram.com/baidx.system
 TikTok: https://www.tiktok.com/@he_is.ceo
-Service area: Ghana (remote delivery). Language: English. Currency: Ghana cedi (GHS).
+Location: East Legon, Accra, Greater Accra Region, Ghana.
+Service area: Ghana (projects can be delivered remotely). Language: English. Currency: Ghana cedi (GHS).
 
 ## Services
 - Web development: business and corporate websites, e-commerce, booking systems, client portals, dashboards, custom web applications.
@@ -26,6 +27,8 @@ Service area: Ghana (remote delivery). Language: English. Currency: Ghana cedi (
 - Extras not automatically included: domain and hosting renewals, paid plugins/APIs, stock images, photography, copywriting, payment gateway fees, changes outside the agreed scope.
 
 ## FAQ
-- How much is a website in Ghana? Packages start at GH₵2,500.
-- Do you accept Mobile Money on e-commerce sites? Yes, Mobile Money and card payments can be integrated.
-- How do I start? Call or WhatsApp +233 55 836 2423 or email edstudios77@gmail.com.
+- Where are you based? East Legon, Accra, Ghana. We serve clients across Ghana and can work remotely.
+- How does payment work? Under GH₵10,000: 60% upfront, 40% before launch. Larger projects: 50% / 30% / 20%.
+- What is not included? Domain and hosting renewals, premium plugins, paid APIs, stock images, photography, copywriting, gateway charges and out-of-scope changes.
+- What happens at launch? Domain, hosting, SSL, mobile optimisation, testing and deployment; Business and Professional also include Google Analytics, Search Console and a sitemap.
+- What do I need to provide? Logo, images, business information, contact details, social links and content.
