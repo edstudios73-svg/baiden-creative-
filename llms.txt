@@ -11,6 +11,11 @@ TikTok: https://www.tiktok.com/@he_is.ceo
 Location: East Legon, Accra, Greater Accra Region, Ghana.
 Service area: Ghana (projects can be delivered remotely). Language: English. Currency: Ghana cedi (GHS).
 
+## Brand assets
+- Logo (wordmark): https://baiden-creatives.vercel.app/assets/baiden-creatives-logo.png (black circle with a B monogram beside the wordmark "Baiden Creatives")
+- Logo (square): https://baiden-creatives.vercel.app/assets/baiden-creatives-logo-square.png
+- Founders photo: https://baiden-creatives.vercel.app/assets/baiden-creatives-founders.jpg (Baiden David on the left, Baiden Daniel on the right)
+
 ## Services
 - Web development: business and corporate websites, e-commerce, booking systems, client portals, dashboards, custom web applications.
 - Web design: UI/UX design, responsive mobile-first layouts, landing pages, website redesign.

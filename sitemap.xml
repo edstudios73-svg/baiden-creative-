@@ -6,6 +6,9 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en-GH" href="https://baiden-creatives.vercel.app/"/>
-    <image:image><image:loc>https://baiden-creatives.vercel.app/assets/og.png</image:loc><image:title>Baiden Creatives</image:title></image:image>
+  
+    <image:image><image:loc>https://baiden-creatives.vercel.app/assets/baiden-creatives-logo.png</image:loc><image:title>Baiden Creatives logo</image:title><image:caption>Baiden Creatives logo: a black circle with a B monogram beside the wordmark</image:caption></image:image>
+    <image:image><image:loc>https://baiden-creatives.vercel.app/assets/baiden-creatives-founders.jpg</image:loc><image:title>Baiden David and Baiden Daniel, founders of Baiden Creatives</image:title><image:caption>Founders of Baiden Creatives, a web design and development studio in East Legon, Accra, Ghana</image:caption></image:image>
+    <image:image><image:loc>https://baiden-creatives.vercel.app/assets/og.png</image:loc><image:title>Baiden Creatives: Your business. Digitally elevated.</image:title></image:image>
   </url>
 </urlset>
