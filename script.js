@@ -1,9 +1,13 @@
 const $=s=>document.querySelector(s);
 $('#yr').textContent=new Date().getFullYear();
 const nav=$('#nav'),menu=$('#menu'),burger=$('#burger');
-addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>40),{passive:true});
-burger.onclick=()=>{const o=menu.classList.toggle('open');burger.classList.toggle('open',o);burger.setAttribute('aria-expanded',o)};
-menu.querySelectorAll('a').forEach(a=>a.onclick=()=>{menu.classList.remove('open');burger.classList.remove('open')});
+const solid=()=>nav.classList.toggle('solid',scrollY>40);addEventListener('scroll',solid,{passive:true});solid();
+function setMenu(open){menu.classList.toggle('open',open);burger.classList.toggle('open',open);document.documentElement.classList.toggle('menu-open',open);
+  burger.setAttribute('aria-expanded',String(open));burger.setAttribute('aria-label',open?'Close menu':'Open menu')}
+burger.addEventListener('click',()=>setMenu(!menu.classList.contains('open')));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.classList.contains('open')){setMenu(false);burger.focus()}});
+addEventListener('resize',()=>{if(innerWidth>900)setMenu(false)});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4)*80+'ms';io.observe(el)});
 // contact form -> opens email
@@ -65,11 +69,6 @@ const hero=document.querySelector('.hero');
     requestAnimationFrame(loop)}
   loop();
 })();
-
-// logo stays out of the hero, appears once you scroll past it
-(function(){const h=document.querySelector('.hero'),n=document.getElementById('nav');
-  const f=()=>n.classList.toggle('over-hero',scrollY<h.offsetHeight-120&&!document.getElementById('menu').classList.contains('open'));
-  addEventListener('scroll',f,{passive:true});addEventListener('resize',f);f()})();
 
 // scale live site previews to fit their card
 (function(){const fit=()=>document.querySelectorAll('.work .frame').forEach(f=>{const s=f.clientWidth/1440;f.style.setProperty('--s',s.toFixed(4))});

@@ -1650,3 +1650,29 @@ a.work .meta>span{
 }
 @media(max-width:900px){.about-media::after{background:radial-gradient(ellipse 80% 40% at 50% 80%,rgba(255,255,255,.05),transparent 70%);-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 40%);mask-image:linear-gradient(180deg,transparent 0,#000 40%)}}
 .about-copy .eyebrow{color:#e6e6e6}
+
+/* ===== header + mobile menu (authoritative) ===== */
+header.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;height:72px;padding:0 6vw;background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);transition:background .25s,border-color .25s}
+header.nav.solid{background:rgba(0,0,0,.88);border-bottom-color:#222}
+header.nav .logo{position:relative;z-index:61;opacity:1;visibility:visible;transform:none}
+header.nav .burger{display:none}
+@media(min-width:901px){#menu{display:flex;align-items:center;gap:2rem}}
+@media(max-width:900px){
+  /* backdrop-filter on the header would trap the fixed menu inside it, so turn it off here */
+  header.nav,header.nav.solid{-webkit-backdrop-filter:none;backdrop-filter:none;background:#000;border-bottom:1px solid #1d1d1d}
+  header.nav .burger{display:block;position:relative;z-index:61;width:44px;height:44px;background:none;border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  header.nav .burger span{position:absolute;left:9px;right:9px;height:2px;background:#fff;border-radius:2px;transition:transform .25s,top .25s}
+  header.nav .burger span:first-child{top:16px}
+  header.nav .burger span:last-child{top:26px}
+  header.nav .burger.open span:first-child{top:21px;transform:rotate(45deg)}
+  header.nav .burger.open span:last-child{top:21px;transform:rotate(-45deg)}
+  #menu{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh;height:100dvh;z-index:60;display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:0;padding:88px 6vw 2rem;background:#000;overflow-y:auto;visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .25s,transform .25s,visibility 0s .25s}
+  #menu.open{visibility:visible;opacity:1;transform:none;transition:opacity .25s,transform .25s}
+  #menu a:not(.btn){display:block;padding:1.1rem 0;border-bottom:1px solid #1d1d1d;font:600 1.5rem var(--h);letter-spacing:-.01em;color:#fff}
+  #menu a:not(.btn)::after{display:none}
+  #menu .btn{margin-top:1.75rem;text-align:center;padding:1rem 1.5rem;font-size:1rem}
+}
+html.menu-open,html.menu-open body{overflow:hidden}
+.hero{padding-top:6rem!important}
+@media(max-width:900px){.hero{padding-top:5.5rem!important}}
+@media(max-width:800px){.work .meta{flex-direction:column;gap:.2rem}.work .meta>span{text-align:left}.hscroll>.work{flex-basis:84vw}}
