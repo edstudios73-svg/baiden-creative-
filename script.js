@@ -6,14 +6,6 @@ burger.onclick=()=>{const o=menu.classList.toggle('open');burger.classList.toggl
 menu.querySelectorAll('a').forEach(a=>a.onclick=()=>{menu.classList.remove('open');burger.classList.remove('open')});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4)*80+'ms';io.observe(el)});
-// cursor + tilt
-const cur=$('.cursor');
-addEventListener('mousemove',e=>{cur.style.opacity=1;cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'});
-document.querySelectorAll('a,button,.chips span').forEach(el=>{el.addEventListener('mouseenter',()=>cur.classList.add('big'));el.addEventListener('mouseleave',()=>cur.classList.remove('big'))});
-document.querySelectorAll('.tilt').forEach(c=>{
-  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(800px) rotateY(${x*8}deg) rotateX(${-y*8}deg)`});
-  c.addEventListener('mouseleave',()=>c.style.transform='');
-});
 // contact form -> opens email
 $('#form').addEventListener('submit',e=>{
   e.preventDefault();const f=new FormData(e.target);
@@ -46,18 +38,7 @@ document.querySelectorAll('.hero h1 > span:not(.sr)').forEach((sp,k)=>{
   const words=sp.textContent.trim().split(/\s+/);
   sp.innerHTML=words.map((w,i)=>`<span class="w"><i style="--i:${k*3+i}">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</i></span>`).join(' ');
 });
-// spotlight + magnetic
-document.querySelectorAll('.card,.pcard').forEach(c=>c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',e.clientX-r.left+'px');c.style.setProperty('--my',e.clientY-r.top+'px')}));
-if(!reduce&&matchMedia('(hover:hover)').matches)document.querySelectorAll('.btn').forEach(b=>{b.classList.add('mag');
-  b.addEventListener('mousemove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.3}px)`});
-  b.addEventListener('mouseleave',()=>b.style.transform='')});
-// hero: parallax glow + orbit
 const hero=document.querySelector('.hero');
-hero.addEventListener('mousemove',e=>{const r=hero.getBoundingClientRect();hero.style.setProperty('--gx',e.clientX-r.left+'px');hero.style.setProperty('--gy',e.clientY-r.top+'px');
-  hero.style.setProperty('--px',((e.clientX-r.left)/r.width-.5).toFixed(3));hero.style.setProperty('--py',((e.clientY-r.top)/r.height-.5).toFixed(3))});
-// rotating words
-(function(){const el=document.querySelector('.swap');if(!el||reduce)return;const w=el.dataset.words.split(',');let i=0;
-  setInterval(()=>{el.classList.add('out');setTimeout(()=>{i=(i+1)%w.length;el.textContent=w[i];el.classList.remove('out')},250)},2200)})();
 // interactive network canvas: signals, click bursts, cursor attraction
 (function(){
   const cv=document.getElementById('net');if(!cv||reduce)return;

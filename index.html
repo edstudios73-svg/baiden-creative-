@@ -50,17 +50,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="assets/logo.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 <a class="skip" href="#top">Skip to content</a>
 <div class="progress" aria-hidden="true"></div>
-<div class="cursor" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <a href="#top" class="logo" aria-label="Baiden Creatives home"><img src="assets/logo.jpg" alt="Baiden Creatives logo" width="263" height="105" decoding="async"></a>
   <nav id="menu">
     <a href="#services">Services</a>
+    <a href="#work">Work</a>
     <a href="#pricing">Pricing</a>
     <a href="#team">About</a>
     <a href="#faq">FAQ</a>
@@ -72,37 +72,34 @@
 <main id="top" tabindex="-1">
 <section class="hero">
   <canvas id="net" aria-hidden="true"></canvas>
-  <div class="glow" aria-hidden="true"></div>
-  <div class="orbit" aria-hidden="true"><div class="ring r1"><i></i></div><div class="ring r2"><i></i><i></i></div><div class="ring r3"><i></i></div><div class="core"></div></div>
   <div class="grid-bg"></div>
-  <p class="eyebrow reveal"><span class="dot"></span>Digital Creative Studio · East Legon, Accra</p>
+  <p class="eyebrow reveal">Digital Creative Studio · East Legon, Accra</p>
   <h1 class="reveal"><span class="sr">Baiden Creatives: </span>
     <span>Your business.</span>
-    <span class="outline">Digitally elevated.</span>
+    <span class="soft">Digitally elevated.</span>
   </h1>
-  <p class="role reveal">We craft <span class="swap" data-words="websites,brands,visuals,web apps,experiences">websites</span></p>
   <p class="lead reveal">We combine design and technology to turn ideas and businesses into professional digital experiences: websites, visuals and brands that look established and ready to grow.</p>
   <div class="cta reveal">
     <a href="#contact" class="btn">Start a project</a>
     <a href="#services" class="btn ghost">See what we do</a>
   </div>
   <div id="services" class="disc">
-    <div class="head"><div><p class="eyebrow">What we do</p><h2>Three disciplines. <br>One studio.</h2></div>
+    <div class="head"><div><p class="eyebrow">Services</p><h2>What we do</h2></div>
       <div class="arrows" data-arrows><button aria-label="Previous">←</button><button aria-label="Next">→</button></div></div>
     <div class="hscroll" data-scroll>
-    <article class="card tilt">
+    <article class="card">
       <span class="num">01</span>
       <h3>Web Development</h3>
       <p>Fast, functional websites and web apps built around how your business actually works.</p>
       <ul><li>Business &amp; corporate sites</li><li>E-commerce</li><li>Booking websites</li></ul>
     </article>
-    <article class="card tilt">
+    <article class="card">
       <span class="num">02</span>
       <h3>Web Design</h3>
       <p>Clean, modern, mobile-first interfaces designed to earn trust and convert visitors.</p>
       <ul><li>UI / UX design</li><li>Landing pages</li><li>Website redesign</li></ul>
     </article>
-    <article class="card tilt">
+    <article class="card">
       <span class="num">03</span>
       <h3>Graphic Design</h3>
       <p>Visuals that make your brand look sharp everywhere it shows up, online and offline.</p>
@@ -119,16 +116,35 @@
   </div></div>
 </section>
 
+<section id="work" class="sec">
+  <p class="eyebrow reveal">Portfolio</p>
+  <div class="head"><h2 class="reveal">Selected work</h2><div class="arrows" data-arrows><button aria-label="Previous">←</button><button aria-label="Next">→</button></div></div>
+  <div class="hscroll" data-scroll>
+    <article class="work">
+      <a class="shot" href="#top" aria-label="Baiden Creatives website"><img src="assets/og.png" alt="Baiden Creatives website preview" width="1200" height="630" loading="lazy"></a>
+      <div class="meta"><div><h3>Baiden Creatives</h3><p>Brand website</p></div><span>Web design · Development · SEO</span></div>
+    </article>
+    <article class="work empty">
+      <a class="shot" href="#contact" aria-label="Start a project"><span class="plus">+</span></a>
+      <div class="meta"><div><h3>Your project</h3><p>Next in this space</p></div><span>Start a project</span></div>
+    </article>
+    <article class="work empty">
+      <a class="shot" href="#contact" aria-label="Start a project"><span class="plus">+</span></a>
+      <div class="meta"><div><h3>Your brand</h3><p>Next in this space</p></div><span>Start a project</span></div>
+    </article>
+  </div>
+</section>
+
 <section id="pricing" class="sec">
-  <p class="eyebrow reveal">01 — Pricing</p>
-  <div class="head"><h2 class="reveal">Clear packages.<br>No surprises.</h2><div class="arrows" data-arrows><button aria-label="Previous">←</button><button aria-label="Next">→</button></div></div>
+  <p class="eyebrow reveal">Pricing</p>
+  <div class="head"><h2 class="reveal">Website packages</h2><div class="arrows" data-arrows><button aria-label="Previous">←</button><button aria-label="Next">→</button></div></div>
   <div class="hscroll" data-scroll><article class="pcard"><span class="tag">&nbsp;</span><h3>Starter</h3><p class="best">Individuals &amp; small businesses</p><div class="price"><small>&nbsp;</small><span>GH₵</span>2,500</div><ul><li>1–3 page custom website</li><li>Responsive on all devices</li><li>Contact form &amp; WhatsApp</li><li>Domain, hosting &amp; SSL</li><li>Live in 5–7 days</li></ul><a href="#contact" class="btn ghost">Get started</a></article><article class="pcard featured"><span class="tag">Most popular</span><h3>Business</h3><p class="best">Growing businesses</p><div class="price"><small>&nbsp;</small><span>GH₵</span>5,000</div><ul><li>Everything in Starter</li><li>Up to 7 pages, custom UI/UX</li><li>Gallery, portfolio &amp; blog</li><li>Analytics &amp; Search Console</li><li>30 days support</li></ul><a href="#contact" class="btn">Get started</a></article><article class="pcard"><span class="tag">&nbsp;</span><h3>Professional</h3><p class="best">Established brands &amp; organisations</p><div class="price"><small>&nbsp;</small><span>GH₵</span>8,500</div><ul><li>Everything in Business</li><li>Up to 12 pages, premium UI/UX</li><li>CMS &amp; advanced animations</li><li>Booking/request system</li><li>60 days support &amp; training</li></ul><a href="#contact" class="btn ghost">Get started</a></article><article class="pcard"><span class="tag">&nbsp;</span><h3>E-Commerce</h3><p class="best">Online sellers</p><div class="price"><small>From </small><span>GH₵</span>10,000</div><ul><li>Catalogue, cart &amp; checkout</li><li>Mobile Money &amp; card payments</li><li>Customer accounts</li><li>Admin dashboard &amp; inventory</li><li>3–6 weeks</li></ul><a href="#contact" class="btn ghost">Get started</a></article><article class="pcard"><span class="tag">&nbsp;</span><h3>Custom Web App</h3><p class="best">Complex systems</p><div class="price"><small>From </small><span>GH₵</span>15,000</div><ul><li>Logins, roles &amp; dashboards</li><li>Databases &amp; APIs</li><li>Payments &amp; notifications</li><li>Portals &amp; booking systems</li><li>Quoted after assessment</li></ul><a href="#contact" class="btn ghost">Get started</a></article></div>
-  <p class="foot reveal">Also offering graphic design, brand design and website care plans. Prices are starting guides, so get in touch for a tailored quote.</p>
+  <p class="foot reveal">Also offering graphic design, brand design and website care plans. Prices are starting points. Contact us for a quote based on your project.</p>
 </section>
 
 <section id="team" class="sec">
-  <p class="eyebrow reveal">02 — About</p>
-  <h2 class="reveal">Meet the founders.</h2>
+  <p class="eyebrow reveal">About</p>
+  <h2 class="reveal">Who we are</h2>
   <p class="about reveal">Baiden Creatives is a digital creative studio in East Legon, Accra, helping businesses, organisations and entrepreneurs look established online, with websites, web apps and visuals built to earn trust and drive growth.</p>
   <div class="founders">
     <div class="founder reveal"><h3>Baiden David</h3><p>Co-founder</p></div>
@@ -137,14 +153,14 @@
 </section>
 
 <section id="faq" class="sec">
-  <p class="eyebrow reveal">03 — FAQ</p>
-  <h2 class="reveal">Quick answers.</h2>
+  <p class="eyebrow reveal">FAQ</p>
+  <h2 class="reveal">Frequently asked questions</h2>
   <div class="faq"><details class="reveal"><summary><span>How does payment work?</span><i aria-hidden="true">+</i></summary><p>Projects under GH₵10,000 are paid 60% upfront and 40% before launch. Larger projects are paid 50% upfront, 30% during development and 20% before final deployment.</p></details><details class="reveal"><summary><span>What is not included in the package price?</span><i aria-hidden="true">+</i></summary><p>Domain and hosting renewals, premium plugins, paid APIs, stock images, professional photography, copywriting, large-scale data entry, third-party subscriptions, payment gateway charges, and major changes outside the agreed scope.</p></details><details class="reveal"><summary><span>What happens when my website launches?</span><i aria-hidden="true">+</i></summary><p>We handle the full launch: domain and hosting setup, SSL/HTTPS, mobile and tablet optimisation, final testing and deployment. Business and Professional packages also include Google Analytics, Google Search Console, an XML sitemap and search indexing setup.</p></details><details class="reveal"><summary><span>What do I need to provide to get started?</span><i aria-hidden="true">+</i></summary><p>Your logo, images, business information, contact details, social media links and any content you already have. If you do not have these yet, we will guide you through it.</p></details><details class="reveal"><summary><span>Where is Baiden Creatives based, and do you work with clients outside Accra?</span><i aria-hidden="true">+</i></summary><p>Baiden Creatives is based in East Legon, Accra, Ghana. We work with businesses, organisations and individuals across Ghana, and projects can be delivered fully remotely.</p></details></div>
 </section>
 
 <section id="contact" class="sec contact">
-  <p class="eyebrow reveal">04 — Contact</p>
-  <h2 class="reveal big">Let's build<br><span class="outline">something dope.</span></h2>
+  <p class="eyebrow reveal">Contact</p>
+  <h2 class="reveal big">Tell us about<br>your project.</h2>
   <div class="links reveal">
     <a href="https://wa.me/233558362423" target="_blank" rel="noopener"><small>WhatsApp</small>0558 362 423</a>
     <a href="tel:+233558362423"><small>Call</small>+233 55 836 2423</a>
@@ -158,7 +174,7 @@
     <input name="phone" placeholder="Phone / WhatsApp">
     <select name="service"><option>Web Development</option><option>Web Design</option><option>Graphic Design</option><option>Full package</option></select>
     <textarea name="msg" rows="4" placeholder="Tell us about your project" required></textarea>
-    <button class="btn" type="submit">Send via email</button>
+    <button class="btn" type="submit">Send message</button>
   </form>
 </section>
 </main>
@@ -166,11 +182,11 @@
 <footer>
   <div class="fgrid">
     <div><strong>Baiden Creatives</strong><p>Web development, web design and graphic design. Based in East Legon, Accra, serving businesses across Ghana.</p></div>
-    <div><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></div>
+    <div><a href="#services">Services</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></div>
     <div><a href="mailto:edstudios77@gmail.com">edstudios77@gmail.com</a><a href="tel:+233558362423">+233 55 836 2423</a><a href="https://www.instagram.com/baidx.system" rel="noopener me">Instagram</a><a href="https://www.tiktok.com/@he_is.ceo" rel="noopener me">TikTok</a></div>
   </div>
   <div class="fbar"><span>© <span id="yr">2026</span> Baiden Creatives. East Legon, Accra, Ghana.</span><a href="#top">Back to top ↑</a></div>
 </footer>
-<script src="script.js?v=7"></script>
+<script src="script.js?v=8"></script>
 </body>
 </html>
