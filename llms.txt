@@ -30,7 +30,7 @@ Service area: Ghana (projects can be delivered remotely). Language: English. Cur
 - Mane Naturals (natural hair care brand website): https://mane-naturals.vercel.app
 - Christian Service Church (church website, east legon): https://www.christianservicechurch.org
 - Xorlali & Daniella (wedding website): https://xorlali-daniella-wedding-site.vercel.app
-- Baiden Portfolio (personal portfolio website): https://portfolio-web-baiden.vercel.app
+- Ompad Media (media website): https://ompadmedia.netlify.app
 
 ## Pricing (starting guides, GHS)
 - Starter website (1-3 pages): GH₵2,500, 5-7 working days.

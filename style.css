@@ -1676,3 +1676,5 @@ html.menu-open,html.menu-open body{overflow:hidden}
 .hero{padding-top:6rem!important}
 @media(max-width:900px){.hero{padding-top:5.5rem!important}}
 @media(max-width:800px){.work .meta{flex-direction:column;gap:.2rem}.work .meta>span{text-align:left}.hscroll>.work{flex-basis:84vw}}
+.work.ompad .shot{background:#101214;color:#f3f3f3}
+.work.ompad .mock-title{color:#fff}
