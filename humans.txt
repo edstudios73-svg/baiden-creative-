@@ -1,0 +1,9 @@
+/* TEAM */
+Founder: Baiden David
+Founder: Baiden Daniel
+Site: https://baiden-creatives.vercel.app/
+Location: Ghana
+
+/* SITE */
+Last update: 2026/10/01
+Standards: HTML5, CSS3, vanilla JavaScript, JSON-LD, Open Graph, PWA manifest
