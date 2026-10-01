@@ -1597,23 +1597,36 @@ a.work .meta>span{
 .form .actions{grid-column:1/-1;display:flex;gap:.8rem;flex-wrap:wrap}
 @media(max-width:800px){.form .actions .btn{flex:1 1 100%;text-align:center}}
 
-/* about: founders photo */
-.about-sec{position:relative;overflow:hidden;border-block:1px solid #1d1d1d;background:#050505}
-.about-photo{position:absolute;top:0;right:0;height:100%;width:min(58%,820px);object-fit:cover;object-position:50% 22%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 38%);mask-image:linear-gradient(90deg,transparent 0,#000 38%)}
-.about-sec::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 30%,transparent 70%,rgba(0,0,0,.6));pointer-events:none}
-.about-inner{position:relative;z-index:2;max-width:1300px;margin:0 auto;padding:var(--sp) 6vw;display:flex;flex-direction:column;justify-content:center;min-height:620px}
-.about-inner h2{max-width:11ch}
-.about-inner .about{margin:0 0 var(--gap-h)!important;max-width:460px;color:#cfcfcf}
-.about-inner .founders{grid-template-columns:repeat(2,minmax(0,220px));gap:0 2rem;max-width:480px}
-.about-inner .founder{padding:1.1rem 0}
-@media(max-width:800px){
-  .about-sec{display:flex;flex-direction:column}
-  .about-photo{position:relative;width:100%;height:auto;aspect-ratio:4/4.2;object-position:50% 20%;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
-  .about-sec::after{display:none}
-  .about-inner{min-height:0;margin-top:-4.5rem;padding-top:0}
-  .about-inner h2{max-width:none}
-  .about-inner .founders{grid-template-columns:1fr;max-width:none}
+/* about: founders photo with text on the image */
+.about-sec{background:#000;border-block:1px solid #1d1d1d;overflow:hidden}
+.about-stage{position:relative;max-width:1440px;margin:0 auto;height:min(70vw,980px);min-height:640px}
+.about-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.about-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.8) 0,rgba(0,0,0,.45) 40%,rgba(0,0,0,0) 62%,rgba(0,0,0,.85) 100%),linear-gradient(90deg,rgba(0,0,0,.55),transparent 55%)}
+.about-copy{position:absolute;top:var(--sp);left:6vw;max-width:520px;z-index:2}
+.about-copy h2{margin-bottom:1.25rem}
+.about-copy .about{margin:0!important;color:#d6d6d6;max-width:480px}
+.tag{position:absolute;bottom:2.5rem;transform:translateX(-50%);text-align:center;z-index:2;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.55);min-width:150px}
+.tag.david{left:29%}.tag.daniel{left:72%}
+.tag h3{font-size:clamp(1.05rem,1.8vw,1.5rem);font-weight:600;white-space:nowrap}
+.tag p{color:#cfcfcf;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;margin-top:.25rem}
+@media(max-width:900px){
+  .about-stage{height:auto;min-height:0;display:flex;flex-direction:column}
+  .about-copy{position:relative;top:auto;left:auto;max-width:none;padding:var(--sp) 6vw 0}
+  .about-photo{position:relative;inset:auto;height:auto;aspect-ratio:720/956;margin-top:-5rem;-webkit-mask-image:linear-gradient(180deg,transparent,#000 22%);mask-image:linear-gradient(180deg,transparent,#000 22%);object-fit:cover}
+  .about-shade{inset:auto 0 0 0;height:45%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.85))}
+  .tag{bottom:1.25rem;min-width:0;padding-top:.7rem}
+  .tag h3{font-size:1rem}
 }
-.about-inner .founders{grid-template-columns:repeat(2,auto);justify-content:start;gap:0 3rem}
-.about-inner .founder h3{font-size:clamp(1.25rem,2vw,1.6rem);white-space:nowrap}
-@media(max-width:800px){.about-inner .founders{grid-template-columns:1fr}}
+.about-stage{height:min(78vw,1050px)}
+.about-shade{background:linear-gradient(180deg,rgba(0,0,0,.78) 0,rgba(0,0,0,.4) 38%,rgba(0,0,0,0) 58%,rgba(0,0,0,.7) 100%),linear-gradient(90deg,rgba(0,0,0,.5),transparent 55%)}
+.tag{bottom:2rem}
+@media(max-width:900px){
+  .about-stage{height:auto}
+  .about-copy{order:1}
+  .about-photo{order:2}
+}
+@media(max-width:900px){
+  .tag{background:rgba(0,0,0,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:.55rem .9rem;min-width:0}
+  .tag h3{font-size:.9rem}
+  .tag p{font-size:.6rem}
+}
