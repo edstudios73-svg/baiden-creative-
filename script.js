@@ -42,7 +42,7 @@ const links=[...document.querySelectorAll('#menu a[href^="#"]:not(.btn)')];
 const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
 links.forEach(a=>{const s=document.querySelector(a.getAttribute('href'));s&&so.observe(s)});
 // headline word reveal
-document.querySelectorAll('.hero h1 span').forEach((sp,k)=>{
+document.querySelectorAll('.hero h1 > span:not(.sr)').forEach((sp,k)=>{
   const words=sp.textContent.trim().split(/\s+/);
   sp.innerHTML=words.map((w,i)=>`<span class="w"><i style="--i:${k*3+i}">${[...w].map(c=>`<span class="ch">${c}</span>`).join('')}</i></span>`).join(' ');
 });
@@ -93,3 +93,8 @@ hero.addEventListener('mousemove',e=>{const r=hero.getBoundingClientRect();hero.
     cue.style.setProperty('--p',(.33+.67*p).toFixed(3));sc.classList.toggle('at-end',p>.97);
     if(sc.scrollLeft>40)cue.querySelector('.txt').firstChild.textContent=p>.97?'That\u2019s all three ':'Keep going '};
   sc.addEventListener('scroll',upd,{passive:true});upd();addEventListener('resize',upd)})();
+
+// logo stays out of the hero, appears once you scroll past it
+(function(){const h=document.querySelector('.hero'),n=document.getElementById('nav');
+  const f=()=>n.classList.toggle('over-hero',scrollY<h.offsetHeight-120&&!document.getElementById('menu').classList.contains('open'));
+  addEventListener('scroll',f,{passive:true});addEventListener('resize',f);f()})();
