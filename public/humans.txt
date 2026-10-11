@@ -1,0 +1,10 @@
+/* TEAM */
+Co-founder: Baiden David
+Co-founder: Baiden Daniel
+Site: https://www.baidencreatives.org/
+Location: Accra, Ghana
+
+/* SITE */
+Last update: 2026/10/11
+Standards: Next.js (App Router), TypeScript, Tailwind CSS, JSON-LD, Open Graph
+Fonts: Instrument Serif, Geist, Geist Mono (SIL Open Font License)

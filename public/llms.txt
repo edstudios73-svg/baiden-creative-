@@ -1,0 +1,42 @@
+# Baiden Creatives
+
+> Baiden Creatives is a creative and technology company from Accra, Ghana, working with companies, startups and founders internationally. It designs and builds websites, web platforms, digital products, brand identities, graphics and motion work. Statement: "Built from imagination. Made for impact." It also creates its own products, including BAID X.
+
+Founders: Baiden David and Baiden Daniel (co-founders).
+Website: https://www.baidencreatives.org/
+Email: edstudios77@gmail.com
+Phone / WhatsApp: +233 55 836 2423
+Social: @baidencreatives on Instagram (https://www.instagram.com/baidencreatives), TikTok (https://www.tiktok.com/@baidencreatives) and X (https://x.com/baidencreatives).
+Based in: Accra, Ghana. Works remotely with clients anywhere. Language: English.
+
+## Pages
+- Home: https://www.baidencreatives.org/
+- Services: https://www.baidencreatives.org/services
+  - Web design & development: https://www.baidencreatives.org/services/web-design-development
+  - Mobile apps & digital products: https://www.baidencreatives.org/services/mobile-apps-digital-products
+  - Branding & visual identity: https://www.baidencreatives.org/services/branding-identity
+  - Graphic design & creative campaigns: https://www.baidencreatives.org/services/graphic-design
+  - UI/UX & dashboards: https://www.baidencreatives.org/services/ui-ux-dashboards
+  - Creative technology: https://www.baidencreatives.org/services/creative-technology
+- Work (portfolio and case studies): https://www.baidencreatives.org/work
+- Products: https://www.baidencreatives.org/products
+- BAID X: https://www.baidencreatives.org/products/baid-x
+- About: https://www.baidencreatives.org/about
+- Start a project: https://www.baidencreatives.org/contact
+
+## Original product: BAID X
+BAID X is an original product by Baiden Creatives: "Ghana's work network". It connects workers, companies, project managers, suppliers and clients across all 16 regions of Ghana. People are verified by a person at BAID X, and job payments are held in escrow until the client approves the work. The BAID X mobile app is in development and not yet released. Live product: https://www.baid-x.com
+
+## Case studies
+- BAID X: https://www.baidencreatives.org/work/baid-x
+- Blackboy's Vault (menswear store, WhatsApp checkout, store admin, promotional film): https://www.baidencreatives.org/work/blackboys-vault
+- Christian Service Church (church website with content admin): https://www.baidencreatives.org/work/christian-service-church
+- Eslyn Local Kitchen & Pub (identity, menus, social content, website): https://www.baidencreatives.org/work/eslyn-local-kitchen
+- TheNobles Gift & Surprise Hub (gift shop with admin): https://www.baidencreatives.org/work/thenobles-gift-hub
+- Bold Restaurant Ghana (restaurant website): https://www.baidencreatives.org/work/bold-restaurant
+
+## Other live work
+- BOOMiiS Restaurant: https://boomiisgh.com
+- Resilience Estate: https://www.resilienceghana.com
+- EatConnect Ghana: https://eatconnect.vercel.app
+- Ompad Media: https://ompadmedia.netlify.app

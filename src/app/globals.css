@@ -1,0 +1,250 @@
+@import "tailwindcss";
+
+/* ───────────────────────── Design tokens ───────────────────────── */
+@theme {
+  /* Colour. Neutral surfaces; lime is reserved for emphasis, focus and selected details. */
+  --color-ink: #111318;
+  --color-ink-2: #1b1e24;
+  --color-ivory: #f5f2ec;
+  --color-paper: #fbfaf7;
+  --color-graphite: #5d6167; /* text on ivory: 5.6:1 */
+  --color-graphite-soft: #777b80; /* rules and decorative only */
+  --color-mist: #a6aab0; /* text on ink: 7.4:1 */
+  --color-lime: #c9ff54;
+  --color-line: rgb(17 19 24 / 0.14);
+  --color-line-dark: rgb(245 242 236 / 0.16);
+  --color-error: #b42318;
+
+  /* Type */
+  --font-display: var(--font-instrument), "Times New Roman", Georgia, serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Breakpoints (Tailwind defaults kept explicit for documentation) */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+
+  /* Motion */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-reveal: 900ms;
+}
+
+/* ───────────────────────── Fluid type scale ───────────────────────── */
+@utility text-display-1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(3.1rem, 1.6rem + 7.4vw, 10rem);
+  line-height: 0.9;
+  letter-spacing: -0.025em;
+}
+@utility text-display-2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 1.5rem + 4.6vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+@utility text-display-3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+@utility text-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+@utility text-lead {
+  font-size: clamp(1.125rem, 1.02rem + 0.45vw, 1.4rem);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+@utility text-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ───────────────────────── Layout primitives ───────────────────────── */
+@utility container-x {
+  width: 100%;
+  max-width: 90rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 0.4rem + 3vw, 3rem);
+}
+@utility section-y {
+  padding-block: clamp(4.5rem, 3rem + 6vw, 9rem);
+}
+
+/* ───────────────────────── Base ───────────────────────── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-lime);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-lime);
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ───────────────────────── Components ───────────────────────── */
+@layer components {
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    background: var(--color-ink);
+    color: var(--color-ivory);
+    padding: 0.75rem 1rem;
+    transition: top 150ms;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* Text link with drawn underline */
+  .link-draw {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms var(--ease-out-quint);
+  }
+  .link-draw:hover,
+  .link-draw:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Image frames used across work and product imagery */
+  .frame {
+    position: relative;
+    overflow: hidden;
+    background: var(--color-paper);
+    box-shadow:
+      0 0 0 1px var(--color-line),
+      0 30px 60px -30px rgb(17 19 24 / 0.35);
+  }
+  .on-dark .frame {
+    background: var(--color-ink-2);
+    box-shadow:
+      0 0 0 1px var(--color-line-dark),
+      0 30px 60px -30px rgb(0 0 0 / 0.6);
+  }
+  .frame-phone {
+    border-radius: 1.6rem;
+    padding: 0.35rem;
+    background: var(--color-ink);
+  }
+  .frame-phone img {
+    border-radius: 1.3rem;
+  }
+
+  .prose-bc p + p {
+    margin-top: 1.1em;
+  }
+}
+
+/* ───────────────────────── Motion ───────────────────────── */
+/* Content is only hidden for reveal when JS is running and the user has not asked for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 1.5rem, 0);
+    transition:
+      opacity var(--duration-reveal) var(--ease-out-quint),
+      transform var(--duration-reveal) var(--ease-out-quint);
+    transition-delay: calc(var(--reveal-delay, 0) * 90ms);
+  }
+  html.js [data-reveal][data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-line {
+    display: block;
+    animation: hero-rise 1100ms var(--ease-out-quint) both;
+    animation-delay: calc(var(--i, 0) * 110ms + 60ms);
+  }
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 0.35em, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .orbit {
+    animation: orbit 60s linear infinite;
+    transform-origin: 50% 50%;
+  }
+  @keyframes orbit {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .img-zoom img {
+    transition: transform 1200ms var(--ease-out-quint);
+  }
+  .img-zoom:hover img,
+  .img-zoom:focus-visible img {
+    transform: scale(1.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

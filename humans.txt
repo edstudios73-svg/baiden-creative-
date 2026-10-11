@@ -1,9 +1,0 @@
-/* TEAM */
-Founder: Baiden David
-Founder: Baiden Daniel
-Site: https://www.baidencreatives.org/
-Location: East Legon, Accra, Ghana
-
-/* SITE */
-Last update: 2026/10/11
-Standards: HTML5, CSS3, vanilla JavaScript, JSON-LD, Open Graph, PWA manifest
