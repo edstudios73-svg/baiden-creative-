@@ -40,20 +40,49 @@ SOCIAL = [
 NAV = [("Home", "/"), ("About", "/about"), ("Organisations", "/organisations"), ("Work", "/work"), ("Pricing", "/pricing")]
 
 PROJECTS = [
+    ("boomiis", "BOOMiiS Restaurant", "Restaurant website, East Legon", "https://boomiisgh.com", "West Africa, in the heart of Accra."),
+    ("csc", "Christian Service Church", "Church website, East Legon", "https://www.christianservicechurch.org", "Christian Service Church. House of Testimonies."),
+    ("baidx", "BAID X", "Work network website, owned by Baiden Creatives", "https://www.baid-x.com", "Ghana's work network."),
+    ("resilience", "Resilience Estate", "Real estate website, Accra", "https://www.resilienceghana.com", "Real estate and home services in Ghana."),
+    ("nobles", "TheNobles Gift & Surprise Hub", "Gift shop website, Accra", "https://nobles-gift-hub-accra.vercel.app", "Say it with a gift."),
+    ("vault", "Blackboy's Vault", "Menswear store website, Ghana", "https://blackboys-vault-store.vercel.app", "Fresh fits for the new generation."),
+    ("bold", "Bold Restaurant Ghana", "Rooftop restaurant website, Accra", "https://bold-restaurant-ghana.vercel.app", "The restaurant your friends keep telling you about."),
+    ("eat", "EatConnect Ghana", "Food discovery platform", "https://eatconnect.vercel.app/#/discover", "Discover restaurants, cafes and food spots."),
+    ("eslyn", "Eslyn Local Kitchen & Pub", "Restaurant website, Adjiringanor", "https://eslyn.vercel.app", "Good food. Great company."),
     ("skin", "Solenne Skin", "Skincare brand website", "https://skin-care-website-one.vercel.app", "Quietly effective skincare"),
     ("jcutzz", "JCUTZZ", "Barber website, Birmingham", "https://jcutzz.vercel.app", "Sharp cuts, sharper standards."),
-    ("nobles", "TheNobles Gift & Surprise Hub", "Gift shop website, Accra", "https://nobles-gift-hub-accra.vercel.app", "Say it with a gift."),
     ("mane", "Mane Naturals", "Natural hair care brand website", "https://mane-naturals.vercel.app", "Natural hair care from Ghana."),
-    ("csc", "Christian Service Church", "Church website, East Legon", "https://www.christianservicechurch.org", "Christian Service Church. House of Testimonies."),
     ("wedding", "Xorlali & Daniella", "Wedding website", "https://xorlali-daniella-wedding-site.vercel.app", "Xorlali & Daniella. 18.07.2027"),
     ("ompad", "Ompad Media", "Media website", "https://ompadmedia.netlify.app", "Ompad Media"),
 ]
-FEATURED = ["csc", "skin", "mane"]
+FEATURED = ["boomiis", "csc", "bold"]
 
 # Organisations owned by Baiden Creatives (the parent). Add new ones here.
 ORGS = [
-    ("baidx", "BAID X", "Workforce platform", "https://baid-x.vercel.app", "Connecting skills. Powering work.",
-     "BAID X connects skilled professionals, businesses, companies and project teams in one digital workforce infrastructure."),
+    ("baidx", "BAID X", "Work network", "https://www.baid-x.com", "Ghana's work network.",
+     "BAID X lets you hire verified professionals across all 16 regions of Ghana, with payments held in escrow until the work is approved."),
+]
+
+BRAND = [
+    ("Christian Service Church", [
+        ("csc-website-now-live", "Website launch flyer", "Now live: the church website launch announcement"),
+        ("csc-sunday-service-flyer", "Sunday service flyer", "Sunday service invitation flyer"),
+        ("csc-the-word-online", "Sermons flyer", "The Word Online: sermons and daily devotions flyer"),
+        ("csc-21-days-fasting-prayer", "Event flyer", "21 Days of Fasting and Prayer event flyer"),
+    ]),
+    ("BAID X", [
+        ("baidx-launch-flyer-1", "Launch flyer", "BAID X launch flyer, how it works"),
+        ("baidx-launch-flyer-2", "Launch flyer", "BAID X launch flyer for buyers and suppliers"),
+        ("baidx-launch-flyer-3", "Launch flyer", "BAID X launch flyer for companies and project managers"),
+        ("baidx-app-coming-soon", "App announcement", "BAID X app coming soon announcement"),
+    ]),
+    ("Eslyn Local Kitchen & Pub", [
+        ("eslyn-logo", "Logo", "Eslyn Local Kitchen and Pub logo"),
+        ("eslyn-banku-tilapia-promo", "Social media post", "Banku and tilapia promo post"),
+        ("eslyn-special-meal-friday", "Social media post", "Special meal Friday promo post"),
+        ("eslyn-kitchen-menu-flyer", "Menu flyer", "Eslyn Kitchen menu flyer"),
+        ("eslyn-satisfy-your-cravings-menu", "Menu flyer", "Satisfy your cravings menu flyer"),
+    ]),
 ]
 
 SERVICES = [
@@ -347,7 +376,7 @@ def work_card(p):
     return f'''<article class="work {k}">
       <div class="shot">
         <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><em>{e(host)}</em></div>
-        <div class="frame"><span class="mock-title" aria-hidden="true">{e(t)}</span><iframe src="{u}" title="{e(plain)} website preview" loading="lazy" tabindex="-1" aria-hidden="true" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe></div>
+        <div class="frame"><span class="mock-title" aria-hidden="true">{e(t)}</span><iframe data-src="{u}" title="{e(plain)} website preview" loading="lazy" tabindex="-1" aria-hidden="true" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe></div>
         <a class="cover" href="{u}" target="_blank" rel="noopener" aria-label="Open {e(plain)} (new tab)"><span class="visit">Visit site ↗</span></a>
       </div>
       <div class="meta"><div><h3><a href="{u}" target="_blank" rel="noopener">{e(n)}</a></h3><p>{e(d)}</p></div><span>Web design · Development</span></div>
@@ -367,6 +396,25 @@ def org_cards():
       <span class="host">{e(host)}</span>
     </article>''')
     return '<div class="orgs">' + "".join(out) + "</div>"
+
+
+def brand_section():
+    sizes = json.loads((ROOT / "tools" / "work-sizes.json").read_text())
+    groups = []
+    for client, items in BRAND:
+        figs = []
+        for f, kind, alt in items:
+            w, h = sizes[f]
+            figs.append(f'''<figure><button type="button" data-full="/assets/work/{f}.jpg" data-cap="{e(client)}: {e(kind)}" aria-label="View larger: {e(alt)}"><img src="/assets/work/{f}-thumb.jpg" alt="{e(alt)}" width="{w}" height="{h}" loading="lazy" decoding="async"></button><figcaption><b>{e(client)}</b><span>{e(kind)}</span></figcaption></figure>''')
+        groups.append(f'<div class="bgroup"><h3>{e(client)}</h3><div class="gallery">{"".join(figs)}</div></div>')
+    return f'''<section class="sec" id="branding">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">Branding and design</p><h2>Logos, flyers and social graphics</h2></div><a class="more" href="/start-a-project">Start a project</a></div>
+    {"".join(groups)}
+    <p class="lead" style="margin-top:2rem">A selection of branding and design work for clients. More is added regularly.</p>
+  </div>
+</section>
+<dialog id="lb" aria-label="Image viewer"><button type="button" class="lb-x" aria-label="Close">×</button><button type="button" class="lb-n lb-prev" aria-label="Previous">←</button><figure><img alt=""><figcaption></figcaption></figure><button type="button" class="lb-n lb-next" aria-label="Next">→</button></dialog>'''
 
 
 def wrap_page(path, title, desc, nodes, body):
@@ -553,7 +601,7 @@ def work():
     nodes = page_nodes(path, title, desc, crumbs=[("Home", "/"), ("Work", "/work")]) + project_nodes()
     cards = "".join(work_card(p) for p in PROJECTS)
     body = phead("Work", "What we do and what we have built.",
-                 "Our services, and a selection of live websites we have designed and developed.") + f'''
+                 "Our services, a selection of live websites we have designed and developed, and branding work for clients.") + f'''
 <section class="sec" id="services">
   <div class="wrap">
     <div class="sec-head"><div><p class="eyebrow">Services</p><h2>What we do</h2></div><a class="more" href="/start-a-project">Start a project</a></div>
@@ -569,6 +617,8 @@ def work():
     </div>
   </div>
 </section>
+
+{brand_section()}
 
 {cta_band()}'''
     return path, wrap_page(path, title, desc, nodes, body)
@@ -673,6 +723,7 @@ def sitemap():
     pages = [("/", "1.0", "weekly"), ("/about", "0.8", "monthly"), ("/organisations", "0.8", "monthly"), ("/work", "0.9", "weekly"),
              ("/pricing", "0.8", "monthly"), ("/start-a-project", "0.9", "monthly")]
     imgs = {
+        "/work": [(f"assets/work/{f}.jpg", f"{c}: {k}", a) for c, items in BRAND for f, k, a in items],
         "/": [("assets/baiden-creatives-logo.png", "Baiden Creatives logo", "Baiden Creatives logo: a black circle with a B monogram beside the wordmark"),
               ("assets/og.png", "Baiden Creatives: Your business. Digitally elevated.", "")],
     }

@@ -4,7 +4,7 @@
 
 Founders: Baiden David and Baiden Daniel.
 Organisation type: parent organisation with sub-organisations.
-Sub-organisations: BAID X (workforce platform) at https://baid-x.vercel.app, owned by Baiden Creatives.
+Sub-organisations: BAID X (workforce platform) at https://www.baid-x.com, owned by Baiden Creatives.
 Website: https://www.baidencreatives.org/
 Email: edstudios77@gmail.com
 Phone / WhatsApp: +233 55 836 2423
@@ -30,7 +30,7 @@ Service area: Ghana (projects can be delivered remotely). Language: English. Cur
 - Logo (square): https://www.baidencreatives.org/assets/baiden-creatives-logo-square.png
 
 ## Organisations under Baiden Creatives
-- BAID X: workforce platform that connects skilled professionals, businesses, companies and project teams in one digital workforce infrastructure. Owned by Baiden Creatives. https://baid-x.vercel.app
+- BAID X: Ghana's work network. Hire verified professionals across all 16 regions of Ghana, with payments held in escrow until the work is approved. Owned by Baiden Creatives. https://www.baid-x.com
 
 ## Services
 - Web development: business and corporate websites, e-commerce, booking systems, client portals, dashboards, custom web applications.
@@ -38,14 +38,22 @@ Service area: Ghana (projects can be delivered remotely). Language: English. Cur
 - Graphic design: flyers, posters, social media graphics, business cards, brand design.
 - Launch setup: domain, hosting, SSL/HTTPS, Google Analytics, Google Search Console, sitemap, performance optimisation.
 
-## Selected work
-- Solenne Skin (skincare brand website): https://skin-care-website-one.vercel.app
-- JCUTZZ (barber website, Birmingham): https://jcutzz.vercel.app
-- TheNobles Gift & Surprise Hub (gift shop website, Accra): https://nobles-gift-hub-accra.vercel.app
-- Mane Naturals (natural hair care brand website): https://mane-naturals.vercel.app
-- Christian Service Church (church website, East Legon): https://www.christianservicechurch.org
+## Selected work (websites built for clients)
+- BOOMiiS Restaurant (restaurant, East Legon): https://boomiisgh.com
+- Christian Service Church (church, East Legon): https://www.christianservicechurch.org
+- BAID X (work network, owned by Baiden Creatives): https://www.baid-x.com
+- Resilience Estate (real estate, Accra): https://www.resilienceghana.com
+- TheNobles Gift & Surprise Hub (gift shop, Accra): https://nobles-gift-hub-accra.vercel.app
+- Blackboy's Vault (menswear store): https://blackboys-vault-store.vercel.app
+- Bold Restaurant Ghana (rooftop restaurant, Accra): https://bold-restaurant-ghana.vercel.app
+- EatConnect Ghana (food discovery platform): https://eatconnect.vercel.app
+- Eslyn Local Kitchen & Pub (restaurant, Adjiringanor): https://eslyn.vercel.app
+- Solenne Skin (skincare brand): https://skin-care-website-one.vercel.app
+- JCUTZZ (barber, Birmingham): https://jcutzz.vercel.app
+- Mane Naturals (natural hair care): https://mane-naturals.vercel.app
 - Xorlali & Daniella (wedding website): https://xorlali-daniella-wedding-site.vercel.app
-- Ompad Media (media website): https://ompadmedia.netlify.app
+- Ompad Media (media): https://ompadmedia.netlify.app
+More client work is added over time. Branding and design work (logos, flyers, social graphics for Christian Service Church, BAID X and Eslyn) is shown at https://www.baidencreatives.org/work#branding
 
 ## Pricing (starting guides, GHS)
 - Starter website (1-3 pages): GH₵2,500, 5-7 working days.

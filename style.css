@@ -299,3 +299,36 @@ footer{border-top:1px solid var(--line);padding:4rem 0 1.75rem;color:var(--mute)
 .org:only-child>*{grid-column:1}
 .org:only-child .btn{justify-self:start}
 @media(max-width:900px){.org:only-child{display:flex}}
+
+/* project fallback colours */
+.boomiis .shot{background:#0a1a13;color:#f4efe3}
+.boomiis .mock-title{color:#f4efe3}
+.resilience .shot{background:#14181d;color:#eef0f2}
+.baidx .shot{background:#050505;color:#f4f0e6}
+.vault .shot{background:#fff;color:#111}
+.vault .mock-title{text-transform:uppercase;letter-spacing:-.01em}
+.bold .shot{background:#0b0a09;color:#f3e9d8}
+.eat .shot{background:#24150D;color:#f3e6d6}
+.eslyn .shot{background:#000;color:#fff}
+
+/* branding gallery */
+.bgroup{margin-top:3.5rem}
+.bgroup:first-of-type{margin-top:0}
+.bgroup h3{font-size:1.3rem;margin-bottom:1.25rem;padding-bottom:.9rem;border-bottom:1px solid #333}
+.gallery{columns:4 220px;column-gap:1.1rem}
+.gallery figure{break-inside:avoid;margin:0 0 1.1rem}
+.gallery button{display:block;width:100%;padding:0;border:1px solid #262626;border-radius:12px;overflow:hidden;background:#0d0d0d;cursor:zoom-in;transition:border-color .2s}
+.gallery button:hover,.gallery button:focus-visible{border-color:#fff}
+.gallery img{width:100%;height:auto;display:block}
+.gallery figcaption{display:flex;flex-direction:column;gap:.1rem;padding:.55rem .1rem 0;font-size:.78rem;color:var(--mute)}
+.gallery figcaption b{font-weight:500;color:#ddd}
+dialog#lb{border:0;background:rgba(0,0,0,.94);color:#fff;width:100vw;height:100vh;max-width:none;max-height:none;padding:0;margin:0}
+dialog#lb::backdrop{background:#000}
+dialog#lb[open]{display:flex;align-items:center;justify-content:center;gap:1rem;padding:1.5rem}
+dialog#lb figure{margin:0;max-width:min(90vw,900px);text-align:center}
+dialog#lb img{max-width:100%;max-height:80vh;border-radius:10px;margin:0 auto}
+dialog#lb figcaption{margin-top:.9rem;color:var(--mute);font-size:.9rem}
+.lb-x{position:absolute;top:1rem;right:1.2rem;width:44px;height:44px;border-radius:50%;border:1px solid #444;background:none;font-size:1.6rem;cursor:pointer}
+.lb-n{width:46px;height:46px;border-radius:50%;border:1px solid #444;background:none;font-size:1.3rem;cursor:pointer;flex-shrink:0}
+.lb-x:hover,.lb-n:hover{background:#fff;color:#000}
+@media(max-width:900px){.gallery{columns:2 150px}dialog#lb[open]{padding:1rem .5rem}.lb-n{position:absolute;bottom:1rem}.lb-prev{left:1rem}.lb-next{right:1rem}}

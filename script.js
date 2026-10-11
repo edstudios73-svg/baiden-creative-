@@ -26,6 +26,16 @@
   });
   addEventListener('resize', () => { if (innerWidth > 900) setMenu(false); });
 
+  /* lazy-load live previews only when their card is near the screen */
+  const lazy = $$('iframe[data-src]');
+  if (lazy.length) {
+    const load = f => { f.src = f.dataset.src; f.removeAttribute('data-src'); };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } }), { rootMargin: '400px' });
+      lazy.forEach(f => io.observe(f));
+    } else lazy.forEach(load);
+  }
+
   /* live site previews: scale a 1440px-wide page to fit its card */
   const frames = $$('.work .frame');
   if (frames.length) {
@@ -36,6 +46,25 @@
       const ro = new ResizeObserver(fit);
       frames.forEach(f => ro.observe(f));
     }
+  }
+
+  /* image viewer for the branding gallery */
+  const lb = $('#lb');
+  if (lb && lb.showModal) {
+    const items = $$('.gallery button');
+    const img = $('img', lb), cap = $('figcaption', lb);
+    let i = 0;
+    const show = n => {
+      i = (n + items.length) % items.length;
+      const b = items[i];
+      img.src = b.dataset.full; img.alt = $('img', b).alt; cap.textContent = b.dataset.cap + '  (' + (i + 1) + '/' + items.length + ')';
+    };
+    items.forEach((b, n) => b.addEventListener('click', () => { show(n); lb.showModal(); }));
+    $('.lb-x', lb).addEventListener('click', () => lb.close());
+    $('.lb-prev', lb).addEventListener('click', () => show(i - 1));
+    $('.lb-next', lb).addEventListener('click', () => show(i + 1));
+    lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+    lb.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') show(i - 1); if (e.key === 'ArrowRight') show(i + 1); });
   }
 
   /* start a project form */
