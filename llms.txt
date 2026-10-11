@@ -3,18 +3,28 @@
 > Baiden Creatives is a digital creative studio based in East Legon, Accra, Ghana, offering web development, web design and graphic design for businesses, organisations, entrepreneurs and individuals across Ghana. Tagline: "Your business. Digitally elevated."
 
 Founders: Baiden David and Baiden Daniel.
-Website: https://baiden-creatives.vercel.app/
+Website: https://baidencreatives.org/
 Email: edstudios77@gmail.com
 Phone / WhatsApp: +233 55 836 2423
-Instagram: https://www.instagram.com/baidx.system
-TikTok: https://www.tiktok.com/@he_is.ceo
+Social handle on every platform: @baidencreatives
+- Instagram: https://www.instagram.com/baidencreatives
+- TikTok: https://www.tiktok.com/@baidencreatives
+- Facebook: https://www.facebook.com/baidencreatives
+- X: https://x.com/baidencreatives
+- YouTube: https://www.youtube.com/@baidencreatives
 Location: East Legon, Accra, Greater Accra Region, Ghana.
 Service area: Ghana (projects can be delivered remotely). Language: English. Currency: Ghana cedi (GHS).
 
+## Pages
+- Home: https://baidencreatives.org/
+- About (founders and studio): https://baidencreatives.org/about
+- Work (services and selected projects): https://baidencreatives.org/work
+- Pricing (packages, payment terms, FAQ): https://baidencreatives.org/pricing
+- Start a project (contact and project brief): https://baidencreatives.org/start-a-project
+
 ## Brand assets
-- Logo (wordmark): https://baiden-creatives.vercel.app/assets/baiden-creatives-logo.png (black circle with a B monogram beside the wordmark "Baiden Creatives")
-- Logo (square): https://baiden-creatives.vercel.app/assets/baiden-creatives-logo-square.png
-- Founders photo: https://baiden-creatives.vercel.app/assets/baiden-creatives-founders.jpg (Baiden David on the left, Baiden Daniel on the right)
+- Logo (wordmark): https://baidencreatives.org/assets/baiden-creatives-logo.png (black circle with a B monogram beside the wordmark "Baiden Creatives")
+- Logo (square): https://baidencreatives.org/assets/baiden-creatives-logo-square.png
 
 ## Services
 - Web development: business and corporate websites, e-commerce, booking systems, client portals, dashboards, custom web applications.
@@ -25,10 +35,10 @@ Service area: Ghana (projects can be delivered remotely). Language: English. Cur
 ## Selected work
 - Solenne Skin (skincare brand website): https://skin-care-website-one.vercel.app
 - BAID X (workforce platform website): https://baid-x.vercel.app
-- JCUTZZ (barber website, birmingham): https://jcutzz.vercel.app
-- TheNobles Gift & Surprise Hub (gift shop website, accra): https://nobles-gift-hub-accra.vercel.app
+- JCUTZZ (barber website, Birmingham): https://jcutzz.vercel.app
+- TheNobles Gift & Surprise Hub (gift shop website, Accra): https://nobles-gift-hub-accra.vercel.app
 - Mane Naturals (natural hair care brand website): https://mane-naturals.vercel.app
-- Christian Service Church (church website, east legon): https://www.christianservicechurch.org
+- Christian Service Church (church website, East Legon): https://www.christianservicechurch.org
 - Xorlali & Daniella (wedding website): https://xorlali-daniella-wedding-site.vercel.app
 - Ompad Media (media website): https://ompadmedia.netlify.app
 
@@ -39,11 +49,9 @@ Service area: Ghana (projects can be delivered remotely). Language: English. Cur
 - E-commerce website (Mobile Money and card payments, admin dashboard): from GH₵10,000, 3-6 weeks.
 - Custom web application: from GH₵15,000, quoted after assessment.
 - Payment: under GH₵10,000 is 60% upfront and 40% before launch; larger projects 50% / 30% / 20%.
-- Extras not automatically included: domain and hosting renewals, paid plugins/APIs, stock images, photography, copywriting, payment gateway fees, changes outside the agreed scope.
+- Not automatically included: domain and hosting renewals, paid plugins/APIs, stock images, photography, copywriting, payment gateway fees, changes outside the agreed scope.
 
 ## FAQ
 - Where are you based? East Legon, Accra, Ghana. We serve clients across Ghana and can work remotely.
-- How does payment work? Under GH₵10,000: 60% upfront, 40% before launch. Larger projects: 50% / 30% / 20%.
-- What is not included? Domain and hosting renewals, premium plugins, paid APIs, stock images, photography, copywriting, gateway charges and out-of-scope changes.
+- How do I start? Use https://baidencreatives.org/start-a-project, WhatsApp +233 55 836 2423, or email edstudios77@gmail.com.
 - What happens at launch? Domain, hosting, SSL, mobile optimisation, testing and deployment; Business and Professional also include Google Analytics, Search Console and a sitemap.
-- What do I need to provide? Logo, images, business information, contact details, social links and content.

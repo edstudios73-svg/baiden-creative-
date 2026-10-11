@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# AI / generative search crawlers are welcome
+# AI and generative search crawlers are welcome
 User-agent: GPTBot
 Allow: /
 User-agent: OAI-SearchBot
@@ -19,4 +19,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://baiden-creatives.vercel.app/sitemap.xml
+Sitemap: https://baidencreatives.org/sitemap.xml
