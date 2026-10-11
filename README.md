@@ -2,7 +2,7 @@
 
 Website for Baiden Creatives, a web design, web development and graphic design studio in East Legon, Accra, Ghana.
 
-Live: https://baidencreatives.org
+Live: https://www.baidencreatives.org (baidencreatives.org redirects here)
 
 Static site (HTML, CSS, vanilla JS). Vercel serves the committed files directly and deploys from `main`.
 

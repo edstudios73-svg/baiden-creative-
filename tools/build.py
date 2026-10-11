@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generates the static pages for baidencreatives.org.
+"""Generates the static pages for baidencreatives.org (served at www.baidencreatives.org).
 
 Run from the repo root:  python3 tools/build.py
 It writes index.html, about.html, work.html, pricing.html, start-a-project.html,
@@ -11,7 +11,7 @@ from html import escape
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DOMAIN = "https://baidencreatives.org"
+DOMAIN = "https://www.baidencreatives.org"
 TODAY = "2026-10-11"
 V = "30"  # asset version, bump to bust caches
 
@@ -288,7 +288,7 @@ def footer():
       </div>
       <div><h4>Follow @baidencreatives</h4>{social_links()}</div>
     </div>
-    <div class="fbar"><span>© <span id="yr">2026</span> {NAME}. All rights reserved.</span><a href="https://baidencreatives.org">baidencreatives.org</a></div>
+    <div class="fbar"><span>© <span id="yr">2026</span> {NAME}. All rights reserved.</span><a href="{DOMAIN}">baidencreatives.org</a></div>
   </div>
 </footer>
 <script src="/script.js?v={V}"></script>

@@ -3,7 +3,7 @@
 > Baiden Creatives is a digital creative studio based in East Legon, Accra, Ghana, offering web development, web design and graphic design for businesses, organisations, entrepreneurs and individuals across Ghana. Tagline: "Your business. Digitally elevated."
 
 Founders: Baiden David and Baiden Daniel.
-Website: https://baidencreatives.org/
+Website: https://www.baidencreatives.org/
 Email: edstudios77@gmail.com
 Phone / WhatsApp: +233 55 836 2423
 Social handle on every platform: @baidencreatives
@@ -16,15 +16,15 @@ Location: East Legon, Accra, Greater Accra Region, Ghana.
 Service area: Ghana (projects can be delivered remotely). Language: English. Currency: Ghana cedi (GHS).
 
 ## Pages
-- Home: https://baidencreatives.org/
-- About (founders and studio): https://baidencreatives.org/about
-- Work (services and selected projects): https://baidencreatives.org/work
-- Pricing (packages, payment terms, FAQ): https://baidencreatives.org/pricing
-- Start a project (contact and project brief): https://baidencreatives.org/start-a-project
+- Home: https://www.baidencreatives.org/
+- About (founders and studio): https://www.baidencreatives.org/about
+- Work (services and selected projects): https://www.baidencreatives.org/work
+- Pricing (packages, payment terms, FAQ): https://www.baidencreatives.org/pricing
+- Start a project (contact and project brief): https://www.baidencreatives.org/start-a-project
 
 ## Brand assets
-- Logo (wordmark): https://baidencreatives.org/assets/baiden-creatives-logo.png (black circle with a B monogram beside the wordmark "Baiden Creatives")
-- Logo (square): https://baidencreatives.org/assets/baiden-creatives-logo-square.png
+- Logo (wordmark): https://www.baidencreatives.org/assets/baiden-creatives-logo.png (black circle with a B monogram beside the wordmark "Baiden Creatives")
+- Logo (square): https://www.baidencreatives.org/assets/baiden-creatives-logo-square.png
 
 ## Services
 - Web development: business and corporate websites, e-commerce, booking systems, client portals, dashboards, custom web applications.
@@ -53,5 +53,5 @@ Service area: Ghana (projects can be delivered remotely). Language: English. Cur
 
 ## FAQ
 - Where are you based? East Legon, Accra, Ghana. We serve clients across Ghana and can work remotely.
-- How do I start? Use https://baidencreatives.org/start-a-project, WhatsApp +233 55 836 2423, or email edstudios77@gmail.com.
+- How do I start? Use https://www.baidencreatives.org/start-a-project, WhatsApp +233 55 836 2423, or email edstudios77@gmail.com.
 - What happens at launch? Domain, hosting, SSL, mobile optimisation, testing and deployment; Business and Professional also include Google Analytics, Search Console and a sitemap.
