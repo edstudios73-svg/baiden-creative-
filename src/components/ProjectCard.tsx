@@ -5,7 +5,7 @@ import { ArrowRight, ArrowUpRight } from "./icons";
 import { SmartLink } from "./ui";
 
 const aspect = {
-  wide: "aspect-[16/9]",
+  wide: "aspect-[16/9] md:aspect-[21/9]",
   standard: "aspect-[16/10]",
   tall: "aspect-[4/5]",
 } as const;
