@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DOMAIN = "https://www.baidencreatives.org"
 TODAY = "2026-10-11"
-V = "30"  # asset version, bump to bust caches
+V = "40"  # asset version, bump to bust caches
 
 NAME = "Baiden Creatives"
 EMAIL = "edstudios77@gmail.com"
@@ -49,13 +49,9 @@ PROJECTS = [
     ("bold", "Bold Restaurant Ghana", "Rooftop restaurant website, Accra", "https://bold-restaurant-ghana.vercel.app", "The restaurant your friends keep telling you about."),
     ("eat", "EatConnect Ghana", "Food discovery platform", "https://eatconnect.vercel.app/#/discover", "Discover restaurants, cafes and food spots."),
     ("eslyn", "Eslyn Local Kitchen & Pub", "Restaurant website, Adjiringanor", "https://eslyn.vercel.app", "Good food. Great company."),
-    ("skin", "Solenne Skin", "Skincare brand website", "https://skin-care-website-one.vercel.app", "Quietly effective skincare"),
-    ("jcutzz", "JCUTZZ", "Barber website, Birmingham", "https://jcutzz.vercel.app", "Sharp cuts, sharper standards."),
-    ("mane", "Mane Naturals", "Natural hair care brand website", "https://mane-naturals.vercel.app", "Natural hair care from Ghana."),
-    ("wedding", "Xorlali & Daniella", "Wedding website", "https://xorlali-daniella-wedding-site.vercel.app", "Xorlali & Daniella. 18.07.2027"),
     ("ompad", "Ompad Media", "Media website", "https://ompadmedia.netlify.app", "Ompad Media"),
 ]
-FEATURED = ["boomiis", "csc", "bold"]
+FEATURED = ["boomiis", "csc", "bold"]  # unused on home now (carousel shows all)
 
 # Organisations owned by Baiden Creatives (the parent). Add new ones here.
 ORGS = [
@@ -289,7 +285,7 @@ def head_end(nodes):
     return f'''{jsonld(nodes)}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css?v={V}">
 </head>
 '''
@@ -329,7 +325,7 @@ def footer():
         <a href="tel:{PHONE_INTL}">{PHONE_DISPLAY}</a>
         <a href="{MAPS}" target="_blank" rel="noopener">East Legon, Accra, Ghana</a>
       </div>
-      <div><h4>Follow @baidencreatives</h4>{social_links()}</div>
+      <div class="f-social"><h4>Follow @baidencreatives</h4>{social_links()}</div>
     </div>
     <div class="fbar"><span>© <span id="yr">2026</span> {NAME}. All rights reserved.</span><a href="{DOMAIN}">baidencreatives.org</a></div>
   </div>
@@ -374,28 +370,67 @@ def work_card(p):
     host = u.replace("https://", "").rstrip("/")
     plain = n.replace("&", "and")
     return f'''<article class="work {k}">
-      <div class="shot">
-        <div class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><em>{e(host)}</em></div>
-        <div class="frame"><span class="mock-title" aria-hidden="true">{e(t)}</span><iframe data-src="{u}" title="{e(plain)} website preview" loading="lazy" tabindex="-1" aria-hidden="true" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe></div>
-        <a class="cover" href="{u}" target="_blank" rel="noopener" aria-label="Open {e(plain)} (new tab)"><span class="visit">Visit site ↗</span></a>
-      </div>
+      <a class="shot" href="{u}" target="_blank" rel="noopener" aria-label="Open {e(plain)} (new tab)">
+        <span class="mock-bar" aria-hidden="true"><i></i><i></i><i></i><em>{e(host)}</em></span>
+        <img src="/assets/work/sites/{k}.jpg" alt="{e(plain)} website: homepage preview" width="1280" height="800" loading="lazy" decoding="async">
+        <span class="visit">Visit site ↗</span>
+      </a>
       <div class="meta"><div><h3><a href="{u}" target="_blank" rel="noopener">{e(n)}</a></h3><p>{e(d)}</p></div><span>Web design · Development</span></div>
     </article>'''
+
+
+def carousel(label, slides, cls=""):
+    n = len(slides)
+    return f'''<div class="car {cls}" data-car role="region" aria-roledescription="carousel" aria-label="{e(label)}">
+      <div class="car-track" tabindex="0">{"".join(slides)}</div>
+      <div class="car-ui"><span class="car-count" aria-live="polite">01 <span>/ {n:02d}</span></span>
+        <div class="car-btns"><button type="button" class="car-prev" aria-label="Previous">←</button><button type="button" class="car-next" aria-label="Next">→</button></div></div>
+    </div>'''
+
+
+SLIDE_IMG = [("/assets/work/sites/boomiis.jpg", "BOOMiiS restaurant website homepage", ""),
+             ("/assets/work/sites/baidx.jpg", "BAID X website homepage", ""),
+             ("/assets/work/csc-website-now-live-thumb.jpg", "Christian Service Church website launch flyer", " flyer")]
+
+
+def service_slides():
+    out = []
+    for i, ((n, d, items), (src, alt, cls)) in enumerate(zip(SERVICES, SLIDE_IMG)):
+        lis = "".join(f"<li>{e(x)}</li>" for x in items)
+        out.append(f'''<article class="slide" aria-label="{i+1} of {len(SERVICES)}"><div><span class="num">0{i+1}</span><h3>{n}</h3><p>{d}</p><ul>{lis}</ul><a class="more" href="/work">See examples</a></div><div class="slide-img{cls}"><img src="{src}" alt="{e(alt)}" loading="lazy" decoding="async"></div></article>''')
+    return out
 
 
 def org_cards():
     out = []
     for k, n, kind, u, t, d in ORGS:
-        host = u.replace("https://", "").rstrip("/")
-        out.append(f'''<article class="org {k}">
-      <div class="org-top"><span class="badge">Owned by Baiden Creatives</span><span class="kind">{e(kind)}</span></div>
-      <h3>{e(n)}</h3>
-      <p class="tagline">{e(t)}</p>
-      <p>{e(d)}</p>
-      <a class="btn" href="{u}" target="_blank" rel="noopener">Visit {e(n)} ↗</a>
-      <span class="host">{e(host)}</span>
+        plain = n.replace("&", "and")
+        out.append(f'''<article class="orgx-card {k}">
+      <img src="/assets/work/sites/{k}.jpg" alt="{e(plain)} homepage" width="1280" height="800" loading="lazy" decoding="async">
+      <div class="orgx-body">
+        <span class="badge">Owned by Baiden Creatives</span>
+        <h3>{e(n)}</h3>
+        <p class="tagline">{e(t)}</p>
+        <p>{e(d)}</p>
+        <a class="btn" href="{u}" target="_blank" rel="noopener">Visit {e(n)} ↗</a>
+      </div>
     </article>''')
-    return '<div class="orgs">' + "".join(out) + "</div>"
+    return "".join(out)
+
+
+def org_feature():
+    kids = "".join(f'<li class="ot-kid"><span>Owned organisation</span><b>{e(n)}</b></li>' for _, n, _, _, _, _ in ORGS)
+    return f'''<div class="orgx">
+      <div class="orgx-tree">
+        <div class="ot-parent"><span>Parent organisation</span><b>Baiden Creatives</b></div>
+        <ul class="ot-kids">
+          <li class="ot-kid"><span>Division</span><b>Creative services</b></li>
+          {kids}
+          <li class="ot-kid soon"><span>Further organisations</span><b>To be announced</b></li>
+        </ul>
+      </div>
+      {org_cards()}
+    </div>'''
 
 
 def brand_section():
@@ -428,8 +463,8 @@ def home():
     desc = ("Baiden Creatives is a digital organisation in East Legon, Accra, Ghana, founded by Baiden David and "
             "Baiden Daniel. Web design, web development, graphic design, and the parent of BAID X.")
     nodes = page_nodes(path, title, desc) + project_nodes()
-    feat = "".join(work_card(p) for p in PROJECTS if p[0] in FEATURED)
-    sectors = "".join(f"<li><i>{i+1:02d}</i><span>{e(s)}</span></li>" for i, s in enumerate(SECTORS))
+    proj_slides = [f'<div class="pslide">{work_card(p)}</div>' for p in PROJECTS]
+    sectors = ", ".join(f"<em>{e(s)}</em>" if i in (0, 3, 10) else e(s) for i, s in enumerate(SECTORS[:-1])) + " and " + e(SECTORS[-1])
     body = f'''<section class="hero">
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="grid-bg"></div>
@@ -458,31 +493,29 @@ def home():
 
 <section class="sec alt">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Organisations</p><h2>Baiden Creatives and the organisations under it</h2></div><a class="more" href="/organisations">How the group fits together</a></div>
-    {org_cards()}
+    <div class="sec-head"><div><p class="eyebrow">The organisation</p><h2>One parent, organisations of its own</h2></div><a class="more" href="/organisations">How the group fits together</a></div>
+    {org_feature()}
   </div>
 </section>
 
 <section class="sec">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">What we do</p><h2>Creative services for clients</h2></div><a class="more" href="/work">See all services and work</a></div>
-    {service_cards()}
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Portfolio</p><h2>Recent work</h2></div><a class="more" href="/work">View all work</a></div>
-    <div class="works three">
-    {feat}
-    </div>
+    <div class="sec-head"><div><p class="eyebrow">What we do</p><h2>Creative services for clients</h2></div><a class="more" href="/work">All services</a></div>
+    {carousel("What we do", service_slides())}
   </div>
 </section>
 
 <section class="sec alt">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">Clients</p><h2>Who we work with</h2></div></div>
-    <ul class="aud">{sectors}</ul>
+    <div class="sec-head"><div><p class="eyebrow">Portfolio</p><h2>Selected work</h2></div><a class="more" href="/work">View all work</a></div>
+    {carousel("Selected work", proj_slides, "proj")}
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow">Who we work with</p>
+    <p class="sectors">{sectors}.</p>
   </div>
 </section>
 

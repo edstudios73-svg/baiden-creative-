@@ -26,27 +26,40 @@
   });
   addEventListener('resize', () => { if (innerWidth > 900) setMenu(false); });
 
-  /* lazy-load live previews only when their card is near the screen */
-  const lazy = $$('iframe[data-src]');
-  if (lazy.length) {
-    const load = f => { f.src = f.dataset.src; f.removeAttribute('data-src'); };
-    if ('IntersectionObserver' in window) {
-      const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { load(e.target); io.unobserve(e.target); } }), { rootMargin: '400px' });
-      lazy.forEach(f => io.observe(f));
-    } else lazy.forEach(load);
-  }
-
-  /* live site previews: scale a 1440px-wide page to fit its card */
-  const frames = $$('.work .frame');
-  if (frames.length) {
-    const fit = () => frames.forEach(f => f.style.setProperty('--s', (f.clientWidth / 1440).toFixed(4)));
-    fit();
-    addEventListener('resize', fit);
-    if ('ResizeObserver' in window) {
-      const ro = new ResizeObserver(fit);
-      frames.forEach(f => ro.observe(f));
-    }
-  }
+  /* carousels */
+  $$('[data-car]').forEach(car => {
+    const track = $('.car-track', car), prev = $('.car-prev', car), next = $('.car-next', car), count = $('.car-count', car);
+    const slides = [...track.children];
+    const total = slides.length;
+    const pad = n => String(n).padStart(2, '0');
+    const index = () => {
+      let best = 0, d = Infinity;
+      slides.forEach((s, i) => { const x = Math.abs(s.offsetLeft - track.scrollLeft - slides[0].offsetLeft); if (x < d) { d = x; best = i; } });
+      return best;
+    };
+    const update = () => {
+      const i = index(), max = track.scrollWidth - track.clientWidth - 2;
+      count.innerHTML = pad(i + 1) + ' <span>/ ' + pad(total) + '</span>';
+      prev.disabled = track.scrollLeft <= 2;
+      next.disabled = track.scrollLeft >= max;
+    };
+    const go = dir => {
+      const w = slides[0].getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 24);
+      track.scrollBy({ left: dir * w, behavior: 'smooth' });
+    };
+    prev.addEventListener('click', () => go(-1));
+    next.addEventListener('click', () => go(1));
+    track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    addEventListener('resize', update);
+    track.addEventListener('keydown', e => { if (e.key === 'ArrowRight') { e.preventDefault(); go(1); } if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); } });
+    /* drag to scroll with a mouse */
+    let down = false, sx = 0, sl = 0, moved = false;
+    track.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; down = true; moved = false; sx = e.clientX; sl = track.scrollLeft; });
+    addEventListener('pointerup', () => { if (!down) return; down = false; track.classList.remove('drag'); });
+    track.addEventListener('pointermove', e => { if (!down) return; const dx = e.clientX - sx; if (Math.abs(dx) > 6) { moved = true; track.classList.add('drag'); } track.scrollLeft = sl - dx; });
+    track.addEventListener('click', e => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    update();
+  });
 
   /* image viewer for the branding gallery */
   const lb = $('#lb');

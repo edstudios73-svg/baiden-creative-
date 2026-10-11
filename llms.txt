@@ -48,10 +48,6 @@ Service area: Ghana (projects can be delivered remotely). Language: English. Cur
 - Bold Restaurant Ghana (rooftop restaurant, Accra): https://bold-restaurant-ghana.vercel.app
 - EatConnect Ghana (food discovery platform): https://eatconnect.vercel.app
 - Eslyn Local Kitchen & Pub (restaurant, Adjiringanor): https://eslyn.vercel.app
-- Solenne Skin (skincare brand): https://skin-care-website-one.vercel.app
-- JCUTZZ (barber, Birmingham): https://jcutzz.vercel.app
-- Mane Naturals (natural hair care): https://mane-naturals.vercel.app
-- Xorlali & Daniella (wedding website): https://xorlali-daniella-wedding-site.vercel.app
 - Ompad Media (media): https://ompadmedia.netlify.app
 More client work is added over time. Branding and design work (logos, flyers, social graphics for Christian Service Church, BAID X and Eslyn) is shown at https://www.baidencreatives.org/work#branding
 
