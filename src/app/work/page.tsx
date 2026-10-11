@@ -34,7 +34,7 @@ export default function WorkPage() {
           </>
         }
       />
-      <section className="container-x pb-24 md:pb-32" aria-label="Projects">
+      <section className="container-x pb-16 md:pb-20" aria-label="Projects">
         <WorkIndex projects={publicProjects} categories={projectCategories} />
       </section>
       <CtaBand />

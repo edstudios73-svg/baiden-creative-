@@ -31,7 +31,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="container-x overflow-x-clip pt-8 pb-20 md:pt-14 md:pb-28" aria-labelledby="hero-title">
+      <section className="container-x overflow-x-clip pt-8 pb-14 md:pt-10 md:pb-20" aria-labelledby="hero-title">
         <p className="text-label hero-line text-graphite">Creative &amp; technology company · {site.base}</p>
         <h1 id="hero-title" className="text-display-1 mt-6 md:mt-8">
           <span className="hero-line" style={{ "--i": 1 } as React.CSSProperties}>
@@ -46,7 +46,7 @@ export default function HomePage() {
           </span>
         </h1>
 
-        <div className="mt-14 grid gap-14 lg:mt-20 lg:grid-cols-12 lg:gap-10">
+        <div className="mt-10 grid gap-10 lg:mt-12 lg:grid-cols-12 lg:gap-10">
           <div className="hero-line lg:col-span-4 lg:pt-6" style={{ "--i": 3 } as React.CSSProperties}>
             <p className="text-lead max-w-md">{site.summary}</p>
             <p className="mt-5 max-w-md text-graphite">
@@ -73,7 +73,7 @@ export default function HomePage() {
             title={<span id="work-title">Websites, stores and brands we&apos;ve designed and built.</span>}
             action={<ArrowLink href="/work">All work ({publicProjects.length})</ArrowLink>}
           />
-          <div className="mt-16 grid gap-x-8 gap-y-20 md:mt-20 md:grid-cols-12">
+          <div className="mt-12 grid gap-x-8 gap-y-14 md:mt-14 md:grid-cols-12">
             {lead && (
               <div className="md:col-span-12">
                 <ProjectCard project={lead} variant="wide" sizes="100vw" />
@@ -85,7 +85,7 @@ export default function HomePage() {
               </div>
             )}
             {rest[1] && (
-              <div className="md:col-span-5 md:mt-32">
+              <div className="md:col-span-5 md:mt-20">
                 <ProjectCard project={rest[1]} sizes="(min-width: 768px) 42vw, 100vw" />
               </div>
             )}
@@ -107,7 +107,7 @@ export default function HomePage() {
             intro="Each project draws on the disciplines it needs, so your brand, interface and code are made to fit together."
             action={<ArrowLink href="/services">All services</ArrowLink>}
           />
-          <div className="mt-14 md:mt-20">
+          <div className="mt-10 md:mt-14">
             <CapabilityIndex />
           </div>
         </div>
@@ -132,7 +132,7 @@ export default function HomePage() {
 
       {/* About preview */}
       <section className="section-y border-t border-line bg-paper" aria-labelledby="about-title">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
+        <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7" data-reveal>
             <Label className="text-graphite">About Baiden Creatives</Label>
             <h2 id="about-title" className="text-display-3 mt-4">

@@ -33,11 +33,11 @@ export default function AboutPage() {
 
       <section className="border-y border-line bg-paper" aria-label="Mission and vision">
         <div className="container-x grid md:grid-cols-2">
-          <div className="py-14 md:border-r md:border-line md:py-20 md:pr-12" data-reveal>
+          <div className="py-10 md:border-r md:border-line md:py-14 md:pr-12" data-reveal>
             <Label className="text-graphite">Mission</Label>
             <p className="text-heading mt-5">{mission}</p>
           </div>
-          <div className="border-t border-line py-14 md:border-t-0 md:py-20 md:pl-12" data-reveal style={{ "--reveal-delay": 1 } as React.CSSProperties}>
+          <div className="border-t border-line py-10 md:border-t-0 md:py-14 md:pl-12" data-reveal style={{ "--reveal-delay": 1 } as React.CSSProperties}>
             <Label className="text-graphite">Vision</Label>
             <p className="text-heading mt-5">{vision}</p>
           </div>
@@ -45,7 +45,7 @@ export default function AboutPage() {
       </section>
 
       <section className="section-y" aria-labelledby="philosophy-title">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
+        <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4" data-reveal>
             <Label className="text-graphite">Creative philosophy</Label>
             <h2 id="philosophy-title" className="text-display-3 mt-4">
@@ -70,7 +70,7 @@ export default function AboutPage() {
           <h2 id="values-title" className="text-display-3 mt-4 max-w-2xl">
             What we hold ourselves to.
           </h2>
-          <ul className="mt-14 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v, i) => (
               <li key={v.title} className="border-t border-line-dark pt-5" data-reveal style={{ "--reveal-delay": i } as React.CSSProperties}>
                 <h3 className="text-display-3 italic">{v.title}</h3>
@@ -82,7 +82,7 @@ export default function AboutPage() {
       </section>
 
       <section className="section-y" aria-labelledby="founders-title">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
+        <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4" data-reveal>
             <Label className="text-graphite">Founders</Label>
             <h2 id="founders-title" className="text-display-3 mt-4">
@@ -111,7 +111,7 @@ export default function AboutPage() {
             </div>
             <ArrowLink href="/work">See all {publicProjects.length} projects</ArrowLink>
           </div>
-          <ul className="mt-14 grid gap-x-8 gap-y-16 md:grid-cols-3">
+          <ul className="mt-10 grid gap-x-8 gap-y-12 md:grid-cols-3">
             {featuredProjects.slice(0, 3).map((p) => (
               <li key={p.slug}>
                 <ProjectCard project={p} sizes="(min-width: 768px) 33vw, 100vw" />

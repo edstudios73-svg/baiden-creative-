@@ -43,7 +43,7 @@ export function WorkIndex({ projects, categories }: { projects: Project[]; categ
           <EmptyState title="Nothing here yet">We haven&apos;t published work in this category. Try another filter.</EmptyState>
         </div>
       ) : (
-        <ul className="mt-10 grid gap-x-8 gap-y-16 md:grid-cols-2">
+        <ul className="mt-10 grid gap-x-8 gap-y-12 md:grid-cols-2">
           {visible.map((p) => (
             <li key={p.slug}>
               <ProjectCard project={p} sizes="(min-width: 768px) 50vw, 100vw" />

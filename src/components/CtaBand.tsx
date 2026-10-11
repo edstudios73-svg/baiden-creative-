@@ -14,7 +14,7 @@ export function CtaBand({
 }) {
   return (
     <section className="on-dark bg-ink text-ivory" aria-labelledby="cta-title">
-      <div className="container-x section-y grid gap-12 lg:grid-cols-12 lg:items-end">
+      <div className="container-x section-y grid gap-10 lg:grid-cols-12 lg:items-end">
         <h2 id="cta-title" className="text-display-2 lg:col-span-8" data-reveal>
           {title}
         </h2>

@@ -38,12 +38,12 @@ export default function ServicesPage() {
         lead="We bring strategy, design and engineering to the same table, so what you sign off is what gets built. Choose a single discipline or combine them."
       />
 
-      <section className="container-x pb-24 md:pb-32" aria-label="Our services">
+      <section className="container-x pb-16 md:pb-20" aria-label="Our services">
         <CapabilityIndex headingLevel="h2" />
       </section>
 
       <section className="section-y border-t border-line bg-paper" aria-labelledby="who-title">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
+        <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4" data-reveal>
             <Label className="text-graphite">Who we work with</Label>
             <h2 id="who-title" className="text-display-3 mt-4">

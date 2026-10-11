@@ -82,9 +82,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
   return (
     <>
       <article>
-        <header className="container-x pt-10 md:pt-16">
+        <header className="container-x pt-10 md:pt-12">
           <Breadcrumbs items={crumbs} />
-          <div className="mt-10 grid gap-10 md:mt-14 lg:grid-cols-12">
+          <div className="mt-10 grid gap-10 md:mt-10 lg:grid-cols-12">
             <div className="lg:col-span-8">
               <p className="text-label text-graphite">
                 Case study · {p.category}
@@ -104,7 +104,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
           </div>
         </header>
 
-        <div className="container-x mt-14 md:mt-20">
+        <div className="container-x mt-10 md:mt-14">
           <div className="frame aspect-[16/10]">
             <Image src={p.coverImage.src} alt={p.coverImage.alt} fill priority sizes="(min-width: 1440px) 1360px, 100vw" className="object-cover object-top" />
           </div>
@@ -125,7 +125,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
 
         {Boolean(p.approach?.length || p.solution?.length) && (
           <section className="section-y border-t border-line bg-paper" aria-label="Approach and execution">
-            <div className="container-x grid gap-16 lg:grid-cols-2 lg:gap-12">
+            <div className="container-x grid gap-12 lg:grid-cols-2 lg:gap-12">
               {p.approach && p.approach.length > 0 && (
                 <div data-reveal>
                   <Label className="text-graphite">Approach</Label>
@@ -162,7 +162,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
           <section className="section-y" aria-labelledby="gallery-title">
             <div className="container-x">
               <Label className="text-graphite">Gallery</Label>
-              <h2 id="gallery-title" className="text-display-3 mt-4 mb-12">
+              <h2 id="gallery-title" className="text-display-3 mt-4 mb-10">
                 In detail.
               </h2>
               <Gallery images={p.gallery} label={`${p.title} gallery`} />
@@ -211,7 +211,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
               </h2>
               <ArrowLink href="/work">All work</ArrowLink>
             </div>
-            <ul className="mt-12 grid gap-x-8 gap-y-16 md:grid-cols-2">
+            <ul className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-2">
               {related.map((r) => (
                 <li key={r.slug}>
                   <ProjectCard project={r} sizes="(min-width: 768px) 50vw, 100vw" />

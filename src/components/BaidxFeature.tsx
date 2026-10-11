@@ -5,7 +5,7 @@ import { ButtonLink, Label } from "./ui";
 /** BAID X introduced as an original product. Live capabilities and in-development work are kept visibly separate. */
 export function BaidxFeature({ headingLevel: H = "h2" }: { headingLevel?: "h2" | "h3" }) {
   return (
-    <div className="grid gap-14 lg:grid-cols-12 lg:gap-10">
+    <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
       <div className="lg:col-span-5" data-reveal>
         <Label className="text-mist">Original products</Label>
         <H className="text-display-2 mt-5">

@@ -48,7 +48,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       </PageHeader>
 
       {service.practiceNote && (
-        <aside className="container-x pb-16" aria-label="Where this practice stands">
+        <aside className="container-x pb-12" aria-label="Where this practice stands">
           <div className="grid gap-4 border-l-2 border-lime bg-paper p-6 md:grid-cols-12 md:p-8">
             <p className="text-label text-graphite md:col-span-3">Where we are today</p>
             <p className="md:col-span-9">{service.practiceNote}</p>
@@ -57,7 +57,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       )}
 
       <section className="section-y border-t border-line" aria-labelledby="solves-title">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
+        <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4" data-reveal>
             <Label className="text-graphite">What it solves</Label>
             <h2 id="solves-title" className="text-display-3 mt-4">
@@ -76,7 +76,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       </section>
 
       <section className="section-y bg-paper" aria-labelledby="scope-title">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
+        <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4" data-reveal>
             <Label className="text-graphite">Scope &amp; deliverables</Label>
             <h2 id="scope-title" className="text-display-3 mt-4">
@@ -92,7 +92,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
               ))}
             </ul>
           </div>
-          <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:col-span-8">
+          <div className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:col-span-8">
             {service.deliverables.map((d) => (
               <div key={d.title} className="border-t border-ink/80 pt-5" data-reveal>
                 <h3 className="text-heading">{d.title}</h3>
@@ -119,7 +119,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
               </div>
               <ArrowLink href="/work">All work</ArrowLink>
             </div>
-            <ul className="mt-14 grid gap-x-8 gap-y-16 md:grid-cols-2">
+            <ul className="mt-10 grid gap-x-8 gap-y-12 md:grid-cols-2">
               {work.map((p) => (
                 <li key={p.slug}>
                   <ProjectCard project={p} sizes="(min-width: 768px) 50vw, 100vw" />
@@ -131,7 +131,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       )}
 
       <section className="section-y border-t border-line" aria-labelledby="process-title">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
+        <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4" data-reveal>
             <Label className="text-graphite">Working process</Label>
             <h2 id="process-title" className="text-display-3 mt-4">
@@ -160,7 +160,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
       {service.faqs.length > 0 && (
         <section className="section-y bg-paper" aria-labelledby="faq-title">
-          <div className="container-x grid gap-12 lg:grid-cols-12">
+          <div className="container-x grid gap-10 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <Label className="text-graphite">FAQ</Label>
               <h2 id="faq-title" className="text-display-3 mt-4">

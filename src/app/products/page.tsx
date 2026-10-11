@@ -51,7 +51,7 @@ export default function ProductsPage() {
       </section>
 
       <section className="section-y" aria-labelledby="why-title">
-        <div className="container-x grid gap-12 lg:grid-cols-12">
+        <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4" data-reveal>
             <Label className="text-graphite">Why we build products</Label>
             <h2 id="why-title" className="text-display-3 mt-4">

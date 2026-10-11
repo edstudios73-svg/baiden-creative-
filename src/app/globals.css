@@ -36,21 +36,21 @@
 @utility text-display-1 {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(3.1rem, 1.6rem + 7.4vw, 10rem);
+  font-size: clamp(2.8rem, 1.6rem + 6vw, 8.25rem);
   line-height: 0.9;
   letter-spacing: -0.025em;
 }
 @utility text-display-2 {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2.5rem, 1.5rem + 4.6vw, 6.5rem);
+  font-size: clamp(2.3rem, 1.5rem + 3.8vw, 5.25rem);
   line-height: 0.95;
   letter-spacing: -0.02em;
 }
 @utility text-display-3 {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2rem, 1.4rem + 2.6vw, 4rem);
+  font-size: clamp(1.85rem, 1.35rem + 2vw, 3.25rem);
   line-height: 1;
   letter-spacing: -0.015em;
 }
@@ -64,7 +64,7 @@
 @utility text-statement {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(1.75rem, 1.3rem + 1.7vw, 3rem);
+  font-size: clamp(1.6rem, 1.25rem + 1.4vw, 2.6rem);
   line-height: 1.1;
   letter-spacing: -0.012em;
 }
@@ -89,7 +89,7 @@
   padding-inline: clamp(1rem, 0.4rem + 3vw, 3rem);
 }
 @utility section-y {
-  padding-block: clamp(4.5rem, 3rem + 6vw, 9rem);
+  padding-block: clamp(3rem, 2.2rem + 3.6vw, 6rem);
 }
 
 /* ───────────────────────── Base ───────────────────────── */

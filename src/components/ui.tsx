@@ -137,9 +137,9 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <header className="container-x pt-10 pb-14 md:pt-16 md:pb-20">
+    <header className="container-x pt-8 pb-10 md:pt-12 md:pb-14">
       <Breadcrumbs items={crumbs} />
-      <h1 className="text-display-2 mt-8 max-w-[14ch] md:mt-12">{title}</h1>
+      <h1 className="text-display-2 mt-6 max-w-[14ch] md:mt-8">{title}</h1>
       {lead && <div className="text-lead mt-8 max-w-2xl text-graphite">{lead}</div>}
       {children}
     </header>
@@ -153,7 +153,7 @@ export function JsonLd({ data }: { data: object }) {
 
 export function EmptyState({ title, children }: { title: string; children?: ReactNode }) {
   return (
-    <div className="border border-dashed border-ink/25 px-6 py-14 text-center" role="status">
+    <div className="border border-dashed border-ink/25 px-6 py-10 text-center" role="status">
       <p className="text-heading">{title}</p>
       {children && <div className="mx-auto mt-3 max-w-md text-graphite">{children}</div>}
     </div>

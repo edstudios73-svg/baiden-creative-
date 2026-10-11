@@ -35,7 +35,7 @@ export default function ContactPage() {
         lead="Tell us what you're working on. The more context you share, the more useful our first reply will be."
       />
 
-      <section className="container-x grid gap-16 pb-24 md:pb-32 lg:grid-cols-12 lg:gap-10" aria-label="Project inquiry">
+      <section className="container-x grid gap-12 pb-16 md:pb-20 lg:grid-cols-12 lg:gap-10" aria-label="Project inquiry">
         <div className="lg:col-span-7 xl:col-span-7">
           <ContactForm />
         </div>
@@ -68,7 +68,7 @@ export default function ContactPage() {
               </li>
             </ul>
 
-            <h2 className="text-label mt-14 text-graphite">What happens next</h2>
+            <h2 className="text-label mt-10 text-graphite">What happens next</h2>
             <ol className="mt-6 grid gap-6">
               {next.map((n, i) => (
                 <li key={n.title} className="grid grid-cols-[2.25rem_1fr]">

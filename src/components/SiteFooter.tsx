@@ -12,8 +12,8 @@ export function SiteFooter() {
 
   return (
     <footer className="on-dark border-t border-line-dark bg-ink text-ivory">
-      <div className="container-x grid gap-14 pt-20 pb-10 md:pt-24">
-        <div className="grid gap-12 lg:grid-cols-12">
+      <div className="container-x grid gap-10 pt-14 pb-10 md:pt-16">
+        <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Logo tone="light" className="h-9 w-auto" />
             <p className="mt-6 max-w-sm text-mist">

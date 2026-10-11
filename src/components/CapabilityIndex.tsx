@@ -10,7 +10,7 @@ export function CapabilityIndex({ headingLevel: H = "h3" }: { headingLevel?: "h2
         <li key={s.slug} className="border-b border-line" data-reveal style={{ "--reveal-delay": i % 3 } as React.CSSProperties}>
           <Link
             href={`/services/${s.slug}`}
-            className="group grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-4 gap-y-3 py-8 md:grid-cols-[4rem_minmax(0,5fr)_minmax(0,5fr)_auto] md:gap-x-8 md:py-10"
+            className="group grid grid-cols-[2.5rem_1fr_auto] items-baseline gap-x-4 gap-y-2 py-6 md:grid-cols-[4rem_minmax(0,5fr)_minmax(0,5fr)_auto] md:gap-x-8 md:py-7"
           >
             <span className="text-label text-graphite">{s.index}</span>
             <H className="text-heading transition-[font-style] group-hover:italic">{s.title}</H>
