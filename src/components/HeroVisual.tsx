@@ -1,12 +1,12 @@
 import Image from "next/image";
 
 /**
- * Art-directed hero composition built only from real work: the BAID X platform, the Blackboy's Vault
- * mobile store and Eslyn's identity, layered around a circle that echoes the logo's monogram.
+ * Art-directed hero composition built only from real work: the Bold Restaurant website, the
+ * Blackboy's Vault mobile store and Eslyn's identity, layered around a circle that echoes the logo's monogram.
  */
 export function HeroVisual() {
   return (
-    <div className="relative aspect-[5/4] w-full sm:aspect-[16/11]" aria-label="Selected work: BAID X, Blackboy's Vault and Eslyn" role="group">
+    <div className="relative aspect-[5/4] w-full sm:aspect-[16/11]" aria-label="Selected work: Bold Restaurant, Blackboy's Vault and Eslyn" role="group">
       {/* Abstract element: the logo's circle, with a slow orbiting accent. Purely decorative. */}
       <svg className="absolute -top-[6%] -right-[8%] w-[62%] text-ink/15" viewBox="0 0 200 200" fill="none" aria-hidden="true">
         <circle cx="100" cy="100" r="98" stroke="currentColor" strokeWidth="0.6" />
@@ -16,18 +16,18 @@ export function HeroVisual() {
         </g>
       </svg>
 
-      <figure className="absolute top-[4%] right-0 w-[84%]">
+      <figure className="absolute top-0 right-0 flex w-[84%] flex-col-reverse">
         <div className="frame aspect-[16/10]">
           <Image
-            src="/assets/work/sites/baidx.jpg"
-            alt="BAID X, Ghana's work network: homepage"
+            src="/assets/work/sites/bold.jpg"
+            alt="Bold Restaurant Ghana website: homepage"
             fill
             priority
             sizes="(min-width: 1024px) 50vw, 90vw"
             className="object-cover object-top"
           />
         </div>
-        <figcaption className="text-label mt-3 text-right text-graphite">BAID X · Platform</figcaption>
+        <figcaption className="text-label mb-3 text-right text-graphite">Bold Restaurant · Website</figcaption>
       </figure>
 
       <figure className="absolute bottom-0 left-0 w-[27%] min-w-[96px]">

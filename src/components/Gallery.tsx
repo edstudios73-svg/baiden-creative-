@@ -21,7 +21,7 @@ export function Gallery({ images, label }: { images: Img[]; label: string }) {
 
   return (
     <>
-      <ul className="columns-1 gap-6 sm:columns-2 lg:columns-3" aria-label={label}>
+      <ul className="columns-1 gap-6 sm:columns-2 lg:columns-3 xl:columns-4" aria-label={label}>
         {images.map((img, i) => (
           <li key={img.src} className="mb-6 break-inside-avoid" data-reveal style={{ "--reveal-delay": i % 3 } as React.CSSProperties}>
             <button
@@ -30,7 +30,7 @@ export function Gallery({ images, label }: { images: Img[]; label: string }) {
               className={`img-zoom block w-full ${img.kind === "phone" ? "frame-phone" : "frame"}`}
               aria-label={`View larger: ${img.alt}`}
             >
-              <Image src={img.src} alt={img.alt} width={img.width} height={img.height} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="w-full" />
+              <Image src={img.src} alt={img.alt} width={img.width} height={img.height} sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="w-full" />
             </button>
           </li>
         ))}

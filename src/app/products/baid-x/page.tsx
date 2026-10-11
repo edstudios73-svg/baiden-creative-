@@ -66,7 +66,7 @@ export default function BaidxPage() {
           <h2 id="problem-title" className="text-label text-graphite lg:col-span-3">
             The problem
           </h2>
-          <p className="text-display-3 lg:col-span-9" data-reveal>
+          <p className="text-statement max-w-5xl lg:col-span-9" data-reveal>
             {baidx.problem}
           </p>
         </div>

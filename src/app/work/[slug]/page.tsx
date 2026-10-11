@@ -116,7 +116,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
               <h2 id="context-title" className="text-label text-graphite lg:col-span-3">
                 Background &amp; challenge
               </h2>
-              <p className="text-display-3 lg:col-span-9" data-reveal>
+              <p className="text-statement max-w-5xl lg:col-span-9" data-reveal>
                 {p.challenge}
               </p>
             </div>

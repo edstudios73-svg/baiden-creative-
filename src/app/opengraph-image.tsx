@@ -30,7 +30,6 @@ export default async function OpenGraphImage() {
           fontFamily: "Instrument Serif",
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logoSrc} width={250} height={68} alt="" />
         <div style={{ display: "flex", flexDirection: "column", fontSize: 104, lineHeight: 0.95, letterSpacing: -2 }}>
           <span>Built from imagination.</span>

@@ -61,6 +61,13 @@
   line-height: 1.08;
   letter-spacing: -0.01em;
 }
+@utility text-statement {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 1.3rem + 1.7vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.012em;
+}
 @utility text-lead {
   font-size: clamp(1.125rem, 1.02rem + 0.45vw, 1.4rem);
   line-height: 1.5;
@@ -88,6 +95,7 @@
 /* ───────────────────────── Base ───────────────────────── */
 @layer base {
   html {
+    overflow-x: clip;
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -188,6 +196,12 @@
 }
 
 /* ───────────────────────── Motion ───────────────────────── */
+@layer components {
+  .hero-line {
+    display: block;
+  }
+}
+
 /* Content is only hidden for reveal when JS is running and the user has not asked for reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   html.js [data-reveal] {
@@ -204,7 +218,6 @@
   }
 
   .hero-line {
-    display: block;
     animation: hero-rise 1100ms var(--ease-out-quint) both;
     animation-delay: calc(var(--i, 0) * 110ms + 60ms);
   }

@@ -21,7 +21,8 @@ export const metadata: Metadata = {
 };
 
 // Order of the editorial selection on the homepage.
-const HOME_WORK = ["baid-x", "blackboys-vault", "christian-service-church", "eslyn-local-kitchen"];
+// BAID X has its own section below, so the selection shows client work.
+const HOME_WORK = ["christian-service-church", "blackboys-vault", "eslyn-local-kitchen", "thenobles-gift-hub"];
 
 export default function HomePage() {
   const work = HOME_WORK.map((slug) => caseStudies.find((p) => p.slug === slug)).filter((p) => p !== undefined);
@@ -30,7 +31,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="container-x pt-8 pb-20 md:pt-14 md:pb-28" aria-labelledby="hero-title">
+      <section className="container-x overflow-x-clip pt-8 pb-20 md:pt-14 md:pb-28" aria-labelledby="hero-title">
         <p className="text-label hero-line text-graphite">Creative &amp; technology company · {site.base}</p>
         <h1 id="hero-title" className="text-display-1 mt-6 md:mt-8">
           <span className="hero-line" style={{ "--i": 1 } as React.CSSProperties}>
@@ -40,7 +41,7 @@ export default function HomePage() {
             Made for{" "}
             <span className="relative isolate whitespace-nowrap">
               impact.
-              <span aria-hidden="true" className="absolute right-[0.1em] bottom-[0.06em] left-0 -z-10 h-[0.16em] bg-lime" />
+              <span aria-hidden="true" className="absolute right-[0.1em] bottom-[0.1em] left-0 -z-10 h-[0.12em] bg-lime" />
             </span>
           </span>
         </h1>
@@ -69,7 +70,7 @@ export default function HomePage() {
         <div className="container-x">
           <SectionHeading
             label="Selected work"
-            title={<span id="work-title">Products, platforms and brands we&apos;ve designed and built.</span>}
+            title={<span id="work-title">Websites, stores and brands we&apos;ve designed and built.</span>}
             action={<ArrowLink href="/work">All work ({publicProjects.length})</ArrowLink>}
           />
           <div className="mt-16 grid gap-x-8 gap-y-20 md:mt-20 md:grid-cols-12">
