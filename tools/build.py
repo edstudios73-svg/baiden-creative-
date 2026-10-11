@@ -37,11 +37,10 @@ SOCIAL = [
      '<path d="M3 21l1.6-4.7A8.5 8.5 0 1 1 8 19.6z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1.3-1.6-2-1-.9.7a3.5 3.5 0 0 1-1.6-1.6l.7-.9-1-2z"/>'),
 ]
 
-NAV = [("Home", "/"), ("About", "/about"), ("Work", "/work"), ("Pricing", "/pricing")]
+NAV = [("Home", "/"), ("About", "/about"), ("Organisations", "/organisations"), ("Work", "/work"), ("Pricing", "/pricing")]
 
 PROJECTS = [
     ("skin", "Solenne Skin", "Skincare brand website", "https://skin-care-website-one.vercel.app", "Quietly effective skincare"),
-    ("baidx", "BAID X", "Workforce platform website", "https://baid-x.vercel.app", "Connecting skills. Powering work."),
     ("jcutzz", "JCUTZZ", "Barber website, Birmingham", "https://jcutzz.vercel.app", "Sharp cuts, sharper standards."),
     ("nobles", "TheNobles Gift & Surprise Hub", "Gift shop website, Accra", "https://nobles-gift-hub-accra.vercel.app", "Say it with a gift."),
     ("mane", "Mane Naturals", "Natural hair care brand website", "https://mane-naturals.vercel.app", "Natural hair care from Ghana."),
@@ -49,7 +48,13 @@ PROJECTS = [
     ("wedding", "Xorlali & Daniella", "Wedding website", "https://xorlali-daniella-wedding-site.vercel.app", "Xorlali & Daniella. 18.07.2027"),
     ("ompad", "Ompad Media", "Media website", "https://ompadmedia.netlify.app", "Ompad Media"),
 ]
-FEATURED = ["baidx", "csc", "skin"]
+FEATURED = ["csc", "skin", "mane"]
+
+# Organisations owned by Baiden Creatives (the parent). Add new ones here.
+ORGS = [
+    ("baidx", "BAID X", "Workforce platform", "https://baid-x.vercel.app", "Connecting skills. Powering work.",
+     "BAID X connects skilled professionals, businesses, companies and project teams in one digital workforce infrastructure."),
+]
 
 SERVICES = [
     ("Web Development", "Business websites, online stores and custom web apps that load fast and are easy to manage.",
@@ -118,14 +123,15 @@ def org_node():
     place_addr = {"@type": "PostalAddress", "addressLocality": "East Legon, Accra",
                   "addressRegion": "Greater Accra Region", "addressCountry": "GH"}
     return {
-        "@type": ["Organization", "ProfessionalService"], "@id": DOMAIN + "/#organization",
+        "@type": ["Organization", "LocalBusiness"], "@id": DOMAIN + "/#organization",
         "name": NAME, "alternateName": "Baiden Creative", "url": DOMAIN + "/",
         "logo": {"@type": "ImageObject", "@id": DOMAIN + "/#logo", "url": DOMAIN + "/assets/baiden-creatives-logo-square.png",
                  "contentUrl": DOMAIN + "/assets/baiden-creatives-logo-square.png", "width": 512, "height": 512,
                  "caption": "Baiden Creatives logo"},
         "image": [{"@id": DOMAIN + "/#logo-wordmark"}, DOMAIN + "/assets/og.png"],
         "brand": {"@type": "Brand", "name": NAME, "logo": {"@id": DOMAIN + "/#logo"}},
-        "description": "Baiden Creatives is a digital creative studio based in East Legon, Accra, Ghana, offering web development, web design and graphic design for businesses, organisations and entrepreneurs.",
+        "description": "Baiden Creatives is a digital organisation based in East Legon, Accra, Ghana. It provides web development, web design and graphic design for businesses, organisations and entrepreneurs, and owns BAID X.",
+        "disambiguatingDescription": "Parent organisation of BAID X",
         "slogan": "Your business. Digitally elevated.",
         "email": EMAIL, "telephone": PHONE_INTL, "address": place_addr,
         "areaServed": [{"@type": "City", "name": "Accra"}, {"@type": "AdministrativeArea", "name": "Greater Accra Region"}, {"@type": "Country", "name": "Ghana"}],
@@ -133,6 +139,8 @@ def org_node():
         "knowsLanguage": "en", "priceRange": "GH₵100 – GH₵15,000+", "currenciesAccepted": "GHS",
         "paymentAccepted": "Mobile Money, Bank transfer, Cash",
         "founder": [{"@id": DOMAIN + "/#david"}, {"@id": DOMAIN + "/#daniel"}],
+        "subOrganization": [{"@id": u.rstrip("/") + "/#organization"} for _, _, _, u, _, _ in ORGS],
+        "owns": [{"@id": u.rstrip("/") + "/#organization"} for _, _, _, u, _, _ in ORGS],
         "contactPoint": [{"@type": "ContactPoint", "telephone": PHONE_INTL, "email": EMAIL, "contactType": "customer service",
                           "areaServed": "GH", "availableLanguage": "English"}],
         "sameAs": [u for n, u, p in SOCIAL if n != "WhatsApp"],
@@ -142,11 +150,17 @@ def org_node():
     }
 
 
+def org_nodes():
+    return [{"@type": "Organization", "@id": u.rstrip("/") + "/#organization", "name": n, "url": u, "slogan": t,
+             "description": d, "parentOrganization": {"@id": DOMAIN + "/#organization"}} for _, n, _, u, t, d in ORGS]
+
+
 def common_nodes():
     place = {"@type": "Place", "name": "East Legon, Accra, Ghana",
              "address": {"@type": "PostalAddress", "addressLocality": "East Legon, Accra", "addressRegion": "Greater Accra Region", "addressCountry": "GH"}}
     return [
         org_node(),
+        *org_nodes(),
         {"@type": "Person", "@id": DOMAIN + "/#david", "name": "Baiden David", "jobTitle": "Co-founder",
          "worksFor": {"@id": DOMAIN + "/#organization"}, "workLocation": place},
         {"@type": "Person", "@id": DOMAIN + "/#daniel", "name": "Baiden Daniel", "jobTitle": "Co-founder",
@@ -278,7 +292,7 @@ def footer():
     <div class="fgrid">
       <div>
         <img src="/assets/baiden-creatives-logo-white.png" alt="Baiden Creatives" width="140" height="38" loading="lazy">
-        <p>A digital creative studio in East Legon, Accra. Web development, web design and graphic design for businesses across Ghana.</p>
+        <p>A digital organisation in East Legon, Accra. Creative services for businesses across Ghana, and the parent of BAID X.</p>
       </div>
       <div><h4>Pages</h4>{pages}</div>
       <div><h4>Contact</h4>
@@ -340,6 +354,21 @@ def work_card(p):
     </article>'''
 
 
+def org_cards():
+    out = []
+    for k, n, kind, u, t, d in ORGS:
+        host = u.replace("https://", "").rstrip("/")
+        out.append(f'''<article class="org {k}">
+      <div class="org-top"><span class="badge">Owned by Baiden Creatives</span><span class="kind">{e(kind)}</span></div>
+      <h3>{e(n)}</h3>
+      <p class="tagline">{e(t)}</p>
+      <p>{e(d)}</p>
+      <a class="btn" href="{u}" target="_blank" rel="noopener">Visit {e(n)} ↗</a>
+      <span class="host">{e(host)}</span>
+    </article>''')
+    return '<div class="orgs">' + "".join(out) + "</div>"
+
+
 def wrap_page(path, title, desc, nodes, body):
     return head(path, title, desc) + head_end(nodes) + header(path) + '<main id="main">\n' + body + "</main>\n" + footer()
 
@@ -347,9 +376,9 @@ def wrap_page(path, title, desc, nodes, body):
 # ---------- pages ----------
 def home():
     path = "/"
-    title = "Baiden Creatives | Web Design, Web Development & Graphic Design in East Legon, Accra"
-    desc = ("Baiden Creatives is a digital creative studio in East Legon, Accra, Ghana, founded by Baiden David and "
-            "Baiden Daniel. Web development, web design and graphic design for businesses across Ghana.")
+    title = "Baiden Creatives | Digital Organisation in East Legon, Accra, Ghana"
+    desc = ("Baiden Creatives is a digital organisation in East Legon, Accra, Ghana, founded by Baiden David and "
+            "Baiden Daniel. Web design, web development, graphic design, and the parent of BAID X.")
     nodes = page_nodes(path, title, desc) + project_nodes()
     feat = "".join(work_card(p) for p in PROJECTS if p[0] in FEATURED)
     sectors = "".join(f"<li><i>{i+1:02d}</i><span>{e(s)}</span></li>" for i, s in enumerate(SECTORS))
@@ -357,9 +386,9 @@ def home():
   <canvas id="net" aria-hidden="true"></canvas>
   <div class="grid-bg"></div>
   <div class="wrap">
-    <p class="eyebrow rv" style="--d:0">Digital creative studio · East Legon, Accra</p>
+    <p class="eyebrow rv" style="--d:0">Organisation · East Legon, Accra, Ghana</p>
     <h1><span>Your business.</span><span class="soft">Digitally elevated.</span></h1>
-    <p class="lead rv" style="--d:3">We design, build and launch websites, web apps and brand visuals for businesses in Accra and across Ghana.</p>
+    <p class="lead rv" style="--d:3">Baiden Creatives is an organisation in Accra that builds websites, web apps and brands for clients, and owns BAID X.</p>
     <div class="actions rv" style="--d:4"><a class="btn" href="/start-a-project">Start a project</a><a class="btn ghost" href="/work">See what we do</a></div>
   </div>
   <div class="scrollhint" aria-hidden="true"><span>Scroll</span><i></i></div>
@@ -370,18 +399,25 @@ def home():
   <div class="wrap intro">
     <div>
       <p class="eyebrow">Who we are</p>
-      <h2>A studio that helps businesses and organisations look established online.</h2>
+      <h2>An organisation building digital products and brands for Ghana.</h2>
     </div>
     <div>
-      <p>Baiden Creatives was founded by Baiden David and Baiden Daniel in East Legon, Accra. We combine design and technology to build websites, web apps and brand visuals that work for the people who use them.</p>
-      <a class="more" href="/about">About Baiden Creatives</a>
+      <p>Baiden Creatives was founded by Baiden David and Baiden Daniel in East Legon, Accra. It delivers creative services to businesses and organisations, and it owns BAID X, a workforce platform that sits under it as its own organisation.</p>
+      <a class="more" href="/organisations">Our organisations</a>
     </div>
   </div>
 </section>
 
 <section class="sec alt">
   <div class="wrap">
-    <div class="sec-head"><div><p class="eyebrow">What we do</p><h2>Three disciplines under one roof</h2></div><a class="more" href="/work">See all services and work</a></div>
+    <div class="sec-head"><div><p class="eyebrow">Organisations</p><h2>Baiden Creatives and the organisations under it</h2></div><a class="more" href="/organisations">How the group fits together</a></div>
+    {org_cards()}
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">What we do</p><h2>Creative services for clients</h2></div><a class="more" href="/work">See all services and work</a></div>
     {service_cards()}
   </div>
 </section>
@@ -408,17 +444,17 @@ def home():
 
 def about():
     path = "/about"
-    title = "About Baiden Creatives | Founders Baiden David & Baiden Daniel, East Legon, Accra"
-    desc = ("Meet Baiden David and Baiden Daniel, the founders of Baiden Creatives, a web design, web development "
-            "and graphic design studio in East Legon, Accra, Ghana.")
+    title = "About Baiden Creatives | Organisation Founded by Baiden David & Baiden Daniel"
+    desc = ("Baiden Creatives is an organisation in East Legon, Accra, Ghana, founded by Baiden David and Baiden Daniel. "
+            "It provides creative services and owns BAID X.")
     nodes = page_nodes(path, title, desc, kind="AboutPage", crumbs=[("Home", "/"), ("About", "/about")])
     points = "".join(f'<div class="point"><h3>{h}</h3><p>{p}</p></div>' for h, p in [
         ("Clear scope", "We agree what is being built, what it costs and when it launches before any design work starts."),
         ("Built for phones first", "Most of your customers will see your site on a phone, so that is where we start."),
         ("Ready to launch", "Domain, hosting, SSL, analytics and search setup are part of the job, not an afterthought."),
     ])
-    body = phead("About", "A digital studio built by two founders.",
-                 "Baiden Creatives designs and builds websites, web apps and brand visuals for businesses, organisations and individuals across Ghana.") + f'''
+    body = phead("About", "An organisation built by two founders.",
+                 "Baiden Creatives is a Ghanaian organisation founded by Baiden David and Baiden Daniel. It delivers creative services for clients and owns BAID X.") + f'''
 <section class="sec">
   <div class="wrap">
     <p class="eyebrow">Founders</p>
@@ -436,8 +472,8 @@ def about():
       <h2>We build digital presence that reflects the value of what you offer.</h2>
     </div>
     <div>
-      <p>Baiden Creatives is a web and graphic design studio in East Legon, Accra. We started with a simple idea: every business deserves a website and a brand that look as good as the work behind them.</p>
-      <p>Today we build business websites, online stores, booking systems and custom web applications, and design the flyers, social graphics and brand materials that go with them.</p>
+      <p>Baiden Creatives is an organisation based in East Legon, Accra. Its creative services build business websites, online stores, booking systems and custom web applications, and design the flyers, social graphics and brand materials that go with them.</p>
+      <p>Baiden Creatives also owns BAID X, a platform that connects skilled professionals with businesses and project teams. Each organisation under Baiden Creatives has its own brand and focus. <a class="more" href="/organisations">See the structure</a></p>
     </div>
   </div>
 </section>
@@ -452,15 +488,60 @@ def about():
 <section class="sec alt">
   <div class="wrap">
     <dl class="facts">
-      <div><dt>Studio</dt><dd>East Legon, Accra, Ghana</dd></div>
+      <div><dt>Headquarters</dt><dd>East Legon, Accra, Ghana</dd></div>
+      <div><dt>Owns</dt><dd>BAID X</dd></div>
       <div><dt>Services</dt><dd>Web development, web design, graphic design</dd></div>
-      <div><dt>Clients</dt><dd>Businesses, organisations and individuals across Ghana</dd></div>
       <div><dt>Contact</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd></div>
     </dl>
   </div>
 </section>
 
 {cta_band("Let's work together.")}'''
+    return path, wrap_page(path, title, desc, nodes, body)
+
+
+def organisations():
+    path = "/organisations"
+    title = "Our Organisations | Baiden Creatives and BAID X, East Legon, Accra"
+    desc = ("Baiden Creatives is the parent organisation. See the organisations under it, including BAID X, "
+            "and how the group fits together.")
+    nodes = page_nodes(path, title, desc, crumbs=[("Home", "/"), ("Organisations", "/organisations")])
+    children = "".join(f'<li><span>Organisation</span><b>{e(n)}</b><em>{e(kind)}</em></li>' for _, n, kind, _, _, _ in ORGS)
+    body = phead("Organisations", "One parent. Organisations of its own.",
+                 "Baiden Creatives is the parent organisation. It delivers creative services for clients and owns the organisations listed here.") + f'''
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow">Structure</p>
+    <div class="tree">
+      <div class="tree-parent"><span>Parent organisation</span><b>Baiden Creatives</b><em>East Legon, Accra, Ghana</em></div>
+      <div class="tree-line" aria-hidden="true"></div>
+      <ul class="tree-kids">
+        <li class="svc"><span>Creative services</span><b>Web, design and brand</b><em>Web development, web design, graphic design</em></li>
+        {children}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec alt">
+  <div class="wrap">
+    <div class="sec-head"><div><p class="eyebrow">Owned organisations</p><h2>Under Baiden Creatives</h2></div></div>
+    {org_cards()}
+    <p class="lead" style="margin-top:2rem">Each organisation under Baiden Creatives has its own brand, website and focus. Founded by Baiden David and Baiden Daniel.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap intro">
+    <div><p class="eyebrow">Creative services</p><h2>The services arm of the organisation</h2></div>
+    <div>
+      <p>Baiden Creatives builds websites, web apps and brand visuals for businesses, organisations and individuals across Ghana.</p>
+      <a class="more" href="/work">See services and work</a>
+    </div>
+  </div>
+</section>
+
+{cta_band("Work with the organisation.")}'''
     return path, wrap_page(path, title, desc, nodes, body)
 
 
@@ -542,7 +623,7 @@ def start():
         <a href="{WA}" target="_blank" rel="noopener"><small>WhatsApp</small>{PHONE_DISPLAY}</a>
         <a href="tel:{PHONE_INTL}"><small>Call</small>+233 55 836 2423</a>
         <a href="mailto:{EMAIL}"><small>Email</small>{EMAIL}</a>
-        <a href="{MAPS}" target="_blank" rel="noopener"><small>Studio</small>East Legon, Accra</a>
+        <a href="{MAPS}" target="_blank" rel="noopener"><small>Office</small>East Legon, Accra</a>
         <a href="{ig}" target="_blank" rel="noopener me"><small>Instagram and TikTok</small>@baidencreatives</a>
       </div>
     </div>
@@ -589,7 +670,7 @@ def not_found():
 
 # ---------- sitemap, robots ----------
 def sitemap():
-    pages = [("/", "1.0", "weekly"), ("/about", "0.8", "monthly"), ("/work", "0.9", "weekly"),
+    pages = [("/", "1.0", "weekly"), ("/about", "0.8", "monthly"), ("/organisations", "0.8", "monthly"), ("/work", "0.9", "weekly"),
              ("/pricing", "0.8", "monthly"), ("/start-a-project", "0.9", "monthly")]
     imgs = {
         "/": [("assets/baiden-creatives-logo.png", "Baiden Creatives logo", "Baiden Creatives logo: a black circle with a B monogram beside the wordmark"),
@@ -649,7 +730,7 @@ def robots():
 
 
 def main():
-    for path, html in (home(), about(), work(), pricing(), start(), not_found()):
+    for path, html in (home(), about(), organisations(), work(), pricing(), start(), not_found()):
         name = "index.html" if path == "/" else path.strip("/") + ".html"
         (ROOT / name).write_text(html, encoding="utf-8")
         print("wrote", name)
