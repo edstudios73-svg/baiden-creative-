@@ -49,7 +49,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
 
       {service.practiceNote && (
         <aside className="container-x pb-12" aria-label="Where this practice stands">
-          <div className="grid gap-4 border-l-2 border-lime bg-paper p-6 md:grid-cols-12 md:p-8">
+          <div className="grid gap-4 border-l-2 border-ink bg-paper p-6 md:grid-cols-12 md:p-8">
             <p className="text-label text-graphite md:col-span-3">Where we are today</p>
             <p className="md:col-span-9">{service.practiceNote}</p>
           </div>
@@ -199,7 +199,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       <CtaBand
         title={
           <>
-            Let&apos;s talk about <em className="text-lime">your project.</em>
+            Let&apos;s talk about <em>your project.</em>
           </>
         }
       />

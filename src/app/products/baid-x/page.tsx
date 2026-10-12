@@ -35,7 +35,8 @@ export default function BaidxPage() {
           <Breadcrumbs items={crumbs} tone="dark" />
           <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
-              <p className="text-label text-lime">An original product by {site.name}</p>
+              <p className="text-label text-ivory">An original product by {site.name}</p>
+              <Image src="/assets/brand-baidx-logo.png" alt="BAID X logo" width={881} height={217} priority className="mt-8 h-12 w-auto md:h-16" />
               <h1 className="text-display-1 mt-6">{baidx.name}</h1>
               <p className="text-display-3 mt-4 text-mist italic">{baidx.tagline}</p>
             </div>
@@ -94,7 +95,7 @@ export default function BaidxPage() {
         <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4" data-reveal>
             <p className="text-label flex items-center gap-2 text-graphite">
-              <span aria-hidden="true" className="size-2 rounded-full bg-lime ring-1 ring-ink" /> Live today
+              <span aria-hidden="true" className="size-2 rounded-full bg-ink" /> Live today
             </p>
             <h2 id="live-title" className="text-display-3 mt-4">
               What BAID X does now.
@@ -169,7 +170,7 @@ export default function BaidxPage() {
       <CtaBand
         title={
           <>
-            Have a platform idea <em className="text-lime">of your own?</em>
+            Have a platform idea <em>of your own?</em>
           </>
         }
         body="We bring the product thinking, design and engineering behind BAID X to founders and companies building their own platforms."

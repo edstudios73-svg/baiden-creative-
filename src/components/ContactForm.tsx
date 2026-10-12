@@ -24,7 +24,13 @@ type Status =
   | { kind: "error"; code: "not_configured" | "rate_limited" | "network" | "server" };
 
 const empty: Inquiry = { name: "", email: "", company: "", services: [], description: "", budget: "", timeline: "", reference: "" };
-const order: InquiryField[] = ["name", "email", "company", "services", "description", "budget", "timeline", "reference"];
+
+const steps: { title: string; fields: InquiryField[] }[] = [
+  { title: "About you", fields: ["name", "email", "company"] },
+  { title: "Your project", fields: ["services", "description", "reference"] },
+  { title: "Budget & timing", fields: ["budget", "timeline"] },
+  { title: "Review & send", fields: [] },
+];
 
 /** Plain-text version of the inquiry, used to prefill email and WhatsApp when the form can't send. */
 function summaryText(d: Inquiry) {
@@ -43,41 +49,73 @@ function summaryText(d: Inquiry) {
 export function ContactForm() {
   const [values, setValues] = useState<Inquiry>(empty);
   const [errors, setErrors] = useState<InquiryErrors>({});
-  const [attempted, setAttempted] = useState(false);
+  const [step, setStep] = useState(0);
+  const [attempted, setAttempted] = useState<Set<number>>(new Set());
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   const startedAt = useRef(0);
   const formRef = useRef<HTMLFormElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
   const resultRef = useRef<HTMLDivElement>(null);
+  const firstRender = useRef(true);
 
   useEffect(() => {
     startedAt.current = Date.now();
   }, []);
 
+  // Move focus to the new step's heading so keyboard and screen-reader users land in the right place.
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+    headingRef.current?.focus();
+  }, [step]);
+
   useEffect(() => {
     if (status.kind === "success" || status.kind === "error") resultRef.current?.focus();
   }, [status.kind]);
 
+  const stepErrors = (all: InquiryErrors, s: number) =>
+    Object.fromEntries(Object.entries(all).filter(([f]) => steps[s].fields.includes(f as InquiryField))) as InquiryErrors;
+
   const set = <K extends keyof Inquiry>(key: K, value: Inquiry[K]) => {
     const next = { ...values, [key]: value };
     setValues(next);
-    // After the first submit attempt, keep errors in sync as the user corrects them.
-    if (attempted) setErrors(validateInquiry(normaliseInquiry(next)));
+    if (attempted.has(step)) setErrors(stepErrors(validateInquiry(normaliseInquiry(next)), step));
   };
 
   const toggleService = (v: string) =>
     set("services", values.services.includes(v) ? values.services.filter((s) => s !== v) : [...values.services, v]);
 
+  /** Validates the current step; returns true when it can advance. */
+  function checkStep(s: number) {
+    setAttempted((a) => new Set(a).add(s));
+    const found = stepErrors(validateInquiry(normaliseInquiry(values)), s);
+    setErrors(found);
+    const first = steps[s].fields.find((f) => found[f]);
+    if (first) {
+      formRef.current?.querySelector<HTMLElement>(`[name=${first}]`)?.focus();
+      return false;
+    }
+    return true;
+  }
+
+  function next() {
+    if (checkStep(step)) setStep((s) => Math.min(steps.length - 1, s + 1));
+  }
+
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (step < steps.length - 1) return next();
     if (status.kind === "submitting") return;
-    setAttempted(true);
+
     const data = normaliseInquiry(values);
-    const found = validateInquiry(data);
-    setErrors(found);
-    const first = order.find((f) => found[f]);
-    if (first) {
-      const el = formRef.current?.querySelector<HTMLElement>(first === "services" ? "[name=services]" : `[name=${first}]`);
-      el?.focus();
+    const all = validateInquiry(data);
+    const badStep = steps.findIndex((s) => s.fields.some((f) => all[f]));
+    if (badStep >= 0) {
+      setStep(badStep);
+      setAttempted((a) => new Set(a).add(badStep));
+      setErrors(stepErrors(all, badStep));
       return;
     }
 
@@ -89,10 +127,12 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...data, website: honeypot, startedAt: startedAt.current }),
       });
-      const json = (await res.json().catch(() => ({}))) as { ok?: boolean; code?: string; errors?: InquiryErrors };
+      const json = (await res.json().catch(() => ({}))) as { ok?: boolean; errors?: InquiryErrors };
       if (res.ok && json.ok) return setStatus({ kind: "success" });
       if (res.status === 422 && json.errors) {
-        setErrors(json.errors);
+        const s = Math.max(0, steps.findIndex((st) => st.fields.some((f) => json.errors?.[f])));
+        setStep(s);
+        setErrors(stepErrors(json.errors, s));
         return setStatus({ kind: "idle" });
       }
       if (res.status === 503) return setStatus({ kind: "error", code: "not_configured" });
@@ -105,12 +145,16 @@ export function ContactForm() {
 
   if (status.kind === "success") {
     return (
-      <div ref={resultRef} tabIndex={-1} role="status" className="border-t-2 border-ink bg-paper p-8 outline-none md:p-12">
-        <p className="text-label text-graphite">Inquiry sent</p>
-        <h2 className="text-display-3 mt-4">Thank you, {values.name.split(" ")[0] || "we've got it"}.</h2>
+      <div ref={resultRef} tabIndex={-1} role="status" className="border border-ink p-8 outline-none md:p-12">
+        <svg className="draw-now size-16" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" stroke="currentColor" strokeWidth="1.5" pathLength={1} />
+          <path d="M19 33 L28 42 L46 23" stroke="currentColor" strokeWidth="2" strokeLinecap="square" pathLength={1} style={{ animationDelay: "500ms" }} />
+        </svg>
+        <p className="text-label mt-8 text-graphite">Inquiry sent</p>
+        <h2 className="text-display-3 mt-3">Thank you, {values.name.split(" ")[0] || "we've got it"}.</h2>
         <p className="mt-5 max-w-lg text-graphite">
-          Your project details reached us. We&apos;ll reply to <strong className="text-ink">{values.email}</strong>. If it&apos;s
-          urgent, you can also reach us on{" "}
+          Your project details reached us. We&apos;ll reply to <strong className="text-ink">{values.email}</strong>. If it&apos;s urgent,
+          you can also reach us on{" "}
           <a className="link-draw text-ink" href={site.contact.whatsapp} target="_blank" rel="noopener noreferrer">
             WhatsApp<span className="sr-only"> (opens in a new tab)</span>
           </a>
@@ -120,12 +164,15 @@ export function ContactForm() {
     );
   }
 
-  const field = "mt-2 block w-full border border-ink/25 bg-paper px-4 py-3 text-base transition-colors placeholder:text-graphite/70 hover:border-ink/50 focus:border-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 aria-[invalid=true]:border-error";
+  const field =
+    "mt-2 block w-full border border-ink/25 bg-ivory px-4 py-3.5 text-base transition-colors placeholder:text-graphite/70 hover:border-ink/60 focus:border-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 aria-[invalid=true]:border-ink aria-[invalid=true]:shadow-[inset_0_0_0_1px_#000]";
   const labelCls = "block font-medium";
   const err = (f: InquiryField) =>
     errors[f] ? (
-      <p id={`${f}-error`} className="mt-2 flex gap-2 text-sm text-error">
-        <span aria-hidden="true">!</span>
+      <p id={`${f}-error`} className="mt-2 flex items-start gap-2 text-sm font-medium">
+        <span aria-hidden="true" className="mt-0.5 grid size-4 shrink-0 place-items-center bg-ink text-[0.65rem] text-ivory">
+          !
+        </span>
         {errors[f]}
       </p>
     ) : null;
@@ -133,123 +180,167 @@ export function ContactForm() {
     "aria-invalid": errors[f] ? true : undefined,
     "aria-describedby": [errors[f] ? `${f}-error` : null, hint].filter(Boolean).join(" ") || undefined,
   });
-  const errorCount = Object.keys(errors).length;
-  const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent(`Project inquiry: ${values.company || values.name}`)}&body=${encodeURIComponent(summaryText(normaliseInquiry(values)))}`;
-  const whatsapp = `${site.contact.whatsapp}?text=${encodeURIComponent(summaryText(normaliseInquiry(values)))}`;
+  const summary = summaryText(normaliseInquiry(values));
+  const mailto = `mailto:${site.contact.email}?subject=${encodeURIComponent(`Project inquiry: ${values.company || values.name}`)}&body=${encodeURIComponent(summary)}`;
+  const whatsapp = `${site.contact.whatsapp}?text=${encodeURIComponent(summary)}`;
+  const last = step === steps.length - 1;
+  const choice = (checked: boolean) =>
+    `flex min-h-12 cursor-pointer items-center gap-3 border px-4 py-2.5 transition-colors duration-300 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink ${
+      checked ? "border-ink bg-ink text-ivory" : "border-ink/25 hover:border-ink"
+    }`;
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate aria-describedby="form-note" className="grid gap-7">
-      <p id="form-note" className="text-sm text-graphite">
-        Fields marked <span aria-hidden="true">*</span>
-        <span className="sr-only">with an asterisk</span> are required.
-      </p>
+    <form ref={formRef} onSubmit={onSubmit} noValidate className="grid gap-8">
+      {/* Step indicator */}
+      <ol className="grid grid-cols-4 gap-2" aria-label="Form progress">
+        {steps.map((s, i) => (
+          <li key={s.title} aria-current={i === step ? "step" : undefined}>
+            <button
+              type="button"
+              disabled={i > step}
+              onClick={() => setStep(i)}
+              className="w-full text-left disabled:cursor-default"
+              aria-label={`Step ${i + 1}: ${s.title}${i < step ? ", completed. Go back to this step" : ""}`}
+            >
+              <span className={`block h-0.5 transition-colors duration-500 ${i <= step ? "bg-ink" : "bg-cloud"}`} />
+              <span className={`text-label mt-3 flex items-center gap-2 ${i <= step ? "text-ink" : "text-graphite"}`}>
+                <span className={`grid size-5 shrink-0 place-items-center border text-[0.65rem] ${i < step ? "border-ink bg-ink text-ivory" : i === step ? "border-ink" : "border-cloud"}`}>
+                  {i < step ? "✓" : i + 1}
+                </span>
+                <span className="hidden sm:inline">{s.title}</span>
+              </span>
+            </button>
+          </li>
+        ))}
+      </ol>
 
-      {attempted && errorCount > 0 && (
-        <div role="alert" className="border-l-2 border-error bg-paper p-4 text-sm">
-          Please check {errorCount === 1 ? "1 field" : `${errorCount} fields`} below.
-        </div>
-      )}
+      <div key={step} className="step-in grid gap-7">
+        <h2 ref={headingRef} tabIndex={-1} className="text-display-3 outline-none">
+          <span className="text-label mb-3 block text-graphite">
+            Step {step + 1} of {steps.length}
+          </span>
+          {steps[step].title}
+        </h2>
 
-      <div className="grid gap-7 sm:grid-cols-2">
-        <div>
-          <label htmlFor="name" className={labelCls}>
-            Full name <span aria-hidden="true">*</span>
-          </label>
-          <input id="name" name="name" autoComplete="name" required maxLength={limits.name} value={values.name} onChange={(e) => set("name", e.target.value)} className={field} {...a11y("name")} />
-          {err("name")}
-        </div>
-        <div>
-          <label htmlFor="email" className={labelCls}>
-            Work email <span aria-hidden="true">*</span>
-          </label>
-          <input id="email" name="email" type="email" inputMode="email" autoComplete="email" required maxLength={limits.email} value={values.email} onChange={(e) => set("email", e.target.value)} className={field} {...a11y("email")} />
-          {err("email")}
-        </div>
-      </div>
-
-      <div>
-        <label htmlFor="company" className={labelCls}>
-          Company or project name
-        </label>
-        <input id="company" name="company" autoComplete="organization" maxLength={limits.company} value={values.company} onChange={(e) => set("company", e.target.value)} className={field} {...a11y("company")} />
-        {err("company")}
-      </div>
-
-      <fieldset aria-describedby={errors.services ? "services-error" : undefined}>
-        <legend className={labelCls}>
-          Services required <span aria-hidden="true">*</span> <span className="font-normal text-graphite">(choose any)</span>
-        </legend>
-        <div className="mt-3 grid gap-2 sm:grid-cols-2">
-          {inquiryServices.map((s) => {
-            const checked = values.services.includes(s.value);
-            return (
-              <label
-                key={s.value}
-                className={`flex min-h-12 cursor-pointer items-center gap-3 border px-4 py-2.5 transition-colors has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-ink ${
-                  checked ? "border-ink bg-ink text-ivory" : "border-ink/25 bg-paper hover:border-ink/50"
-                }`}
-              >
-                <input type="checkbox" name="services" value={s.value} checked={checked} onChange={() => toggleService(s.value)} className="size-4 accent-lime" />
-                <span>{s.label}</span>
+        {step === 0 && (
+          <>
+            <div className="grid gap-7 sm:grid-cols-2">
+              <div>
+                <label htmlFor="name" className={labelCls}>
+                  Full name <span aria-hidden="true">*</span>
+                </label>
+                <input id="name" name="name" autoComplete="name" required maxLength={limits.name} value={values.name} onChange={(e) => set("name", e.target.value)} className={field} {...a11y("name")} />
+                {err("name")}
+              </div>
+              <div>
+                <label htmlFor="email" className={labelCls}>
+                  Work email <span aria-hidden="true">*</span>
+                </label>
+                <input id="email" name="email" type="email" inputMode="email" autoComplete="email" required maxLength={limits.email} value={values.email} onChange={(e) => set("email", e.target.value)} className={field} {...a11y("email")} />
+                {err("email")}
+              </div>
+            </div>
+            <div>
+              <label htmlFor="company" className={labelCls}>
+                Company or project name <span className="font-normal text-graphite">(optional)</span>
               </label>
-            );
-          })}
-        </div>
-        {err("services")}
-      </fieldset>
+              <input id="company" name="company" autoComplete="organization" maxLength={limits.company} value={values.company} onChange={(e) => set("company", e.target.value)} className={field} {...a11y("company")} />
+              {err("company")}
+            </div>
+          </>
+        )}
 
-      <div>
-        <label htmlFor="description" className={labelCls}>
-          About your project <span aria-hidden="true">*</span>
-        </label>
-        <p id="description-hint" className="mt-1 text-sm text-graphite">
-          What are you building, who is it for, and what does success look like?
-        </p>
-        <textarea id="description" name="description" rows={7} required maxLength={limits.descriptionMax} value={values.description} onChange={(e) => set("description", e.target.value)} className={`${field} resize-y`} {...a11y("description", "description-hint")} />
-        {err("description")}
-      </div>
+        {step === 1 && (
+          <>
+            <fieldset aria-describedby={errors.services ? "services-error" : undefined}>
+              <legend className={labelCls}>
+                Services required <span aria-hidden="true">*</span> <span className="font-normal text-graphite">(choose any)</span>
+              </legend>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                {inquiryServices.map((s) => {
+                  const checked = values.services.includes(s.value);
+                  return (
+                    <label key={s.value} className={choice(checked)}>
+                      <input type="checkbox" name="services" value={s.value} checked={checked} onChange={() => toggleService(s.value)} className="sr-only" />
+                      <span aria-hidden="true" className={`grid size-4 shrink-0 place-items-center border text-[0.6rem] ${checked ? "border-ivory" : "border-ink/50"}`}>
+                        {checked ? "✓" : ""}
+                      </span>
+                      <span>{s.label}</span>
+                    </label>
+                  );
+                })}
+              </div>
+              {err("services")}
+            </fieldset>
+            <div>
+              <label htmlFor="description" className={labelCls}>
+                About your project <span aria-hidden="true">*</span>
+              </label>
+              <p id="description-hint" className="mt-1 text-sm text-graphite">
+                What are you building, who is it for, and what does success look like?
+              </p>
+              <textarea id="description" name="description" rows={6} required maxLength={limits.descriptionMax} value={values.description} onChange={(e) => set("description", e.target.value)} className={`${field} resize-y`} {...a11y("description", "description-hint")} />
+              {err("description")}
+            </div>
+            <div>
+              <label htmlFor="reference" className={labelCls}>
+                Website or reference link <span className="font-normal text-graphite">(optional)</span>
+              </label>
+              <input id="reference" name="reference" type="url" inputMode="url" placeholder="https://" maxLength={limits.reference} value={values.reference} onChange={(e) => set("reference", e.target.value)} className={field} {...a11y("reference")} />
+              {err("reference")}
+            </div>
+          </>
+        )}
 
-      <div className="grid gap-7 sm:grid-cols-2">
-        <div>
-          <label htmlFor="budget" className={labelCls}>
-            Approximate budget <span aria-hidden="true">*</span>
-          </label>
-          <select id="budget" name="budget" required value={values.budget} onChange={(e) => set("budget", e.target.value)} className={`${field} appearance-auto`} {...a11y("budget")}>
-            <option value="" disabled>
-              Choose a range
-            </option>
-            {budgetRanges.map((b) => (
-              <option key={b.value} value={b.value}>
-                {b.label}
-              </option>
+        {step === 2 && (
+          <div className="grid gap-7">
+            {(
+              [
+                ["budget", "Approximate budget", budgetRanges],
+                ["timeline", "Preferred timeline", timelines],
+              ] as const
+            ).map(([name, label, options]) => (
+              <fieldset key={name} aria-describedby={errors[name] ? `${name}-error` : undefined}>
+                <legend className={labelCls}>
+                  {label} <span aria-hidden="true">*</span>
+                </legend>
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {options.map((o) => {
+                    const checked = values[name] === o.value;
+                    return (
+                      <label key={o.value} className={choice(checked)}>
+                        <input type="radio" name={name} value={o.value} checked={checked} onChange={() => set(name, o.value)} className="sr-only" />
+                        <span aria-hidden="true" className={`size-3 shrink-0 rounded-full border ${checked ? "border-ivory bg-ivory" : "border-ink/50"}`} />
+                        <span>{o.label}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+                {err(name)}
+              </fieldset>
             ))}
-          </select>
-          {err("budget")}
-        </div>
-        <div>
-          <label htmlFor="timeline" className={labelCls}>
-            Preferred timeline <span aria-hidden="true">*</span>
-          </label>
-          <select id="timeline" name="timeline" required value={values.timeline} onChange={(e) => set("timeline", e.target.value)} className={`${field} appearance-auto`} {...a11y("timeline")}>
-            <option value="" disabled>
-              Choose a timeline
-            </option>
-            {timelines.map((t) => (
-              <option key={t.value} value={t.value}>
-                {t.label}
-              </option>
-            ))}
-          </select>
-          {err("timeline")}
-        </div>
-      </div>
+          </div>
+        )}
 
-      <div>
-        <label htmlFor="reference" className={labelCls}>
-          Website or reference link <span className="font-normal text-graphite">(optional)</span>
-        </label>
-        <input id="reference" name="reference" type="url" inputMode="url" placeholder="https://" maxLength={limits.reference} value={values.reference} onChange={(e) => set("reference", e.target.value)} className={field} {...a11y("reference")} />
-        {err("reference")}
+        {step === 3 && (
+          <dl className="border-t border-ink">
+            {[
+              ["Name", values.name],
+              ["Email", values.email],
+              ["Company", values.company || "—"],
+              ["Services", values.services.map((s) => labelFor(inquiryServices, s)).join(", ")],
+              ["Project", values.description],
+              ["Budget", labelFor(budgetRanges, values.budget)],
+              ["Timeline", labelFor(timelines, values.timeline)],
+              ["Reference", values.reference || "—"],
+            ].map(([k, val]) => (
+              <div key={k} className="grid gap-1 border-b border-line py-4 sm:grid-cols-[9rem_1fr] sm:gap-6">
+                <dt className="text-label pt-0.5 text-graphite">{k}</dt>
+                <dd className="whitespace-pre-line break-words">{val}</dd>
+              </div>
+            ))}
+          </dl>
+        )}
       </div>
 
       {/* Honeypot: invisible to people, tempting to bots. */}
@@ -259,7 +350,7 @@ export function ContactForm() {
       </div>
 
       {status.kind === "error" && (
-        <div ref={resultRef} tabIndex={-1} role="alert" className="border-l-2 border-error bg-paper p-5 outline-none">
+        <div ref={resultRef} tabIndex={-1} role="alert" className="border-2 border-ink p-5 outline-none">
           <p className="font-medium">
             {status.code === "not_configured"
               ? "Our online form isn't accepting messages right now."
@@ -283,25 +374,31 @@ export function ContactForm() {
         </div>
       )}
 
-      <div className="flex flex-col gap-4 border-t border-line pt-7 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-sm text-sm text-graphite">
-          We only use these details to reply about your project. See our{" "}
-          <Link href="/privacy" className="link-draw text-ink">
-            privacy notice
-          </Link>
-          .
-        </p>
+      <div className="flex flex-col-reverse gap-4 border-t border-line pt-7 sm:flex-row sm:items-center sm:justify-between">
+        {step > 0 ? (
+          <button type="button" onClick={() => setStep((s) => s - 1)} className="group inline-flex min-h-12 items-center gap-3 font-medium">
+            <ArrowRight className="size-4 rotate-180 transition-transform group-hover:-translate-x-1" />
+            <span className="link-draw">Back</span>
+          </button>
+        ) : (
+          <p className="max-w-sm text-sm text-graphite">
+            We only use these details to reply about your project. See our{" "}
+            <Link href="/privacy" className="link-draw text-ink">
+              privacy notice
+            </Link>
+            .
+          </p>
+        )}
         <button
           type="submit"
           disabled={status.kind === "submitting"}
-          aria-disabled={status.kind === "submitting"}
-          className="group inline-flex min-h-12 items-center justify-between gap-8 bg-ink px-6 font-medium text-ivory transition-colors hover:bg-ink-2 disabled:cursor-progress disabled:opacity-70"
+          className="group inline-flex min-h-12 items-center justify-between gap-8 border border-ink bg-ink px-6 font-medium text-ivory transition-colors duration-300 hover:bg-ivory hover:text-ink disabled:cursor-progress disabled:opacity-70"
         >
-          {status.kind === "submitting" ? "Sending…" : status.kind === "error" ? "Try again" : "Send inquiry"}
+          {!last ? "Continue" : status.kind === "submitting" ? "Sending…" : status.kind === "error" ? "Try again" : "Send inquiry"}
           {status.kind === "submitting" ? (
-            <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-ivory/30 border-t-ivory" />
+            <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-current/30 border-t-current" />
           ) : (
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
           )}
         </button>
       </div>

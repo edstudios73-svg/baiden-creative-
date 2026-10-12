@@ -4,7 +4,7 @@ import { ButtonLink } from "./ui";
 export function CtaBand({
   title = (
     <>
-      Have an idea <em className="text-lime">worth building?</em>
+      Have an idea <em>worth building?</em>
     </>
   ),
   body = "Tell us what you're working on. We'll reply with honest next steps, whether that's a proposal, a few questions or a referral.",

@@ -8,18 +8,19 @@ export function BaidxFeature({ headingLevel: H = "h2" }: { headingLevel?: "h2" |
     <div className="grid gap-10 lg:grid-cols-12 lg:gap-10">
       <div className="lg:col-span-5" data-reveal>
         <Label className="text-mist">Original products</Label>
+        <Image src="/assets/brand-baidx-logo.png" alt="" width={881} height={217} className="mt-6 h-10 w-auto" />
         <H className="text-display-2 mt-5">
           {baidx.name}
           <span className="block text-mist italic">{baidx.tagline}</span>
         </H>
-        <p className="text-label mt-6 text-lime">An original product by Baiden Creatives</p>
+        <p className="text-label mt-6 text-ivory">An original product by Baiden Creatives</p>
         <p className="text-lead mt-6 text-ivory/90">{baidx.overview}</p>
         <p className="mt-5 text-mist">{baidx.category}. Conceived, designed and built by our team rather than commissioned by a client.</p>
 
         <div className="mt-10 grid gap-8 sm:grid-cols-2">
           <div>
             <p className="text-label flex items-center gap-2 text-ivory">
-              <span aria-hidden="true" className="size-2 rounded-full bg-lime" /> Live today
+              <span aria-hidden="true" className="size-2 rounded-full bg-ivory" /> Live today
             </p>
             <ul className="mt-4 grid gap-2 text-mist">
               {baidx.live.slice(0, 4).map((f) => (

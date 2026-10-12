@@ -72,7 +72,7 @@ export default function ProductsPage() {
       <CtaBand
         title={
           <>
-            Building a product of <em className="text-lime">your own?</em>
+            Building a product of <em>your own?</em>
           </>
         }
         body="We bring the same product thinking, design and engineering to founders and companies building platforms of their own."

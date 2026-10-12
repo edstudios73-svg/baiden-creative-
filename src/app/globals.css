@@ -2,18 +2,23 @@
 
 /* ───────────────────────── Design tokens ───────────────────────── */
 @theme {
-  /* Colour. Neutral surfaces; lime is reserved for emphasis, focus and selected details. */
-  --color-ink: #111318;
-  --color-ink-2: #1b1e24;
-  --color-ivory: #f5f2ec;
-  --color-paper: #fbfaf7;
-  --color-graphite: #5d6167; /* text on ivory: 5.6:1 */
-  --color-graphite-soft: #777b80; /* rules and decorative only */
-  --color-mist: #a6aab0; /* text on ink: 7.4:1 */
-  --color-lime: #c9ff54;
-  --color-line: rgb(17 19 24 / 0.14);
-  --color-line-dark: rgb(245 242 236 / 0.16);
-  --color-error: #b42318;
+  /*
+   * Colour: strictly monochrome.
+   * Palette: #000000, #FFFFFF, #111111, #1A1A1A, #777777, #E5E5E5.
+   * graphite (#666666) is the one added neutral: #777777 on white is 4.48:1, just under WCAG AA for small text.
+   * Token names are semantic: ink = black surface/text, ivory/paper = white surface.
+   */
+  --color-ink: #000000;
+  --color-ink-2: #111111;
+  --color-ink-3: #1a1a1a;
+  --color-ivory: #ffffff;
+  --color-paper: #ffffff;
+  --color-graphite: #666666; /* small text on white: 5.7:1 */
+  --color-mist: #777777; /* small text on black: 4.7:1 */
+  --color-cloud: #e5e5e5;
+  --color-line: #e5e5e5;
+  --color-line-dark: rgb(255 255 255 / 0.18);
+  --color-error: #000000;
 
   /* Type */
   --font-display: var(--font-instrument), "Times New Roman", Georgia, serif;
@@ -111,7 +116,11 @@
     overflow-x: clip;
   }
   ::selection {
-    background: var(--color-lime);
+    background: var(--color-ink);
+    color: var(--color-ivory);
+  }
+  .on-dark ::selection {
+    background: var(--color-ivory);
     color: var(--color-ink);
   }
   :focus-visible {
@@ -120,7 +129,7 @@
     border-radius: 2px;
   }
   .on-dark :focus-visible {
-    outline-color: var(--color-lime);
+    outline-color: var(--color-ivory);
   }
   h1,
   h2,
@@ -135,6 +144,11 @@
     max-width: 100%;
     height: auto;
   }
+}
+
+/* Unlayered so it outranks utilities: supporting grey on black surfaces uses the accessible dark-surface grey. */
+.on-dark .text-graphite {
+  color: var(--color-mist);
 }
 
 /* ───────────────────────── Components ───────────────────────── */
@@ -171,15 +185,11 @@
     position: relative;
     overflow: hidden;
     background: var(--color-paper);
-    box-shadow:
-      0 0 0 1px var(--color-line),
-      0 30px 60px -30px rgb(17 19 24 / 0.35);
+    box-shadow: 0 0 0 1px var(--color-line);
   }
   .on-dark .frame {
     background: var(--color-ink-2);
-    box-shadow:
-      0 0 0 1px var(--color-line-dark),
-      0 30px 60px -30px rgb(0 0 0 / 0.6);
+    box-shadow: 0 0 0 1px var(--color-line-dark);
   }
   .frame-phone {
     border-radius: 1.6rem;
@@ -200,9 +210,50 @@
   .hero-line {
     display: block;
   }
+  /* Line-by-line headline: each line is clipped so text rises out of the black. */
+  .line-mask {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+  .line-mask > span {
+    display: block;
+  }
+  /* Fine rules that draw across the screen */
+  .rule-draw {
+    display: block;
+    height: 1px;
+    background: currentColor;
+    transform-origin: left center;
+  }
+  /* Comic linework: paths use pathLength="1" so one dash length fits every path. */
+  .ink-draw path,
+  .ink-draw line,
+  .ink-draw rect,
+  .ink-draw circle,
+  .ink-draw polyline,
+  .ink-draw ellipse {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
 }
 
-/* Content is only hidden for reveal when JS is running and the user has not asked for reduced motion. */
+/* Hero 3D stage: tilted on larger screens, moving through depth with scroll progress (--p, set by HeroStage). */
+@media (min-width: 48rem) {
+  .stage3d {
+    perspective: 1800px;
+  }
+  .stage3d-inner {
+    transform-style: preserve-3d;
+    transform: rotateX(calc(10deg - var(--p, 0) * 8deg)) rotateY(calc(-16deg + var(--p, 0) * 12deg)) translate3d(0, calc(var(--p, 0) * -2.5rem), 0);
+  }
+  .stage3d-inner > * {
+    transform: translateZ(var(--z, 0px));
+  }
+}
+
+/* Everything below only runs with JS and when the user has not asked for reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   html.js [data-reveal] {
     opacity: 0;
@@ -217,18 +268,145 @@
     transform: none;
   }
 
-  .hero-line {
-    animation: hero-rise 1100ms var(--ease-out-quint) both;
-    animation-delay: calc(var(--i, 0) * 110ms + 60ms);
+  /* Mask reveal for imagery: wipes upward inside a clipped frame. */
+  html.js [data-reveal="mask"] {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 1200ms var(--ease-out-quint);
+    transition-delay: calc(var(--reveal-delay, 0) * 120ms);
   }
-  @keyframes hero-rise {
+  html.js [data-reveal="mask"][data-visible="true"] {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* Divider lines draw from left to right as they enter. */
+  html.js [data-reveal="rule"] {
+    opacity: 1;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1400ms var(--ease-out-quint);
+  }
+  html.js [data-reveal="rule"][data-visible="true"] {
+    transform: scaleX(1);
+  }
+
+  /* Vertical timeline spine draws downward. */
+  html.js [data-reveal="spine"] {
+    opacity: 1;
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 1800ms var(--ease-out-quint);
+  }
+  html.js [data-reveal="spine"][data-visible="true"] {
+    transform: scaleY(1);
+  }
+
+  /* Comic panels: linework sketches itself in once the panel is visible. */
+  html.js .ink-draw path,
+  html.js .ink-draw line,
+  html.js .ink-draw rect,
+  html.js .ink-draw circle,
+  html.js .ink-draw polyline,
+  html.js .ink-draw ellipse {
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1800ms cubic-bezier(0.65, 0, 0.35, 1);
+    transition-delay: calc(var(--d, 0) * 1ms);
+  }
+  html.js [data-visible="true"] .ink-draw path,
+  html.js [data-visible="true"] .ink-draw line,
+  html.js [data-visible="true"] .ink-draw rect,
+  html.js [data-visible="true"] .ink-draw circle,
+  html.js [data-visible="true"] .ink-draw polyline,
+  html.js [data-visible="true"] .ink-draw ellipse {
+    stroke-dashoffset: 0;
+  }
+  html.js .ink-fill {
+    opacity: 0;
+    transition: opacity 600ms ease;
+    transition-delay: calc(var(--d, 0) * 1ms);
+  }
+  html.js [data-visible="true"] .ink-fill {
+    opacity: 1;
+  }
+
+  /* Contact form: each stage slides in; the confirmation mark draws itself. */
+  .step-in {
+    animation: step-in 600ms var(--ease-out-quint) both;
+  }
+  @keyframes step-in {
     from {
       opacity: 0;
-      transform: translate3d(0, 0.35em, 0);
+      transform: translate3d(1.5rem, 0, 0);
     }
     to {
       opacity: 1;
       transform: none;
+    }
+  }
+  .draw-now path,
+  .draw-now circle {
+    stroke-dasharray: 1;
+    animation: draw 900ms var(--ease-out-quint) both;
+  }
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Hero choreography */
+  .line-mask > span {
+    animation: line-rise 1100ms var(--ease-out-quint) both;
+    animation-delay: calc(var(--i, 0) * 120ms + 150ms);
+  }
+  @keyframes line-rise {
+    from {
+      transform: translate3d(0, 105%, 0);
+    }
+    to {
+      transform: none;
+    }
+  }
+  .hero-line {
+    animation: hero-fade 1000ms var(--ease-out-quint) both;
+    animation-delay: calc(var(--i, 0) * 120ms + 150ms);
+  }
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 0.75rem, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .hero-rule {
+    animation: rule-in 1600ms var(--ease-out-quint) both;
+    animation-delay: calc(var(--i, 0) * 120ms + 200ms);
+  }
+  @keyframes rule-in {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  .hero-unmask {
+    animation: unmask 1400ms var(--ease-out-quint) both;
+    animation-delay: calc(var(--i, 0) * 160ms + 500ms);
+  }
+  @keyframes unmask {
+    from {
+      clip-path: inset(100% 0 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
     }
   }
 
@@ -247,7 +425,7 @@
   }
   .img-zoom:hover img,
   .img-zoom:focus-visible img {
-    transform: scale(1.03);
+    transform: scale(1.04);
   }
 }
 

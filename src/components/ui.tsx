@@ -40,22 +40,23 @@ export function ButtonLink({
   className?: string;
 }) {
   const base =
-    "group inline-flex min-h-12 items-center justify-between gap-6 px-5 py-3 text-[0.95rem] font-medium tracking-[-0.01em] transition-colors duration-300";
+    "group inline-flex min-h-12 items-center justify-between gap-6 border px-5 py-3 text-[0.95rem] font-medium tracking-[-0.01em] transition-colors duration-300";
+  // Primary buttons invert on hover (black ↔ white); secondary buttons gain a subtle fill.
   const styles = {
     primary: {
-      light: "bg-ink text-ivory hover:bg-ink-2",
-      dark: "bg-lime text-ink hover:bg-ivory",
+      light: "border-ink bg-ink text-ivory hover:bg-ivory hover:text-ink",
+      dark: "border-ivory bg-ivory text-ink hover:bg-ink hover:text-ivory",
     },
     secondary: {
-      light: "border border-ink/25 text-ink hover:border-ink",
-      dark: "border border-ivory/30 text-ivory hover:border-ivory",
+      light: "border-ink/30 text-ink hover:border-ink hover:bg-ink/5",
+      dark: "border-ivory/35 text-ivory hover:border-ivory hover:bg-ivory/10",
     },
   }[variant][tone];
   const Icon = opensNewTab(href) ? ArrowUpRight : ArrowRight;
   return (
     <SmartLink href={href} className={`${base} ${styles} ${className}`}>
       <span>{children}</span>
-      <Icon className="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5" />
+      <Icon className="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
     </SmartLink>
   );
 }
@@ -137,11 +138,22 @@ export function PageHeader({
   children?: ReactNode;
 }) {
   return (
-    <header className="container-x pt-8 pb-10 md:pt-12 md:pb-14">
-      <Breadcrumbs items={crumbs} />
-      <h1 className="text-display-2 mt-6 max-w-[14ch] md:mt-8">{title}</h1>
-      {lead && <div className="text-lead mt-8 max-w-2xl text-graphite">{lead}</div>}
-      {children}
+    <header className="on-dark relative overflow-hidden bg-ink text-ivory">
+      <div className="container-x pt-10 pb-12 md:pt-14 md:pb-16">
+        <Breadcrumbs items={crumbs} tone="dark" />
+        <h1 className="text-display-2 mt-6 max-w-[16ch] md:mt-8">
+          <span className="line-mask">
+            <span>{title}</span>
+          </span>
+        </h1>
+        {lead && (
+          <div className="text-lead hero-line mt-8 max-w-2xl text-mist" style={{ "--i": 2 } as React.CSSProperties}>
+            {lead}
+          </div>
+        )}
+        {children}
+      </div>
+      <span aria-hidden="true" className="rule-draw hero-rule absolute inset-x-0 bottom-0 text-ivory/20" />
     </header>
   );
 }

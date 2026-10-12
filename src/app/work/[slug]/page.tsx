@@ -88,7 +88,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
             <div className="lg:col-span-8">
               <p className="text-label text-graphite">
                 Case study · {p.category}
-                {p.inHouse && <span className="ml-3 bg-lime px-1.5 py-0.5 text-ink">An original product by {site.name}</span>}
+                {p.inHouse && <span className="ml-3 border border-current px-1.5 py-0.5">An original product by {site.name}</span>}
               </p>
               <h1 className="text-display-2 mt-6">{p.title}</h1>
               <p className="text-lead mt-8 max-w-2xl text-graphite">{p.summary}</p>
@@ -225,7 +225,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
       <CtaBand
         title={
           <>
-            Planning something <em className="text-lime">similar?</em>
+            Planning something <em>similar?</em>
           </>
         }
       />

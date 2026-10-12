@@ -68,16 +68,15 @@ export function SiteHeader() {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
-  // No backdrop-filter while the menu is open: it would make the fixed panel position against the header.
   return (
     <header
-      className={`sticky top-0 z-50 transition-[background-color,box-shadow] duration-300 ${
-        open ? "bg-ivory" : scrolled ? "bg-ivory/90 shadow-[0_1px_0_var(--color-line)] backdrop-blur-md" : "bg-ivory/0"
+      className={`on-dark sticky top-0 z-50 bg-ink text-ivory transition-shadow duration-300 ${
+        scrolled && !open ? "shadow-[0_1px_0_var(--color-line-dark)]" : ""
       }`}
     >
       <div className="container-x flex h-16 items-center justify-between gap-6 md:h-20">
         <Link href="/" className="relative z-10 -m-2 p-2" aria-label={`${site.name}, home`}>
-          <Logo className="h-7 w-auto md:h-8" priority />
+          <Logo tone="light" className="h-7 w-auto md:h-8" priority />
         </Link>
 
         <nav aria-label="Main" className="hidden lg:block">
@@ -100,10 +99,10 @@ export function SiteHeader() {
           <Link
             href="/contact"
             aria-current={pathname === "/contact" ? "page" : undefined}
-            className="group hidden min-h-11 items-center gap-3 bg-ink px-4 text-[0.9rem] font-medium text-ivory transition-colors hover:bg-ink-2 sm:inline-flex"
+            className="group hidden min-h-11 items-center gap-3 border border-ivory bg-ivory px-4 text-[0.9rem] font-medium text-ink transition-colors duration-300 hover:bg-ink hover:text-ivory sm:inline-flex"
           >
             Start a Project
-            <span aria-hidden="true" className="size-1.5 rounded-full bg-lime transition-transform duration-300 group-hover:scale-150" />
+            <span aria-hidden="true" className="size-1.5 rounded-full bg-current transition-transform duration-300 group-hover:scale-150" />
           </Link>
           <button
             ref={toggleRef}
@@ -115,8 +114,8 @@ export function SiteHeader() {
           >
             <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
             <span aria-hidden="true" className="relative block h-3 w-6">
-              <span className={`absolute left-0 h-px w-6 bg-ink transition-transform duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
-              <span className={`absolute left-0 h-px w-6 bg-ink transition-transform duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
+              <span className={`absolute left-0 h-px w-6 bg-ivory transition-transform duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
+              <span className={`absolute left-0 h-px w-6 bg-ivory transition-transform duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
             </span>
           </button>
         </div>
@@ -126,28 +125,28 @@ export function SiteHeader() {
         id="mobile-menu"
         ref={panelRef}
         hidden={!open}
-        className="fixed inset-x-0 top-16 bottom-0 overflow-y-auto bg-ivory md:top-20 lg:hidden"
+        className="fixed inset-x-0 top-16 bottom-0 overflow-y-auto bg-ink md:top-20 lg:hidden"
       >
         <nav aria-label="Mobile" className="container-x flex min-h-full flex-col justify-between pt-8 pb-10">
-          <ul className="border-t border-line">
+          <ul className="border-t border-line-dark">
             {[{ label: "Home", href: "/" }, ...mainNav].map((item, i) => (
-              <li key={item.href} className="border-b border-line">
+              <li key={item.href} className="border-b border-line-dark">
                 <Link
                   href={item.href}
                   aria-current={(item.href === "/" ? pathname === "/" : isActive(item.href)) ? "page" : undefined}
                   className="flex items-baseline justify-between py-5 text-display-3 aria-[current=page]:italic"
                 >
                   {item.label}
-                  <span className="text-label text-graphite">0{i + 1}</span>
+                  <span className="text-label text-mist">0{i + 1}</span>
                 </Link>
               </li>
             ))}
           </ul>
           <div className="mt-10 grid gap-6">
-            <Link href="/contact" className="flex min-h-12 items-center justify-between bg-ink px-5 text-ivory">
+            <Link href="/contact" className="flex min-h-12 items-center justify-between border border-ivory bg-ivory px-5 text-ink">
               Start a Project <ArrowRight />
             </Link>
-            <a href={`mailto:${site.contact.email}`} className="text-graphite">
+            <a href={`mailto:${site.contact.email}`} className="text-mist">
               {site.contact.email}
             </a>
           </div>

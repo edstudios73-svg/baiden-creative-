@@ -46,7 +46,7 @@ export function ProjectCard({
       <div className="mt-5 grid grid-cols-[1fr_auto] gap-x-6 gap-y-2">
         <p className="text-label text-graphite">
           {project.category}
-          {project.inHouse && <span className="ml-3 bg-lime px-1.5 py-0.5 text-ink">Original product</span>}
+          {project.inHouse && <span className="ml-3 border border-current px-1.5 py-0.5">Original product</span>}
         </p>
         <Icon className="row-span-2 mt-1 size-5 transition-transform duration-300 group-hover:translate-x-1" />
         <H className="text-heading">
