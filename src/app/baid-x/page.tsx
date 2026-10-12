@@ -295,11 +295,45 @@ export default function BaidxPage() {
         </div>
       </section>
 
-      {/* ── Launch campaign (white) ──────────────────────────────── */}
-      <section className="section-y" aria-labelledby="launch-title">
+      {/* ── In the product (white) ───────────────────────────────── */}
+      <section className="section-y" aria-labelledby="screens-title">
         <div className="container-x">
           <SectionHeading
-            label="(05) The launch"
+            label="(05) In the product"
+            title={
+              <span id="screens-title">
+                From sign-up to <em>verified.</em>
+              </span>
+            }
+            intro="The real BAID X flow on a phone, screen by screen. The account shown is a demo."
+          />
+          <div className="mt-10 md:mt-12">
+            <Carousel
+              label="BAID X app screens"
+              slideClassName="w-[62%] sm:w-[36%] lg:w-[22%]"
+              slides={baidx.screens.map((s, i) => (
+                <figure key={s.src} className="group">
+                  <div className="rounded-[1.75rem] border border-ink bg-ink p-2 shadow-[0_30px_50px_-30px_rgb(0_0_0/0.55)] transition-transform duration-500 group-hover:-translate-y-1">
+                    <div className="overflow-hidden rounded-[1.35rem]">
+                      <Image src={s.src} alt={s.alt} width={s.width} height={s.height} sizes="(min-width: 1024px) 22vw, (min-width: 640px) 36vw, 62vw" className="block h-auto w-full" />
+                    </div>
+                  </div>
+                  <figcaption className="mt-4 flex items-baseline gap-3">
+                    <span className="text-label text-graphite">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="font-display text-[1.15rem]">{s.title}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Launch campaign (light grey) ─────────────────────────── */}
+      <section className="section-y bg-cloud" aria-labelledby="launch-title">
+        <div className="container-x">
+          <SectionHeading
+            label="(06) The launch"
             title={<span id="launch-title">Brand and launch campaign.</span>}
             intro={`Designed in-house alongside the product. Our role: ${story.projectRole.join(", ").toLowerCase()}.`}
           />
