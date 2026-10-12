@@ -4,7 +4,7 @@ import { site } from "@/config/site";
 import { mission, philosophy, values, vision } from "@/content/company";
 import { featuredProjects, publicProjects } from "@/content/projects";
 import { baidx } from "@/content/products";
-import { breadcrumbLd, graph, pageMetadata } from "@/lib/seo";
+import { breadcrumbLd, foundersLd, graph, pageMetadata } from "@/lib/seo";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Carousel } from "@/components/Carousel";
 import { CtaBand } from "@/components/CtaBand";
@@ -157,8 +157,17 @@ export default function AboutPage() {
           </h2>
           <ul className="mt-8">
             {site.founders.map((f, i) => (
-              <li key={f.name} className="group grid items-end gap-2 border-t border-ink py-8 md:grid-cols-12" data-reveal style={delay(i)}>
-                <p className="text-display-1 md:col-span-9">{f.name}</p>
+              <li key={f.name} className="group grid items-end gap-4 border-t border-ink py-8 md:grid-cols-12" data-reveal style={delay(i)}>
+                {f.photo && (
+                  <div className="art md:col-span-3">
+                    <div className="art-frame">
+                      <div className="art-mat">
+                        <Image src={f.photo.src} alt={`${f.name}, ${f.role.toLowerCase()} of ${site.name}`} width={f.photo.width} height={f.photo.height} sizes="(min-width: 768px) 22vw, 90vw" className="block h-auto w-full" />
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <p className={`text-display-1 ${f.photo ? "md:col-span-6" : "md:col-span-9"}`}>{f.name}</p>
                 <p className="text-label text-graphite md:col-span-3 md:justify-self-end">{f.role}</p>
               </li>
             ))}
@@ -219,7 +228,13 @@ export default function AboutPage() {
       </section>
 
       <CtaBand title={<>Let&apos;s build something <em>together.</em></>} />
-      <JsonLd data={graph(breadcrumbLd(crumbs), { "@type": "AboutPage", url: `${site.url}/about`, about: { "@id": `${site.url}/#organization` } })} />
+      <JsonLd
+        data={graph(
+          breadcrumbLd(crumbs),
+          { "@type": "AboutPage", url: `${site.url}/about`, about: { "@id": `${site.url}/#organization` }, mainEntity: { "@id": `${site.url}/#organization` } },
+          ...foundersLd(),
+        )}
+      />
     </>
   );
 }

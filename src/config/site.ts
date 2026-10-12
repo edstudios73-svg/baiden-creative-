@@ -18,9 +18,10 @@ export const site = {
     "Baiden Creatives is a creative and technology company in Accra, Ghana, founded by Baiden David and Baiden Daniel. We design and build websites, apps and brands, and created BAID X, Ghana's work network.",
   base: "Accra, Ghana",
   founded: null as string | null, // TODO(company): founding year, if it should be published.
+  // photo: add an approved portrait (file in public/assets/founders/) and it appears on /about and in search data.
   founders: [
-    { name: "Baiden David", role: "Co-founder" },
-    { name: "Baiden Daniel", role: "Co-founder" },
+    { name: "Baiden David", role: "Co-founder", photo: null as { src: string; width: number; height: number } | null },
+    { name: "Baiden Daniel", role: "Co-founder", photo: null as { src: string; width: number; height: number } | null },
   ],
   contact: {
     email: "edstudios77@gmail.com",
