@@ -118,10 +118,10 @@ export default function WorkPage() {
                         </p>
                         <h3 className="text-display-3 mt-3">{p.title}</h3>
                         <p className="mt-4 text-graphite">{p.summary}</p>
-                        {p.challenge && <p className="mt-4 border-l border-ink pl-4 text-[0.95rem]">{p.challenge}</p>}
+                        {p.challenge && <p className="mt-4 hidden border-l border-ink pl-4 text-[0.95rem] md:block">{p.challenge}</p>}
                       </div>
                       <div className="md:col-span-4">
-                      <dl className="grid content-start gap-4 border-t border-ink pt-4 text-sm">
+                      <dl className="hidden content-start gap-4 border-t border-ink pt-4 text-sm md:grid">
                         <div>
                           <dt className="text-label text-graphite">{p.inHouse ? "Owner" : "Client"}</dt>
                           <dd className="mt-1">{p.clientOrOwner}</dd>
@@ -142,7 +142,7 @@ export default function WorkPage() {
                         )}
                       </dl>
                       {p.externalUrl && (
-                        <ButtonLink href={p.externalUrl} variant="secondary" className="mt-6 w-full">
+                        <ButtonLink href={p.externalUrl} variant="secondary" className="w-full md:mt-6">
                           Visit the live site
                         </ButtonLink>
                       )}
@@ -236,7 +236,17 @@ export default function WorkPage() {
       <section id="brand" className="section-y scroll-mt-16" aria-labelledby="brand-title">
         <div className="container-x">
           <SectionHeading label="(05) Brand & campaigns" title={<span id="brand-title">Identities, posters and launches.</span>} intro="Logos, menus, event series and launch artwork, hung as they were made: uncropped." />
-          <div className="mt-10 columns-2 gap-4 sm:gap-6 md:mt-12 md:columns-3 lg:columns-4 lg:gap-8">
+          {/* Phones: a swipeable row of frames. Larger screens: the full salon hang. */}
+          <div className="mt-10 md:hidden">
+            <Carousel
+              label="Brand and campaign artwork"
+              slideClassName="w-[72%] sm:w-[46%]"
+              slides={brandWall.map((w, i) => (
+                <ArtFrame key={w.src} piece={w} index={i} reveal={false} matAspect="4 / 5" sizes="(min-width: 640px) 46vw, 72vw" />
+              ))}
+            />
+          </div>
+          <div className="mt-12 hidden gap-6 md:block md:columns-3 lg:columns-4 lg:gap-8">
             {brandWall.map((w, i) => (
               <div key={w.src} className="mb-8 break-inside-avoid md:mb-10">
                 <ArtFrame piece={w} index={i} style={{ "--reveal-delay": i % 4 } as React.CSSProperties} sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" />

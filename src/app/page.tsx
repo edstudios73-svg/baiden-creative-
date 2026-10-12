@@ -32,7 +32,6 @@ export const metadata: Metadata = {
 const SHOWCASE = ["awesome-place-events-center", "the-slushify", "christian-service-church", "blackboys-vault", "eslyn-local-kitchen", "thenobles-gift-hub", "bold-restaurant"];
 
 const v = (n: number) => ({ "--i": n }) as React.CSSProperties;
-const delay = (n: number) => ({ "--reveal-delay": n }) as React.CSSProperties;
 
 export default function HomePage() {
   const showcase = SHOWCASE.map((slug) => caseStudies.find((p) => p.slug === slug)).filter((p) => p !== undefined);
@@ -242,59 +241,32 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── BAID X story (white) ─────────────────────────────────── */}
+      {/* ── BAID X (white): one card, one tap to its page ───────── */}
       <section className="section-y" aria-labelledby="baidx-title">
-        <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-5" data-reveal>
-            <Label className="text-graphite">(05) Original product</Label>
-            <div className="mt-6 inline-block bg-ink px-6 py-5">
-              <Image src="/assets/brand-baidx-logo.png" alt="BAID X logo" width={881} height={217} className="h-9 w-auto md:h-11" />
+        <div className="container-x">
+          <Label className="text-graphite">(05) Original product</Label>
+          <Link
+            href="/baid-x"
+            className="on-dark group mt-6 grid overflow-hidden border border-ink bg-ink text-ivory transition-shadow duration-500 hover:shadow-[0_40px_60px_-30px_rgb(0_0_0/0.6)] md:grid-cols-12"
+            data-reveal
+          >
+            <div className="flex flex-col p-6 md:col-span-5 md:p-10">
+              <Image src="/assets/brand-baidx-logo.png" alt="BAID X" width={881} height={217} className="h-9 w-auto self-start md:h-11" />
+              <h2 id="baidx-title" className="text-display-3 mt-8">
+                {baidx.tagline} <em>Built by {site.name}.</em>
+              </h2>
+              <p className="mt-4 text-mist">Hire verified people. Pay only when the work is done.</p>
+              <span className="mt-10 flex items-center justify-between gap-4 border-t border-ivory/20 pt-5 md:mt-auto">
+                <span className="text-label">Read the story</span>
+                <span className="grid size-11 place-items-center border border-ivory/40 transition-colors duration-300 group-hover:bg-ivory group-hover:text-ink">
+                  <ArrowRight className="size-4" />
+                </span>
+              </span>
             </div>
-            <h2 id="baidx-title" className="text-display-3 mt-8">
-              {baidx.tagline} <em>An original product by {site.name}.</em>
-            </h2>
-            <p className="mt-6 text-graphite">{baidx.problem}</p>
-            <div className="mt-8 grid gap-6 border-t border-ink pt-6 sm:grid-cols-2">
-              <div>
-                <p className="text-label flex items-center gap-2">
-                  <span aria-hidden="true" className="size-2 rounded-full bg-ink" /> Live today
-                </p>
-                <ul className="mt-3 grid gap-1.5 text-graphite">
-                  {baidx.live.slice(0, 4).map((f) => (
-                    <li key={f.title}>{f.title}</li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <p className="text-label flex items-center gap-2">
-                  <span aria-hidden="true" className="size-2 rounded-full border border-ink" /> In development
-                </p>
-                <ul className="mt-3 grid gap-1.5 text-graphite">
-                  {baidx.inDevelopment.map((f) => (
-                    <li key={f.title}>{f.title}</li>
-                  ))}
-                </ul>
-              </div>
+            <div className="img-zoom relative aspect-[16/10] overflow-hidden border-t border-ivory/15 md:col-span-7 md:aspect-auto md:min-h-[24rem] md:border-t-0 md:border-l">
+              <Image src={baidx.images.hero.src} alt={baidx.images.hero.alt} fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover object-top" />
             </div>
-            <div className="mt-10 grid gap-3 sm:grid-cols-2">
-              <ButtonLink href="/baid-x">Read the story</ButtonLink>
-              <ButtonLink href={baidx.url} variant="secondary">
-                Visit baid-x.com
-              </ButtonLink>
-            </div>
-          </div>
-          <div className="lg:col-span-7">
-            <div className="frame aspect-[16/10]" data-reveal="mask">
-              <Image src={baidx.images.hero.src} alt={baidx.images.hero.alt} fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-cover object-top" />
-            </div>
-            <div className="mt-4 grid grid-cols-3 gap-4">
-              {[baidx.images.roles, { src: "/assets/work/baidx-launch-flyer-1.jpg", alt: "BAID X launch artwork: how the platform works", width: 864, height: 1080 }, baidx.images.app].map((img, i) => (
-                <div key={img.src} className="frame aspect-[4/5]" data-reveal="mask" style={delay(i + 1)}>
-                  <Image src={img.src} alt={img.alt} fill sizes="(min-width: 1024px) 18vw, 30vw" className="object-cover object-top" />
-                </div>
-              ))}
-            </div>
-          </div>
+          </Link>
         </div>
       </section>
 
