@@ -55,7 +55,10 @@ export default function BaidxPage() {
   const split = baidx.problem.indexOf("BAID X makes");
   const problemBody = split > 0 ? baidx.problem.slice(0, split).trim() : baidx.problem;
   const problemQuote = split > 0 ? baidx.problem.slice(split).trim() : "";
-  const launch = story.gallery.map((g) => ({ ...g, title: "BAID X", kind: g.src.includes("app") ? "App announcement" : "Launch campaign" }));
+  const launch = [
+    { ...baidx.logoMark, title: "BAID X", kind: "Logo mark" },
+    ...story.gallery.map((g) => ({ ...g, title: "BAID X", kind: g.src.includes("app") ? "App announcement" : "Launch campaign" })),
+  ];
 
   return (
     <>
@@ -227,6 +230,34 @@ export default function BaidxPage() {
               </li>
             ))}
           </ol>
+
+          {/* The people on the platform, as BAID X pictures them */}
+          <div className="mt-14 md:mt-20">
+            <Carousel
+              label="The people BAID X is built for"
+              slideClassName="w-[64%] sm:w-[40%] lg:w-[24%]"
+              slides={baidx.people.map((p, i) => (
+                <figure key={p.src} className="group">
+                  <div className="relative aspect-[3/4] overflow-hidden border border-ink bg-cloud">
+                    <span aria-hidden="true" className="absolute top-3 left-3 z-10 font-display text-[1.6rem] leading-none italic">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <Image
+                      src={p.src}
+                      alt={p.alt}
+                      fill
+                      sizes="(min-width: 1024px) 24vw, (min-width: 640px) 40vw, 64vw"
+                      className="object-contain object-bottom transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <figcaption className="mt-3 flex items-baseline justify-between gap-3 border-t border-ink pt-2">
+                    <span className="font-display text-[1.15rem]">{p.role}</span>
+                    <span className="text-label text-graphite">BAID X</span>
+                  </figcaption>
+                </figure>
+              ))}
+            />
+          </div>
         </div>
       </section>
 
