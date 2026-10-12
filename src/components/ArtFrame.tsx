@@ -13,6 +13,7 @@ export function ArtFrame({
   tone = "light",
   sizes = "(min-width: 1024px) 25vw, 50vw",
   reveal = true,
+  matAspect,
   style,
 }: {
   piece: FramedPiece;
@@ -20,13 +21,22 @@ export function ArtFrame({
   tone?: "light" | "dark";
   sizes?: string;
   reveal?: boolean;
+  /** Fixed mat proportion (e.g. "4 / 3") so frames in a row line up. The artwork is contained, never cropped. */
+  matAspect?: string;
   style?: CSSProperties;
 }) {
   return (
     <figure className={`art group ${tone === "dark" ? "art-dark" : ""}`} {...(reveal ? { "data-reveal": "" } : {})} style={style}>
       <div className="art-frame">
-        <div className="art-mat">
-          <Image src={piece.src} alt={piece.alt} width={piece.width} height={piece.height} sizes={sizes} className="art-img block h-auto w-full" />
+        <div className={matAspect ? "art-mat grid place-items-center" : "art-mat"} style={matAspect ? { aspectRatio: matAspect } : undefined}>
+          <Image
+            src={piece.src}
+            alt={piece.alt}
+            width={piece.width}
+            height={piece.height}
+            sizes={sizes}
+            className={matAspect ? "art-img block size-full object-contain" : "art-img block h-auto w-full"}
+          />
         </div>
       </div>
       <figcaption className="art-plaque">

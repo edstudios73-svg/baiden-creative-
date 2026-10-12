@@ -203,7 +203,7 @@ export default function WorkPage() {
               label="Web design"
               slideClassName="w-[82%] sm:w-[52%] lg:w-[36%]"
               slides={webDesign.map((w, i) => (
-                <ArtFrame key={w.src} piece={w} index={i} reveal={false} sizes="(min-width: 1024px) 36vw, (min-width: 640px) 52vw, 82vw" />
+                <ArtFrame key={w.src} piece={w} index={i} reveal={false} matAspect="4 / 3" sizes="(min-width: 1024px) 36vw, (min-width: 640px) 52vw, 82vw" />
               ))}
             />
           </div>
@@ -220,7 +220,7 @@ export default function WorkPage() {
               tone="dark"
               slideClassName="w-[86%] sm:w-[58%] lg:w-[42%]"
               slides={appDesign.map((w, i) => (
-                <ArtFrame key={w.src} piece={w} index={i} tone="dark" reveal={false} sizes="(min-width: 1024px) 42vw, (min-width: 640px) 58vw, 86vw" />
+                <ArtFrame key={w.src} piece={w} index={i} tone="dark" reveal={false} matAspect="4 / 3" sizes="(min-width: 1024px) 42vw, (min-width: 640px) 58vw, 86vw" />
               ))}
             />
           </div>

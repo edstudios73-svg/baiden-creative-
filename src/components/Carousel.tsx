@@ -85,7 +85,7 @@ export function Carousel({
             go(active - 1);
           }
         }}
-        className={"flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:gap-6 [&::-webkit-scrollbar]:hidden -mx-[clamp(1rem,0.4rem+3vw,3rem)] px-[clamp(1rem,0.4rem+3vw,3rem)] scroll-px-[clamp(1rem,0.4rem+3vw,3rem)]"}
+        className={"relative flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:gap-6 [&::-webkit-scrollbar]:hidden -mx-[clamp(1rem,0.4rem+3vw,3rem)] px-[clamp(1rem,0.4rem+3vw,3rem)] scroll-px-[clamp(1rem,0.4rem+3vw,3rem)]"}
       >
         {slides.map((slide, i) => (
           <div

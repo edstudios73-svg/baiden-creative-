@@ -63,13 +63,11 @@ The repository is connected to Vercel and deploys `main` to production. `vercel.
 
 Preview deployments are kept out of search: `robots.txt` disallows everything unless `VERCEL_ENV` is `production`.
 
-Old URLs redirect permanently: `/start-a-project` and `/pricing` go to `/contact`, `/organisations` goes to `/products`, and the `.html` paths go to their clean URLs.
-
 ## Routes
 
 Four pages: `/` (home) · `/work` (explore our work) · `/about` · `/contact` (start a project). Plus `/privacy` and `/terms` (linked from the footer), the 404 page, `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/opengraph-image` and `POST /api/inquiry`.
 
-Old URLs redirect permanently: `/services/*` and `/work/[slug]` go to `/work`, `/products/*` and `/organisations` go to `/about`, and `/start-a-project` and `/pricing` go to `/contact`.
+Old URLs redirect permanently: `/services/*` and `/work/[slug]` go to `/work`, `/products/*` and `/organisations` go to `/about`, and `/start-a-project` and `/pricing` go to `/contact`. The old `.html` paths go to their clean URLs.
 
 ## Where things live
 
@@ -78,11 +76,12 @@ src/
   config/site.ts        Company name, URL, contact details, social links, logo files, BAID X URL
   content/
     projects.ts         Portfolio and case studies (publication status controls what is public)
-    services.ts         The six services and their page content
+    services.ts         The six services (home page carousel, project disciplines)
+    studio.ts           Studio gallery pieces (graphic design, web and app UI)
     products.ts         BAID X: live features vs in-development, kept separate
     company.ts          Process, mission, vision, philosophy, values
   lib/                  SEO helpers, inquiry validation, rate limiting, email delivery
-  components/           Header, footer, cards, gallery, form and other shared UI
+  components/           Header, footer, carousel, art frames, form and other shared UI
   app/                  Routes, metadata files (sitemap, robots, manifest, OG image) and the inquiry API
   fonts/                Self-hosted Instrument Serif, Geist, Geist Mono (SIL OFL)
 public/assets/          Logos, icons and project imagery
@@ -103,7 +102,7 @@ Only publish verified information. `outcomes` stays empty until the client appro
 
 Tokens are in `src/app/globals.css` (`@theme`):
 
-- **Colour.** Ink `#111318`, ivory `#F5F2EC`, paper `#FBFAF7`, graphite `#5D6167` for body text on ivory (5.6:1), mist `#A6AAB0` for text on ink (8:1), and the lime accent `#C9FF54`, reserved for emphasis and focus.
+- **Colour.** Strict black and white: `#000`, `#111`, `#1A1A1A`, `#FFF`, `#E5E5E5`, with `#777` for secondary text on black and `#666` on white (`#777` misses 4.5:1 on white). No accent colours; artwork keeps its own.
 - **Type.** Instrument Serif for display, Geist for text, Geist Mono for labels. The fluid scale utilities are `text-display-1…3`, `text-heading`, `text-lead` and `text-label`.
 - **Layout.** `container-x` (max 1440px, fluid gutter, 16px on small phones) and `section-y`, on a 12-column grid.
 - **Motion.** Reveal on scroll via one `IntersectionObserver` (`RevealObserver`), plus the hero entrance. Everything is gated by `prefers-reduced-motion`, and content stays visible without JavaScript.

@@ -137,7 +137,7 @@ const panels: { title: string; caption: string; art: ReactNode }[] = [
 
 export function IdeaComic() {
   return (
-    <ol className="-mx-[clamp(1rem,0.4rem+3vw,3rem)] flex snap-x snap-mandatory scroll-px-[clamp(1rem,0.4rem+3vw,3rem)] gap-3 overflow-x-auto px-[clamp(1rem,0.4rem+3vw,3rem)] pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 xl:grid-cols-4 [&::-webkit-scrollbar]:hidden" aria-label="Comic: from an idea to an opportunity, four panels">
+    <ol className="relative -mx-[clamp(1rem,0.4rem+3vw,3rem)] flex snap-x snap-mandatory scroll-px-[clamp(1rem,0.4rem+3vw,3rem)] gap-3 overflow-x-auto px-[clamp(1rem,0.4rem+3vw,3rem)] pb-2 [scrollbar-width:none] sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 xl:grid-cols-4 [&::-webkit-scrollbar]:hidden" aria-label="Comic: from an idea to an opportunity, four panels">
       {panels.map((p, i) => (
         <li key={p.title} className="w-[82%] shrink-0 snap-start sm:w-auto" data-reveal style={{ "--reveal-delay": i } as CSSProperties}>
           <figure className="flex h-full flex-col border-2 border-ivory bg-ink">

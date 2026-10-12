@@ -37,7 +37,7 @@ export function Marquee({
   );
 
   return (
-    <div className="group overflow-hidden motion-reduce:overflow-x-auto motion-reduce:[scrollbar-width:none]">
+    <div className="group relative overflow-hidden motion-reduce:overflow-x-auto motion-reduce:[scrollbar-width:none]">
       <div
         className={`marquee-track flex w-max group-hover:[animation-play-state:paused] ${reverse ? "marquee-reverse" : ""}`}
         style={{ "--marquee-duration": `${duration}s` } as React.CSSProperties}
