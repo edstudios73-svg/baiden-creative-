@@ -7,6 +7,7 @@ import { baidx } from "@/content/products";
 import { breadcrumbLd, foundersLd, graph, pageMetadata } from "@/lib/seo";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Carousel } from "@/components/Carousel";
+import { ArtFrame } from "@/components/ArtFrame";
 import { CtaBand } from "@/components/CtaBand";
 import { ArrowLink, Breadcrumbs, ButtonLink, JsonLd, Label } from "@/components/ui";
 
@@ -152,10 +153,21 @@ export default function AboutPage() {
       <section className="section-y" aria-labelledby="founders-title">
         <div className="container-x">
           <Label className="text-graphite">Founders</Label>
-          <h2 id="founders-title" className="sr-only">
-            Founders
+          <h2 id="founders-title" className="text-display-3 mt-4">
+            The people behind <em>the studio.</em>
           </h2>
-          <ul className="mt-8">
+          <div className="mt-10 grid items-end gap-8 md:mt-12 md:grid-cols-12 md:gap-10">
+            {site.foundersPhotos.map((p, i) => (
+              <div key={p.src} className={i === 0 ? "md:col-span-7" : "max-w-sm md:col-span-4 md:col-start-9 md:max-w-none"}>
+                <ArtFrame
+                  piece={{ ...p, title: p.caption, kind: site.name }}
+                  index={i}
+                  sizes={i === 0 ? "(min-width: 768px) 55vw, 100vw" : "(min-width: 768px) 30vw, 90vw"}
+                />
+              </div>
+            ))}
+          </div>
+          <ul className="mt-14">
             {site.founders.map((f, i) => (
               <li key={f.name} className="group grid items-end gap-4 border-t border-ink py-8 md:grid-cols-12" data-reveal style={delay(i)}>
                 {f.photo && (

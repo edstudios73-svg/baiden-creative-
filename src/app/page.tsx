@@ -117,7 +117,15 @@ export default function HomePage() {
       {/* ── Introduction (white) ─────────────────────────────────── */}
       <section className="section-y" aria-labelledby="intro-title">
         <div className="container-x grid gap-10 lg:grid-cols-12">
-          <Label className="text-graphite lg:col-span-3">(01) Who we are</Label>
+          <div className="lg:col-span-3">
+            <Label className="text-graphite">(01) Who we are</Label>
+            <div className="mt-6 max-w-[15rem] lg:max-w-none">
+              <ArtFrame
+                piece={{ ...site.foundersPhotos[0], title: site.foundersPhotos[0].caption, kind: "Founders" }}
+                sizes="(min-width: 1024px) 22vw, 240px"
+              />
+            </div>
+          </div>
           <div className="lg:col-span-9">
             <h2 id="intro-title" className="text-display-3 max-w-4xl" data-reveal>
               A creative and technology company from Accra. We design the idea, build the product and give it a brand worth remembering.

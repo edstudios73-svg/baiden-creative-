@@ -51,6 +51,7 @@ export function organizationLd() {
     telephone: site.contact.phoneIntl,
     address: { "@type": "PostalAddress", addressLocality: "Accra", addressCountry: "GH" },
     founder: site.founders.map((f) => ({ "@id": personId(f.name) })),
+    image: absoluteUrl(site.foundersPhotos[0].src),
     foundingLocation: { "@type": "Place", name: "Accra, Ghana" },
     owns: { "@type": "WebApplication", name: site.baidx.name, url: site.baidx.url },
     sameAs: site.social.map((s) => s.url),
@@ -69,7 +70,8 @@ export function foundersLd() {
     jobTitle: f.role,
     worksFor: { "@id": orgId },
     url: `${site.url}/about`,
-    ...(f.photo ? { image: absoluteUrl(f.photo.src) } : {}),
+    // Their own portrait once confirmed; until then the photo of both founders.
+    image: absoluteUrl(f.photo?.src ?? site.foundersPhotos[0].src),
   }));
 }
 
