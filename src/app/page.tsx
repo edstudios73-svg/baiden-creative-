@@ -32,6 +32,7 @@ export const metadata: Metadata = {
 const SHOWCASE = ["awesome-place-events-center", "the-slushify", "christian-service-church", "blackboys-vault", "eslyn-local-kitchen", "thenobles-gift-hub", "bold-restaurant"];
 
 const v = (n: number) => ({ "--i": n }) as React.CSSProperties;
+const delay = (n: number) => ({ "--reveal-delay": n }) as React.CSSProperties;
 
 export default function HomePage() {
   const showcase = SHOWCASE.map((slug) => caseStudies.find((p) => p.slug === slug)).filter((p) => p !== undefined);
