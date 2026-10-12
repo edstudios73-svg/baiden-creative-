@@ -22,11 +22,11 @@ export function HeroVisual() {
         <div className="absolute inset-0 [--z:-140px]" aria-hidden="true">
           <div className="h-full w-full" data-reveal>
             <svg className="ink-draw h-full w-full text-ivory/20" viewBox="0 0 160 110" preserveAspectRatio="none" fill="none">
-              <line x1="0" y1="20" x2="160" y2="20" pathLength={1} stroke="currentColor" strokeWidth="0.15" />
-              <line x1="0" y1="90" x2="160" y2="90" pathLength={1} stroke="currentColor" strokeWidth="0.15" style={{ "--d": 200 } as React.CSSProperties} />
-              <line x1="40" y1="0" x2="40" y2="110" pathLength={1} stroke="currentColor" strokeWidth="0.15" style={{ "--d": 400 } as React.CSSProperties} />
-              <line x1="120" y1="0" x2="120" y2="110" pathLength={1} stroke="currentColor" strokeWidth="0.15" style={{ "--d": 600 } as React.CSSProperties} />
-              <circle cx="120" cy="20" r="18" pathLength={1} stroke="currentColor" strokeWidth="0.15" style={{ "--d": 800 } as React.CSSProperties} />
+              <path d="M0 20H160" pathLength={1} stroke="currentColor" strokeWidth="0.15" />
+              <path d="M0 90H160" pathLength={1} stroke="currentColor" strokeWidth="0.15" style={{ "--d": 200 } as React.CSSProperties} />
+              <path d="M40 0V110" pathLength={1} stroke="currentColor" strokeWidth="0.15" style={{ "--d": 400 } as React.CSSProperties} />
+              <path d="M120 0V110" pathLength={1} stroke="currentColor" strokeWidth="0.15" style={{ "--d": 600 } as React.CSSProperties} />
+              <path d="M138 20a18 18 0 1 1-36 0a18 18 0 1 1 36 0" pathLength={1} stroke="currentColor" strokeWidth="0.15" style={{ "--d": 800 } as React.CSSProperties} />
             </svg>
           </div>
         </div>

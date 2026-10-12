@@ -147,7 +147,7 @@ export function ContactForm() {
     return (
       <div ref={resultRef} tabIndex={-1} role="status" className="border border-ink p-8 outline-none md:p-12">
         <svg className="draw-now size-16" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-          <circle cx="32" cy="32" r="30" stroke="currentColor" strokeWidth="1.5" pathLength={1} />
+          <path d="M62 32a30 30 0 1 1-60 0a30 30 0 1 1 60 0" stroke="currentColor" strokeWidth="1.5" pathLength={1} />
           <path d="M19 33 L28 42 L46 23" stroke="currentColor" strokeWidth="2" strokeLinecap="square" pathLength={1} style={{ animationDelay: "500ms" }} />
         </svg>
         <p className="text-label mt-8 text-graphite">Inquiry sent</p>

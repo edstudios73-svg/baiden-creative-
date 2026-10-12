@@ -41,7 +41,7 @@ function Bubble({ x, y, w, h = 36, text, tailX, tailY, delay = 900 }: { x: numbe
       />
       <path d={`M${cx - 8} ${edge} L${tailX} ${tailY} L${cx + 8} ${edge}`} fill="#fff" stroke="currentColor" strokeWidth={2.4} strokeLinejoin="round" />
       <path d={`M${cx - 6.5} ${edge} H${cx + 6.5}`} stroke="#fff" strokeWidth={3} />
-      <text x={x + w / 2} y={y + h / 2 + 5} textAnchor="middle" fill="currentColor" fontSize="14" fontWeight="700" fontFamily="var(--font-mono)" letterSpacing="1">
+      <text x={x + w / 2} y={y + h / 2 + 5} textAnchor="middle" fill="currentColor" fontSize="14" fontWeight="700" letterSpacing="1" style={{ fontFamily: "var(--font-mono)" }}>
         {text}
       </text>
     </g>
@@ -79,8 +79,8 @@ const chapters: Chapter[] = [
           <path {...S} strokeWidth={3} d="M262 22 V10 M222 34 L214 26 M208 72 H194 M316 72 H330 M302 34 L310 26 M220 108 L210 116 M304 108 L314 116" />
         </g>
         {/* Drifting question marks */}
-        <text className="st-float" style={d(1500)} x="344" y="150" fontSize="26" fontFamily="var(--font-display)" fill="currentColor">?</text>
-        <text className="st-float" style={d(2100)} x="320" y="196" fontSize="18" fontFamily="var(--font-display)" fill="currentColor">?</text>
+        <text className="st-float" style={{ ...d(1500), fontFamily: "var(--font-display)" }} x="344" y="150" fontSize="26" fill="currentColor">?</text>
+        <text className="st-float" style={{ ...d(2100), fontFamily: "var(--font-display)" }} x="320" y="196" fontSize="18" fill="currentColor">?</text>
         <Bubble x={222} y={198} w={136} text="WHAT IF…?" tailX={210} tailY={184} delay={1700} />
       </>
     ),
@@ -147,7 +147,7 @@ const chapters: Chapter[] = [
           <g transform="rotate(-8 232 236)">
             <rect x="172" y="214" width="120" height="44" fill="#fff" stroke="currentColor" strokeWidth="3.5" />
             <rect x="177" y="219" width="110" height="34" fill="none" stroke="currentColor" strokeWidth="1.2" />
-            <text x="232" y="243" textAnchor="middle" fontSize="17" fontWeight="700" fontFamily="var(--font-mono)" letterSpacing="3" fill="currentColor">
+            <text x="232" y="243" textAnchor="middle" fontSize="17" fontWeight="700" letterSpacing="3" fill="currentColor" style={{ fontFamily: "var(--font-mono)" }}>
               IT&apos;S LIVE
             </text>
           </g>
