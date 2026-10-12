@@ -146,6 +146,11 @@ export default function WorkPage() {
                           Visit the live site
                         </ButtonLink>
                       )}
+                      {p.slug === "baid-x" && (
+                        <ButtonLink href="/baid-x" className="mt-3 w-full">
+                          Read the BAID X story
+                        </ButtonLink>
+                      )}
                       </div>
                     </div>
                   </article>

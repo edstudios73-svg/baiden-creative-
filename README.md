@@ -65,9 +65,9 @@ Preview deployments are kept out of search: `robots.txt` disallows everything un
 
 ## Routes
 
-Four pages: `/` (home) · `/work` (explore our work) · `/about` · `/contact` (start a project). Plus `/privacy` and `/terms` (linked from the footer), the 404 page, `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/opengraph-image` and `POST /api/inquiry`.
+Pages: `/` (home) · `/work` (explore our work) · `/baid-x` (the BAID X story) · `/about` · `/contact` (start a project). Plus `/privacy` and `/terms` (linked from the footer), the 404 page, `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/opengraph-image` and `POST /api/inquiry`.
 
-Old URLs redirect permanently: `/services/*` and `/work/[slug]` go to `/work`, `/products/*` and `/organisations` go to `/about`, and `/start-a-project` and `/pricing` go to `/contact`. The old `.html` paths go to their clean URLs.
+Old URLs redirect permanently: `/services/*` and `/work/[slug]` go to `/work`, `/products/baid-x` goes to `/baid-x`, other `/products/*` paths and `/organisations` go to `/about`, and `/start-a-project` and `/pricing` go to `/contact`. The old `.html` paths go to their clean URLs.
 
 ## Where things live
 

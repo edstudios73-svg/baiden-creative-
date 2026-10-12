@@ -34,6 +34,7 @@ const nextConfig: NextConfig = {
       { source: "/services", destination: "/work", permanent: true },
       { source: "/services/:path*", destination: "/work", permanent: true },
       { source: "/products", destination: "/about", permanent: true },
+      { source: "/products/baid-x", destination: "/baid-x", permanent: true },
       { source: "/products/:path*", destination: "/about", permanent: true },
       { source: "/work/:slug", destination: "/work", permanent: true },
       { source: "/index.html", destination: "/", permanent: true },

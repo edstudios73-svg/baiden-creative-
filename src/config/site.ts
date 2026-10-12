@@ -54,6 +54,7 @@ export const site = {
 
 export const mainNav = [
   { label: "Work", href: "/work" },
+  { label: "BAID X", href: "/baid-x" },
   { label: "About", href: "/about" },
 ] as const;
 

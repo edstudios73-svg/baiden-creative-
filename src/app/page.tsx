@@ -12,7 +12,7 @@ import { HeroVisual } from "@/components/HeroVisual";
 import { Marquee } from "@/components/Marquee";
 import { PhraseRotator } from "@/components/PhraseRotator";
 import { Carousel } from "@/components/Carousel";
-import { IdeaComic } from "@/components/IdeaComic";
+import { IdeaStory } from "@/components/IdeaStory";
 import { CtaBand } from "@/components/CtaBand";
 import { ArtFrame } from "@/components/ArtFrame";
 import { ArrowRight } from "@/components/icons";
@@ -256,7 +256,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="mt-10 grid gap-3 sm:grid-cols-2">
-              <ButtonLink href="/work#baid-x">See it in our work</ButtonLink>
+              <ButtonLink href="/baid-x">Read the story</ButtonLink>
               <ButtonLink href={baidx.url} variant="secondary">
                 Visit baid-x.com
               </ButtonLink>
@@ -284,10 +284,10 @@ export default function HomePage() {
             tone="dark"
             label="(06) How it happens"
             title={<span id="comic-title">From an idea to an opportunity.</span>}
-            intro="Every project we take on follows the same arc. Here it is in four panels."
+            intro="Every project we take on follows the same arc. Here it is in four chapters."
           />
           <div className="mt-12">
-            <IdeaComic />
+            <IdeaStory />
           </div>
         </div>
       </section>

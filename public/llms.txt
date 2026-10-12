@@ -12,6 +12,7 @@ Based in: Accra, Ghana. Works remotely with clients anywhere. Language: English.
 ## Pages
 - Home: https://www.baidencreatives.org/
 - Explore our work (featured case studies, every live project, web, app and brand design): https://www.baidencreatives.org/work
+- BAID X, the story: https://www.baidencreatives.org/baid-x
 - About: https://www.baidencreatives.org/about
 - Start a project: https://www.baidencreatives.org/contact
 

@@ -505,6 +505,261 @@
   }
 }
 
+/* ── Idea story comic (IdeaStory). Resting state is the finished frame; motion is added below. ── */
+.st-stack::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translate(10px, 10px);
+  border: 1px solid rgb(255 255 255 / 0.35);
+}
+.st-stage {
+  isolation: isolate;
+}
+.st-door {
+  transform-box: view-box;
+  transform: scaleX(0.28) skewY(-7deg);
+}
+.st-wipe {
+  transform: translateX(101%);
+}
+.st-pop,
+.st-build,
+.st-burst {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.st-build {
+  transform-origin: center bottom;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .st-char {
+    transition: left 1200ms var(--ease-out-quint);
+  }
+  .st-spin {
+    animation: orbit 120s linear infinite;
+  }
+  .st-draw {
+    stroke-dasharray: 1;
+    animation: st-draw 1100ms cubic-bezier(0.65, 0, 0.35, 1) var(--d, 0ms) both;
+  }
+  .st-pop {
+    animation: st-pop 650ms cubic-bezier(0.34, 1.56, 0.64, 1) var(--d, 0ms) both;
+  }
+  .st-build {
+    animation: st-build 700ms var(--ease-out-quint) var(--d, 0ms) both;
+  }
+  .st-rise {
+    animation: st-rise 900ms var(--ease-out-quint) var(--d, 0ms) both;
+  }
+  .st-glow {
+    animation:
+      st-fade 900ms ease var(--d, 0ms) both,
+      st-pulse 2600ms ease-in-out calc(var(--d, 0ms) + 900ms) infinite;
+  }
+  .st-flicker {
+    animation:
+      st-flicker 900ms steps(1) var(--d, 0ms) both,
+      st-pulse 2400ms ease-in-out calc(var(--d, 0ms) + 900ms) infinite;
+  }
+  .st-float {
+    animation:
+      st-fade 500ms ease var(--d, 0ms) both,
+      st-float 3200ms ease-in-out var(--d, 0ms) infinite;
+  }
+  .st-write {
+    animation:
+      st-fade 400ms ease var(--d, 0ms) both,
+      st-write 900ms ease-in-out var(--d, 0ms) infinite;
+  }
+  .st-cursor {
+    animation: st-cursor 1000ms var(--ease-out-quint) var(--d, 0ms) both;
+  }
+  .st-ripple {
+    transform-box: view-box;
+    animation: st-ripple 1600ms ease-out var(--d, 0ms) infinite both;
+  }
+  .st-stamp {
+    transform-box: view-box;
+    animation: st-stamp 520ms cubic-bezier(0.2, 0.9, 0.3, 1.2) var(--d, 0ms) both;
+  }
+  .st-door {
+    animation: st-door 1400ms cubic-bezier(0.65, 0, 0.35, 1) var(--d, 0ms) both;
+  }
+  .st-burst {
+    animation:
+      st-burst 700ms cubic-bezier(0.34, 1.56, 0.64, 1) var(--d, 0ms) both,
+      st-twinkle 1800ms ease-in-out calc(var(--d, 0ms) + 700ms) infinite;
+  }
+  .st-narration {
+    animation: st-narration 700ms var(--ease-out-quint) 250ms both;
+  }
+  .st-text {
+    animation: hero-fade 800ms var(--ease-out-quint) both;
+  }
+  .st-progress {
+    animation-name: st-progress;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+  }
+  .st-wipe.is-moving {
+    animation: st-wipe 750ms cubic-bezier(0.76, 0, 0.24, 1) both;
+  }
+
+  /* Character: a reaction per chapter on top of a constant idle breath. */
+  .st-react {
+    transform-origin: 50% 100%;
+  }
+  .st-react-0 {
+    animation: st-react-pop 900ms cubic-bezier(0.34, 1.56, 0.64, 1) 150ms both;
+  }
+  .st-react-1 {
+    animation: st-react-wobble 1100ms ease-in-out 300ms both;
+  }
+  .st-react-2 {
+    animation: st-react-jump 900ms ease-out 2500ms both;
+  }
+  .st-react-3 {
+    animation: st-react-walk 1200ms ease-in-out both;
+  }
+  .st-idle {
+    transform-origin: 50% 100%;
+    animation: st-breathe 3200ms ease-in-out infinite;
+  }
+  .st-shadow {
+    animation: st-shadow 3200ms ease-in-out infinite;
+  }
+
+  /* BAID X escrow flow: the money travels from step to step. */
+  .flow-dot {
+    animation: flow-y 6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  }
+  @media (min-width: 48rem) {
+    .flow-dot {
+      animation-name: flow-x;
+    }
+  }
+  @keyframes flow-y {
+    0% { top: 0; opacity: 0; }
+    8% { opacity: 1; }
+    88% { top: calc(100% - 0.75rem); opacity: 1; }
+    100% { top: calc(100% - 0.75rem); opacity: 0; }
+  }
+  @keyframes flow-x {
+    0% { left: 0; opacity: 0; }
+    8% { opacity: 1; }
+    88% { left: 100%; opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
+
+  @keyframes st-draw {
+    from { stroke-dashoffset: 1; }
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes st-pop {
+    0% { opacity: 0; transform: scale(0); }
+    60% { opacity: 1; transform: scale(1.12); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes st-build {
+    from { opacity: 0; transform: scaleY(0); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes st-rise {
+    from { opacity: 0; transform: translateY(46px) rotate(6deg); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes st-fade {
+    from { opacity: 0; }
+  }
+  @keyframes st-pulse {
+    50% { opacity: 0.45; }
+  }
+  @keyframes st-flicker {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    30% { opacity: 0; }
+    45% { opacity: 1; }
+    55% { opacity: 0.2; }
+    70%, 100% { opacity: 1; }
+  }
+  @keyframes st-float {
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes st-write {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-8px, -3px); }
+    50% { transform: translate(-14px, 2px); }
+    75% { transform: translate(-6px, 4px); }
+  }
+  @keyframes st-cursor {
+    from { opacity: 0; transform: translate(60px, 70px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes st-ripple {
+    0% { opacity: 0.9; transform: scale(0.2); }
+    70%, 100% { opacity: 0; transform: scale(2.2); }
+  }
+  @keyframes st-stamp {
+    0% { opacity: 0; transform: scale(2.6); }
+    70% { opacity: 1; transform: scale(0.94); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes st-door {
+    from { transform: none; }
+  }
+  @keyframes st-burst {
+    from { opacity: 0; transform: scale(0) rotate(-60deg); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes st-twinkle {
+    50% { transform: scale(0.75) rotate(20deg); }
+  }
+  @keyframes st-narration {
+    from { clip-path: inset(0 100% 0 0); }
+    to { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes st-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes st-wipe {
+    0% { transform: translateX(-101%); }
+    45%, 55% { transform: translateX(0); }
+    100% { transform: translateX(101%); }
+  }
+  @keyframes st-react-pop {
+    0% { opacity: 0; transform: translateY(40%) scale(0.7); }
+    60% { opacity: 1; transform: translateY(-6%) scale(1.05, 0.96); }
+    100% { opacity: 1; transform: none; }
+  }
+  @keyframes st-react-wobble {
+    0%, 100% { transform: none; }
+    20% { transform: rotate(-7deg); }
+    45% { transform: rotate(5deg); }
+    70% { transform: rotate(-2.5deg); }
+  }
+  @keyframes st-react-jump {
+    0%, 100% { transform: none; }
+    15% { transform: scale(1.06, 0.92); }
+    45% { transform: translateY(-16%) scale(0.97, 1.04); }
+    75% { transform: scale(1.04, 0.95); }
+  }
+  @keyframes st-react-walk {
+    0%, 100% { transform: none; }
+    12.5%, 62.5% { transform: translateY(-4%) rotate(3deg); }
+    37.5%, 87.5% { transform: translateY(-4%) rotate(-3deg); }
+    25%, 50%, 75% { transform: none; }
+  }
+  @keyframes st-breathe {
+    50% { transform: scale(1.012, 1.022); }
+  }
+  @keyframes st-shadow {
+    50% { transform: scaleX(1.05); opacity: 0.8; }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
