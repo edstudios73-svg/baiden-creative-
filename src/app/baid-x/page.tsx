@@ -24,6 +24,12 @@ const crumbs = [
 ];
 
 const v = (n: number) => ({ "--i": n }) as React.CSSProperties;
+// Phones: a swipeable row of cards. Larger screens: a grid.
+const swipe =
+  "relative -mx-[clamp(1rem,0.4rem+3vw,3rem)] flex snap-x snap-mandatory scroll-px-[clamp(1rem,0.4rem+3vw,3rem)] gap-3 overflow-x-auto px-[clamp(1rem,0.4rem+3vw,3rem)] pb-2 [scrollbar-width:none] md:mx-0 md:grid md:gap-px md:overflow-visible md:px-0 md:pb-0 [&::-webkit-scrollbar]:hidden";
+const swipeItem = "w-[82%] shrink-0 snap-start sm:w-[60%] md:w-auto";
+// What BAID X does, as a running band under the hero.
+const ticker = ["Human-checked badges", "Escrow payments", "50 trades", "16 regions", "Payouts to mobile money", "Badge checker", "Price guide"];
 const delay = (n: number) => ({ "--reveal-delay": n }) as React.CSSProperties;
 
 // Verified on baid-x.com: five account types, 50 trades, all 16 regions, automatic release three days after "done".
@@ -45,6 +51,10 @@ const flow = [
 export default function BaidxPage() {
   const story = getCaseStudy("baid-x");
   if (!story) notFound();
+  // The problem text ends on its one-line thesis; that line becomes the pull quote.
+  const split = baidx.problem.indexOf("BAID X makes");
+  const problemBody = split > 0 ? baidx.problem.slice(0, split).trim() : baidx.problem;
+  const problemQuote = split > 0 ? baidx.problem.slice(split).trim() : "";
   const launch = story.gallery.map((g) => ({ ...g, title: "BAID X", kind: g.src.includes("app") ? "App announcement" : "Launch campaign" }));
 
   return (
@@ -116,6 +126,24 @@ export default function BaidxPage() {
         <span aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-2/3 hidden w-px bg-ivory/10 md:block" />
       </header>
 
+      {/* ── Running band (white) ─────────────────────────────────── */}
+      <div className="group overflow-hidden border-b border-ink py-5 md:py-7" aria-hidden="true">
+        <div className="marquee-track flex w-max group-hover:[animation-play-state:paused]" style={{ "--marquee-duration": "48s" } as React.CSSProperties}>
+          {[0, 1].map((copy) => (
+            <ul key={copy} className="flex shrink-0 items-center">
+              {ticker.map((t) => (
+                <li key={t} className="flex items-center gap-6 pr-6 font-display text-[clamp(1.6rem,1.2rem+2vw,3rem)] leading-none whitespace-nowrap italic md:gap-10 md:pr-10">
+                  {t}
+                  <svg viewBox="0 0 20 20" className="size-4 md:size-5" aria-hidden="true">
+                    <path d="M10 0 L12 8 L20 10 L12 12 L10 20 L8 12 L0 10 L8 8 Z" fill="currentColor" />
+                  </svg>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
+
       {/* ── The problem and how we built it (white) ─────────────── */}
       <section className="section-y" aria-labelledby="problem-title">
         <div className="container-x">
@@ -127,15 +155,24 @@ export default function BaidxPage() {
               </h2>
             </div>
             <div className="lg:col-span-8" data-reveal style={delay(1)}>
-              <p className="text-statement">{baidx.problem}</p>
+              <p className="text-lead text-graphite">{problemBody}</p>
+              <blockquote className="relative mt-10 border-l-2 border-ink pl-6 md:mt-12 md:pl-10">
+                <span aria-hidden="true" className="absolute -top-6 left-4 font-display text-[5rem] leading-none md:left-8 md:text-[7rem]">
+                  &ldquo;
+                </span>
+                <p className="text-display-3 pt-8 italic md:pt-12">{problemQuote}</p>
+              </blockquote>
             </div>
           </div>
 
           <span aria-hidden="true" className="rule-draw mt-14 block text-line md:mt-20" data-reveal="rule" />
-          <Label className="mt-10 text-graphite">How we built it</Label>
-          <ol className="mt-6 grid gap-px bg-line md:grid-cols-3">
+          <div className="mt-10 flex items-baseline justify-between gap-4">
+            <Label className="text-graphite">How we built it</Label>
+            <span className="text-label text-graphite md:hidden">Swipe &rarr;</span>
+          </div>
+          <ol className={`mt-6 md:grid-cols-3 md:bg-line ${swipe}`}>
             {(story.approach ?? []).map((a, i) => (
-              <li key={a} className="group bg-paper p-6 transition-colors duration-500 hover:bg-ink hover:text-ivory md:p-8" data-reveal style={delay(i)}>
+              <li key={a} className={`group border border-ink bg-paper p-6 transition-colors duration-500 hover:bg-ink hover:text-ivory md:border-0 md:p-8 ${swipeItem}`}>
                 <span className="font-display text-[3.5rem] leading-none italic">{String(i + 1).padStart(2, "0")}</span>
                 <p className="mt-6 text-[1.02rem] leading-relaxed">{a}</p>
               </li>
@@ -197,11 +234,15 @@ export default function BaidxPage() {
       <section className="on-dark section-y bg-ink text-ivory" aria-labelledby="live-title">
         <div className="container-x">
           <SectionHeading tone="dark" label="(04) Live today" title={<span id="live-title">What&apos;s live, and what&apos;s next.</span>} />
-          <ul className="mt-12 grid gap-px border border-ivory/15 bg-ivory/15 sm:grid-cols-2 lg:grid-cols-3">
+          <p className="text-label mt-10 text-mist md:hidden">Swipe &rarr;</p>
+          <ul className={`mt-4 md:mt-12 md:grid-cols-2 md:border md:border-ivory/15 md:bg-ivory/15 lg:grid-cols-3 ${swipe}`}>
             {baidx.live.map((f, i) => (
-              <li key={f.title} className="bg-ink p-6 transition-colors duration-500 hover:bg-ivory hover:text-ink md:p-8 [&:hover_p]:text-graphite" data-reveal style={delay(i % 3)}>
-                <span className="text-label inline-flex items-center gap-2 text-mist">
-                  <span className="size-1.5 rounded-full bg-current" aria-hidden="true" /> Live
+              <li key={f.title} className={`border border-ivory/20 bg-ink p-6 transition-colors duration-500 hover:bg-ivory hover:text-ink md:border-0 md:p-8 [&:hover_p]:text-graphite ${swipeItem}`}>
+                <span className="flex items-center justify-between gap-4">
+                  <span className="text-label inline-flex items-center gap-2 text-mist">
+                    <span className="size-1.5 rounded-full bg-current" aria-hidden="true" /> Live
+                  </span>
+                  <span className="font-display text-[1.6rem] leading-none italic">{String(i + 1).padStart(2, "0")}</span>
                 </span>
                 <h3 className="text-heading mt-4">{f.title}</h3>
                 <p className="mt-3 text-mist">{f.body}</p>
