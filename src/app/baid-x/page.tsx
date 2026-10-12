@@ -51,7 +51,7 @@ export default function BaidxPage() {
     <>
       {/* ── Hero (black) ─────────────────────────────────────────── */}
       <header className="on-dark relative overflow-hidden bg-ink text-ivory">
-        <div className="container-x pt-10 pb-14 md:pt-14 md:pb-20">
+        <div className="container-x relative z-10 pt-10 pb-14 md:pt-14 md:pb-20">
           <Breadcrumbs items={crumbs} tone="dark" />
           <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-4 md:mt-16">
             <span className="hero-line inline-block" style={v(0)}>
@@ -215,7 +215,7 @@ export default function BaidxPage() {
                 <h3 className="text-display-3 mt-6">{f.title}</h3>
                 <p className="mt-4 max-w-lg text-mist">{f.body}</p>
               </div>
-              <div className="md:col-span-4 md:col-start-9">
+              <div className="mx-auto w-full max-w-[16rem] md:col-span-4 md:col-start-9 md:max-w-[18rem]">
                 <ArtFrame piece={{ ...baidx.images.app, title: "BAID X app", kind: "Coming soon" }} tone="dark" sizes="(min-width: 768px) 28vw, 80vw" />
               </div>
             </div>

@@ -301,12 +301,14 @@ export default function HomePage() {
             intro="Logos, posters, menus, websites and app screens from the studio, for clients and for our own product."
             action={<ArrowLink href="/work#brand">The full wall</ArrowLink>}
           />
-          <div className="mt-10 columns-2 gap-4 sm:gap-6 md:mt-12 md:columns-3 lg:columns-4 lg:gap-8">
-            {wall.map((w, i) => (
-              <div key={w.src} className={`mb-8 break-inside-avoid md:mb-10 ${i >= 8 ? "hidden md:block" : ""}`}>
-                <ArtFrame piece={w} index={i} style={delay(i % 4)} sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" />
-              </div>
-            ))}
+          <div className="mt-10 md:mt-12">
+            <Carousel
+              label="Graphic design"
+              slideClassName="w-[74%] sm:w-[44%] lg:w-[30%] xl:w-[23%]"
+              slides={wall.map((w, i) => (
+                <ArtFrame key={w.src} piece={w} index={i} reveal={false} matAspect="4 / 5" sizes="(min-width: 1280px) 23vw, (min-width: 1024px) 30vw, (min-width: 640px) 44vw, 74vw" />
+              ))}
+            />
           </div>
         </div>
       </section>

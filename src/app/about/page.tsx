@@ -6,6 +6,7 @@ import { featuredProjects, publicProjects } from "@/content/projects";
 import { baidx } from "@/content/products";
 import { breadcrumbLd, graph, pageMetadata } from "@/lib/seo";
 import { ProjectCard } from "@/components/ProjectCard";
+import { Carousel } from "@/components/Carousel";
 import { CtaBand } from "@/components/CtaBand";
 import { ArrowLink, Breadcrumbs, ButtonLink, JsonLd, Label } from "@/components/ui";
 
@@ -205,13 +206,15 @@ export default function AboutPage() {
             </div>
             <ArrowLink href="/work">See all {publicProjects.length} projects</ArrowLink>
           </div>
-          <ul className="mt-12 grid gap-x-8 gap-y-12 md:grid-cols-3">
-            {featuredProjects.slice(0, 3).map((p) => (
-              <li key={p.slug}>
-                <ProjectCard project={p} sizes="(min-width: 768px) 33vw, 100vw" />
-              </li>
-            ))}
-          </ul>
+          <div className="mt-12">
+            <Carousel
+              label="Featured work"
+              slideClassName="w-[86%] sm:w-[56%] lg:w-[36%]"
+              slides={featuredProjects.map((p) => (
+                <ProjectCard key={p.slug} project={p} sizes="(min-width: 1024px) 36vw, (min-width: 640px) 56vw, 86vw" />
+              ))}
+            />
+          </div>
         </div>
       </section>
 
