@@ -23,7 +23,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     baidx.logoMark.src,
     baidx.images.hero.src,
     ...baidx.people.map((p) => p.src),
-    ...baidx.screens.map((s) => s.src),
     ...(baidxStory?.gallery.map((g) => g.src) ?? []),
   ];
   const workImages = [...caseStudies.flatMap((p) => [p.coverImage.src, ...p.gallery.map((g) => g.src)]), ...Object.values(studio).map((s) => s.src)];

@@ -43,23 +43,6 @@ export const baidx = {
     { src: "/assets/baidx/baidx-project-manager.png", width: 591, height: 839, role: "Project managers", alt: "BAID X: project manager in a hi-vis vest with a phone and rolled drawings" },
     { src: "/assets/baidx/baidx-company-lead.png", width: 736, height: 832, role: "Companies", alt: "BAID X: business owner in a suit and tie" },
   ],
-  // Product screens from the BAID X website repository (claude/youthful-sagan-7uxvz1, brag-auth and brag-verify).
-  // The account shown is demo data (Kwame Mensah, example.com email, sample Ghana Card number).
-  screens: [
-    { src: "/assets/baidx/screens/baidx-choose-account-type.jpg", width: 585, height: 1266, title: "Choose your account", alt: "BAID X app screen: choosing an account type: professional, company, project manager, supplier or client" },
-    { src: "/assets/baidx/screens/baidx-sign-up-phone.jpg", width: 585, height: 1266, title: "Sign up with your phone", alt: "BAID X app screen: entering a Ghana phone number to sign up" },
-    { src: "/assets/baidx/screens/baidx-confirm-code.jpg", width: 585, height: 1266, title: "Confirm the code", alt: "BAID X app screen: confirming the six-digit code sent by text" },
-    { src: "/assets/baidx/screens/baidx-choose-trade.jpg", width: 585, height: 1266, title: "Pick your trade", alt: "BAID X app screen: choosing a trade such as electrician, plumber, mason or carpenter" },
-    { src: "/assets/baidx/screens/baidx-create-password.jpg", width: 585, height: 1266, title: "Create a password", alt: "BAID X app screen: creating a password with live strength checks" },
-    { src: "/assets/baidx/screens/baidx-sign-in.jpg", width: 585, height: 1266, title: "Sign in", alt: "BAID X app screen: signing in with a phone number or email" },
-    { src: "/assets/baidx/screens/baidx-home-dashboard.jpg", width: 585, height: 1266, title: "Your dashboard", alt: "BAID X app screen: a professional's home dashboard with jobs, applications, wallet and XP" },
-    { src: "/assets/baidx/screens/baidx-profile-checklist.jpg", width: 585, height: 1266, title: "Profile checklist", alt: "BAID X app screen: the profile checklist that leads to verification" },
-    { src: "/assets/baidx/screens/baidx-verification-documents.jpg", width: 585, height: 1266, title: "Upload your Ghana Card", alt: "BAID X app screen: uploading Ghana Card and face photos for verification" },
-    { src: "/assets/baidx/screens/baidx-under-review.jpg", width: 585, height: 1266, title: "Under review", alt: "BAID X app screen: documents under review by a person at BAID X" },
-    { src: "/assets/baidx/screens/baidx-verified.jpg", width: 585, height: 1266, title: "Verified", alt: "BAID X app screen: an account marked verified after review" },
-    { src: "/assets/baidx/screens/baidx-badges-and-plans.jpg", width: 585, height: 1266, title: "Badges and plans", alt: "BAID X app screen: verified, identity, professional and advanced badges with prices in cedis" },
-    { src: "/assets/baidx/screens/baidx-verified-profile.jpg", width: 585, height: 1266, title: "Verified profile", alt: "BAID X app screen: a professional profile showing the identity-verified badge" },
-  ],
   logoMark: { src: "/assets/baidx/baidx-logo-mark.png", width: 1000, height: 476, alt: "BAID X logo mark: Powering Africa's workforce" },
   images: {
     hero: {
