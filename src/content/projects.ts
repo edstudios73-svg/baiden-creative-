@@ -100,6 +100,8 @@ export const projects: Project[] = [
     services: ["web-design-development", "ui-ux-dashboards", "mobile-apps-digital-products", "branding-identity", "graphic-design"],
     coverImage: site("baidx", "BAID X homepage: “Hire verified people. Pay only when the work is done.” over an architectural floor-plan drawing"),
     gallery: [
+      flyer("baidx-about-poster", "About BAID X poster: Ghana's work network for professionals, companies, project managers, suppliers and clients, with payment held in escrow until you approve the work", 1080, 1350),
+      flyer("baidx-find-work-poster", "BAID X poster: Find work that fits you, with job cards for an electrician in Madina, a mason in Tema and a painter in Takoradi, and payment held in escrow", 1080, 1350),
       flyer("baidx-launch-flyer-1", "BAID X launch flyer explaining how the platform works"),
       flyer("baidx-launch-flyer-2", "BAID X launch flyer for buyers and suppliers"),
       flyer("baidx-launch-flyer-3", "BAID X launch flyer showing the five account roles and the four steps from sign-up to payment"),
