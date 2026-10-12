@@ -37,6 +37,14 @@
   --duration-reveal: 900ms;
 }
 
+/* Older iOS (before 16) has no overflow: clip. Hidden on body alone still propagates to the viewport, so the sticky
+   header keeps working while nothing can scroll sideways. */
+@supports not (overflow: clip) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
 /* ───────────────────────── Fluid type scale ───────────────────────── */
 @utility text-display-1 {
   font-family: var(--font-display);
@@ -102,7 +110,10 @@
   html {
     overflow-x: clip;
     -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
+    text-size-adjust: 100%;
+    /* No optimizeLegibility: WebKit (Safari and every iPhone browser) can overlap glyphs with it. No synthesised
+       bold or italic either: every weight and style in use ships as a real font file. */
+    font-synthesis: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-padding-top: 6rem;

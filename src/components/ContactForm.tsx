@@ -165,7 +165,7 @@ export function ContactForm() {
   }
 
   const field =
-    "mt-2 block w-full border border-ink/25 bg-ivory px-4 py-3.5 text-base transition-colors placeholder:text-graphite/70 hover:border-ink/60 focus:border-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 aria-[invalid=true]:border-ink aria-[invalid=true]:shadow-[inset_0_0_0_1px_#000]";
+    "mt-2 block w-full appearance-none rounded-none border border-ink/25 bg-ivory px-4 py-3.5 text-base transition-colors placeholder:text-graphite/70 hover:border-ink/60 focus:border-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 aria-[invalid=true]:border-ink aria-[invalid=true]:shadow-[inset_0_0_0_1px_#000]";
   const labelCls = "block font-medium";
   const err = (f: InquiryField) =>
     errors[f] ? (

@@ -83,7 +83,7 @@ src/
   lib/                  SEO helpers, inquiry validation, rate limiting, email delivery
   components/           Header, footer, carousel, art frames, form and other shared UI
   app/                  Routes, metadata files (sitemap, robots, manifest, OG image) and the inquiry API
-  fonts/                Self-hosted Instrument Serif, Geist, Geist Mono (SIL OFL)
+  fonts/                Self-hosted Instrument Serif (TTF), Geist and Geist Mono (static WOFF2), SIL OFL
 public/assets/          Logos, icons and project imagery
 tests/                  Unit tests
 ```

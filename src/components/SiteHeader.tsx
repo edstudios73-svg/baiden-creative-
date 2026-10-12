@@ -15,6 +15,7 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   const close = useCallback((restoreFocus = true) => {
     setOpenedAt(null);
@@ -28,13 +29,16 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // While open: lock page scroll, trap focus inside the panel, close on Escape or when resized to desktop.
+  // While open: lock page scroll (html and body, which iOS needs), trap focus inside the panel, close on Escape or
+  // when resized to desktop.
   useEffect(() => {
     if (!open) return;
     const panel = panelRef.current;
-    const prevOverflow = document.body.style.overflow;
+    const root = document.documentElement;
+    const prev = [root.style.overflow, document.body.style.overflow];
+    root.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
-    panel?.querySelector<HTMLElement>("a, button")?.focus();
+    closeRef.current?.focus();
 
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -43,7 +47,7 @@ export function SiteHeader() {
         return;
       }
       if (e.key !== "Tab" || !panel) return;
-      const focusables = [toggleRef.current, ...panel.querySelectorAll<HTMLElement>("a[href], button")].filter(Boolean) as HTMLElement[];
+      const focusables = [...panel.querySelectorAll<HTMLElement>("a[href], button")];
       const first = focusables[0];
       const last = focusables[focusables.length - 1];
       if (e.shiftKey && document.activeElement === first) {
@@ -60,7 +64,7 @@ export function SiteHeader() {
     document.addEventListener("keydown", onKey);
     mq.addEventListener("change", onMq);
     return () => {
-      document.body.style.overflow = prevOverflow;
+      [root.style.overflow, document.body.style.overflow] = prev;
       document.removeEventListener("keydown", onKey);
       mq.removeEventListener("change", onMq);
     };
@@ -110,24 +114,44 @@ export function SiteHeader() {
             className="relative z-10 -mr-2 grid size-11 place-items-center lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
-            onClick={() => (open ? close() : setOpenedAt(pathname))}
+            onClick={() => setOpenedAt(pathname)}
           >
-            <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
-            <span aria-hidden="true" className="relative block h-3 w-6">
-              <span className={`absolute left-0 h-px w-6 bg-ivory transition-transform duration-300 ${open ? "top-1.5 rotate-45" : "top-0"}`} />
-              <span className={`absolute left-0 h-px w-6 bg-ivory transition-transform duration-300 ${open ? "top-1.5 -rotate-45" : "top-3"}`} />
-            </span>
+            <span className="sr-only">Open menu</span>
+            <svg aria-hidden="true" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square">
+              <path d="M2 8h20M2 16h20" />
+            </svg>
           </button>
         </div>
       </div>
 
+      {/* Full-screen menu with its own bar and Close button, so closing never depends on the page header (WebKit can
+          hide a sticky header's controls behind a fixed panel). */}
       <div
         id="mobile-menu"
         ref={panelRef}
         hidden={!open}
-        className="fixed inset-x-0 top-16 bottom-0 overflow-y-auto bg-ink md:top-20 lg:hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menu"
+        className="fixed inset-0 z-[60] flex h-[100dvh] flex-col overflow-y-auto overscroll-contain bg-ink pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] text-ivory lg:hidden"
       >
-        <nav aria-label="Mobile" className="container-x flex min-h-full flex-col justify-between pt-8 pb-10">
+        <div className="container-x flex h-16 shrink-0 items-center justify-between gap-6 md:h-20">
+          <Link href="/" className="-m-2 p-2" aria-label={`${site.name}, home`} onClick={() => close(false)}>
+            <Logo tone="light" className="h-7 w-auto md:h-8" />
+          </Link>
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={() => close()}
+            className="-mr-2 inline-flex min-h-11 items-center gap-2 px-2 text-[0.9rem]"
+          >
+            Close
+            <svg aria-hidden="true" viewBox="0 0 24 24" className="size-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="square">
+              <path d="M5 5l14 14M19 5L5 19" />
+            </svg>
+          </button>
+        </div>
+        <nav aria-label="Mobile" className="container-x flex flex-1 flex-col justify-between pt-6 pb-10" onClick={(e) => (e.target as HTMLElement).closest("a") && close(false)}>
           <ul className="border-t border-line-dark">
             {[{ label: "Home", href: "/" }, ...mainNav].map((item, i) => (
               <li key={item.href} className="border-b border-line-dark">
