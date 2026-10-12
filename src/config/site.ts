@@ -13,8 +13,9 @@ export const site = {
   statement: "Built from imagination. Made for impact.",
   summary:
     "We design and build brands, digital products and experiences that help ambitious businesses move forward.",
+  // Used as the home page's search description: who the founders are, what the studio does, and BAID X.
   description:
-    "Baiden Creatives is a creative and technology company from Accra, Ghana. We design and build websites, web apps, digital products and brand identities for ambitious companies, wherever they are.",
+    "Baiden Creatives is a creative and technology company in Accra, Ghana, founded by Baiden David and Baiden Daniel. We design and build websites, apps and brands, and created BAID X, Ghana's work network.",
   base: "Accra, Ghana",
   founded: null as string | null, // TODO(company): founding year, if it should be published.
   founders: [

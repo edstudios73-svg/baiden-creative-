@@ -18,6 +18,12 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },
+      // Any *.vercel.app address (previews included) stays out of search; only the real domain is indexed.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: ".*\\.vercel\\.app" }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
       {
         source: "/assets/:path*",
         headers: [{ key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=86400" }],
@@ -27,6 +33,13 @@ const nextConfig: NextConfig = {
   async redirects() {
     // URLs from the previous static site, kept alive for search engines and shared links.
     return [
+      // The production vercel.app aliases send visitors and search engines to the real domain.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "baiden-creatives(-mcdan|-git-main-mcdan)?\\.vercel\\.app" }],
+        destination: "https://www.baidencreatives.org/:path*",
+        permanent: true,
+      },
       { source: "/start-a-project", destination: "/contact", permanent: true },
       { source: "/pricing", destination: "/contact", permanent: true },
       { source: "/organisations", destination: "/about", permanent: true },

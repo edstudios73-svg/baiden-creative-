@@ -20,12 +20,12 @@ import { ArrowLink, ButtonLink, Label, SectionHeading } from "@/components/ui";
 
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: `${site.name}: ${site.statement}`,
-    description:
-      "Baiden Creatives is a creative and technology company. We design and build websites, web platforms, digital products and brand identities for ambitious businesses.",
+    title: site.name,
+    description: site.description,
     path: "/",
   }),
-  title: { absolute: `${site.name}: ${site.statement}` },
+  // Search results show the name alone, like a personal site: "Baiden Creatives".
+  title: { absolute: site.name },
 };
 
 // Client work for the showcase; BAID X has its own story section.

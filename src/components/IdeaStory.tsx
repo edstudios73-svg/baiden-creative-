@@ -81,7 +81,7 @@ const chapters: Chapter[] = [
         {/* Drifting question marks */}
         <text className="st-float" style={d(1500)} x="344" y="150" fontSize="26" fontFamily="var(--font-display)" fill="currentColor">?</text>
         <text className="st-float" style={d(2100)} x="320" y="196" fontSize="18" fontFamily="var(--font-display)" fill="currentColor">?</text>
-        <Bubble x={232} y={196} w={136} text="WHAT IF…?" tailX={196} tailY={186} delay={1700} />
+        <Bubble x={222} y={198} w={136} text="WHAT IF…?" tailX={210} tailY={184} delay={1700} />
       </>
     ),
   },
@@ -179,7 +179,7 @@ const chapters: Chapter[] = [
         <Burst cx={384} cy={34} r={18} delay={1600} />
         <Burst cx={226} cy={36} r={12} delay={1850} />
         <Burst cx={384} cy={240} r={11} delay={2100} />
-        <Bubble x={10} y={22} w={124} text="NEXT: GROW." tailX={120} tailY={74} delay={2000} />
+        <Bubble x={8} y={50} w={114} text="NEXT: GROW." tailX={118} tailY={98} delay={2000} />
       </>
     ),
   },
