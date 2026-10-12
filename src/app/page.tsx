@@ -117,24 +117,49 @@ export default function HomePage() {
       {/* ── Introduction (white) ─────────────────────────────────── */}
       <section className="section-y" aria-labelledby="intro-title">
         <div className="container-x grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-3">
-            <Label className="text-graphite">(01) Who we are</Label>
-            <div className="mt-6 max-w-[15rem] lg:max-w-none">
-              <ArtFrame
-                piece={{ ...site.foundersPhotos[0], title: site.foundersPhotos[0].caption, kind: "Founders" }}
-                sizes="(min-width: 1024px) 22vw, 240px"
-              />
-            </div>
-          </div>
+          <Label className="text-graphite lg:col-span-3">(01) Who we are</Label>
           <div className="lg:col-span-9">
             <h2 id="intro-title" className="text-display-3 max-w-4xl" data-reveal>
               A creative and technology company from Accra. We design the idea, build the product and give it a brand worth remembering.
             </h2>
             <span aria-hidden="true" className="rule-draw mt-10 text-ink" data-reveal="rule" />
+
+            {/* The founders, by name */}
+            <p className="text-label mt-8 text-graphite">Founded by</p>
+            <ul className="mt-4 grid items-stretch border-y border-ink md:grid-cols-[1fr_auto_1fr]" aria-label="Founders">
+              {site.founders.map((f, i) => (
+                <li key={f.name} className="contents">
+                  {i === 1 && (
+                    <span
+                      aria-hidden="true"
+                      className="hidden items-center justify-center border-x border-ink px-6 font-display text-[clamp(3rem,2rem+3vw,5.5rem)] leading-none italic md:flex"
+                    >
+                      &amp;
+                    </span>
+                  )}
+                  <div
+                    className={`group flex flex-col justify-between gap-6 p-5 transition-colors duration-500 hover:bg-ink hover:text-ivory md:p-7 ${
+                      i === 1 ? "border-t border-ink md:border-t-0 md:text-right" : ""
+                    }`}
+                    data-reveal
+                    style={delay(i)}
+                  >
+                    <span className="text-label text-graphite group-hover:text-mist">
+                      {String(i + 1).padStart(2, "0")} · {f.role}
+                    </span>
+                    <span className="text-display-2 leading-[0.9]">
+                      {f.name.split(" ")[0]}
+                      <br />
+                      <em>{f.name.split(" ").slice(1).join(" ")}</em>
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
             <div className="mt-8 flex flex-wrap items-center justify-between gap-6" data-reveal>
               <p className="max-w-xl text-graphite">
-                Founded by {site.founders[0].name} and {site.founders[1].name}. We work with clients across brand, interface, code and
-                motion, and we build products of our own.
+                We work with clients across brand, interface, code and motion, and we build products of our own.
               </p>
               <ArrowLink href="/about">About the studio</ArrowLink>
             </div>
