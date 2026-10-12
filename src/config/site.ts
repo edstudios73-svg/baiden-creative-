@@ -27,10 +27,13 @@ export const site = {
     phoneIntl: "+233558362423",
     whatsapp: "https://wa.me/233558362423",
   },
+  handle: "@baidencreatives",
   social: [
-    { label: "Instagram", handle: "@baidencreatives", url: "https://www.instagram.com/baidencreatives" },
     { label: "TikTok", handle: "@baidencreatives", url: "https://www.tiktok.com/@baidencreatives" },
+    { label: "Instagram", handle: "@baidencreatives", url: "https://www.instagram.com/baidencreatives" },
     { label: "X", handle: "@baidencreatives", url: "https://x.com/baidencreatives" },
+    // LinkedIn company page, using the handle supplied by the company (12 Oct 2026).
+    { label: "LinkedIn", handle: "@baidencreatives", url: "https://www.linkedin.com/company/baidencreatives" },
   ],
   logo: {
     onLight: "/assets/baiden-creatives-logo-black.png",
@@ -50,9 +53,7 @@ export const site = {
 } as const;
 
 export const mainNav = [
-  { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
-  { label: "Products", href: "/products" },
   { label: "About", href: "/about" },
 ] as const;
 

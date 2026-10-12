@@ -10,7 +10,7 @@ export const baidx = {
   tagline: "Ghana's work network.",
   category: "Workforce & construction technology",
   url: "https://www.baid-x.com",
-  caseStudy: "/work/baid-x",
+  caseStudy: "/work#baid-x",
   overview:
     "BAID X connects workers, companies, project managers, suppliers and clients across Ghana. People are verified by a person at BAID X, and the money for a job stays in escrow until the client approves the work.",
   problem:

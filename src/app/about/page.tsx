@@ -177,8 +177,8 @@ export default function AboutPage() {
             <p className="text-statement mt-8">{baidx.tagline}</p>
             <p className="mt-5 text-mist">{baidx.overview}</p>
             <div className="mt-10 grid gap-3 sm:grid-cols-2">
-              <ButtonLink href="/products/baid-x" tone="dark">
-                The BAID X story
+              <ButtonLink href="/work#baid-x" tone="dark">
+                See it in our work
               </ButtonLink>
               <ButtonLink href={baidx.url} tone="dark" variant="secondary">
                 Visit baid-x.com

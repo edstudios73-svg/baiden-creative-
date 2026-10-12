@@ -14,6 +14,7 @@ import { PhraseRotator } from "@/components/PhraseRotator";
 import { Carousel } from "@/components/Carousel";
 import { IdeaComic } from "@/components/IdeaComic";
 import { CtaBand } from "@/components/CtaBand";
+import { ArtFrame } from "@/components/ArtFrame";
 import { ArrowRight } from "@/components/icons";
 import { ArrowLink, ButtonLink, Label, SectionHeading } from "@/components/ui";
 
@@ -130,7 +131,7 @@ export default function HomePage() {
             tone="dark"
             label="(02) Services"
             title={<span id="services-title">Six disciplines. One team that designs and builds.</span>}
-            action={<ArrowLink href="/services">All services</ArrowLink>}
+            action={<ArrowLink href="/contact">Start a project</ArrowLink>}
           />
           <div className="mt-12">
             <Carousel
@@ -138,10 +139,9 @@ export default function HomePage() {
               tone="dark"
               slideClassName="w-[86%] sm:w-[58%] lg:w-[36%]"
               slides={services.map((s) => (
-                <Link
+                <article
                   key={s.slug}
-                  href={`/services/${s.slug}`}
-                  className="group flex h-full min-h-[24rem] flex-col border border-ivory/25 p-7 transition-colors duration-500 hover:border-ivory hover:bg-ivory hover:text-ink md:p-9"
+                  className="group flex h-full min-h-[22rem] flex-col border border-ivory/25 p-7 transition-colors duration-500 hover:border-ivory hover:bg-ivory hover:text-ink md:p-9"
                 >
                   <span className="text-label text-mist transition-colors group-hover:text-graphite">{s.index} / 06</span>
                   <h3 className="text-display-3 mt-8">{s.title}</h3>
@@ -154,10 +154,7 @@ export default function HomePage() {
                       </li>
                     ))}
                   </ul>
-                  <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium">
-                    Explore <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                </Link>
+                </article>
               ))}
             />
           </div>
@@ -203,7 +200,7 @@ export default function HomePage() {
               tone="dark"
               slideClassName="w-[88%] md:w-[70%] lg:w-[58%]"
               slides={showcase.map((p) => (
-                <Link key={p.slug} href={`/work/${p.slug}`} className="group block">
+                <Link key={p.slug} href={`/work#${p.slug}`} className="group block">
                   <div className="frame img-zoom aspect-[16/10]">
                     <Image src={p.coverImage.src} alt={p.coverImage.alt} fill sizes="(min-width: 1024px) 58vw, 88vw" className="object-cover object-top" />
                   </div>
@@ -259,7 +256,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="mt-10 grid gap-3 sm:grid-cols-2">
-              <ButtonLink href="/products/baid-x">The BAID X story</ButtonLink>
+              <ButtonLink href="/work#baid-x">See it in our work</ButtonLink>
               <ButtonLink href={baidx.url} variant="secondary">
                 Visit baid-x.com
               </ButtonLink>
@@ -299,32 +296,18 @@ export default function HomePage() {
       <section className="section-y" aria-labelledby="wall-title">
         <div className="container-x">
           <SectionHeading
-            label="(07) Studio wall"
+            label="(07) Graphic design"
             title={<span id="wall-title">Identities, campaigns and interfaces.</span>}
             intro="Logos, posters, menus, websites and app screens from the studio, for clients and for our own product."
-            action={<ArrowLink href="/services/branding-identity">Branding &amp; identity</ArrowLink>}
+            action={<ArrowLink href="/work#brand">The full wall</ArrowLink>}
           />
-          <ul className="mt-10 grid auto-rows-[44vw] grid-flow-dense grid-cols-2 gap-2 sm:auto-rows-[30vw] sm:grid-cols-3 md:gap-3 lg:auto-rows-[15rem] lg:grid-cols-4 xl:auto-rows-[17rem]">
-            {wall.map((w, i) => {
-              const ratio = w.width / w.height;
-              const span = ratio < 0.86 ? "row-span-2" : ratio > 1.16 ? "col-span-2" : "";
-              return (
-                <li key={w.src} className={`group relative overflow-hidden bg-ink ${span} ${i >= 10 ? "hidden sm:block" : ""}`} data-reveal="mask" style={delay(i % 4)}>
-                  <Image
-                    src={w.src}
-                    alt={w.alt}
-                    fill
-                    sizes={span === "col-span-2" ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
-                    className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
-                  />
-                  <p className="text-label absolute bottom-0 left-0 bg-ink px-2.5 py-1.5 text-[0.65rem] text-ivory sm:text-xs">
-                    {w.title}
-                    <span className="hidden text-mist md:inline"> · {w.kind}</span>
-                  </p>
-                </li>
-              );
-            })}
-          </ul>
+          <div className="mt-10 columns-2 gap-4 sm:gap-6 md:mt-12 md:columns-3 lg:columns-4 lg:gap-8">
+            {wall.map((w, i) => (
+              <div key={w.src} className={`mb-8 break-inside-avoid md:mb-10 ${i >= 8 ? "hidden md:block" : ""}`}>
+                <ArtFrame piece={w} index={i} style={delay(i % 4)} sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

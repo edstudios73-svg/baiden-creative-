@@ -1,80 +1,50 @@
 import Link from "next/link";
-import { mainNav, site } from "@/config/site";
-import { services } from "@/content/services";
-import { Logo } from "./Logo";
-import { SmartLink } from "./ui";
+import { site } from "@/config/site";
+import { SocialIcon, type SocialName } from "./SocialIcon";
 
+/** Minimal footer: the social handle and icons, copyright, and the two legal pages. Nothing else. */
 export function SiteFooter() {
   const year = new Date().getFullYear();
-  const col = "grid content-start gap-3";
-  const head = "text-label mb-2 text-mist";
-  const link = "link-draw w-fit text-ivory/85 hover:text-ivory";
 
   return (
     <footer className="on-dark border-t border-line-dark bg-ink text-ivory">
-      <div className="container-x grid gap-10 pt-14 pb-10 md:pt-16">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <Logo tone="light" className="h-9 w-auto" />
-            <p className="mt-6 max-w-sm text-mist">
-              A creative and technology company from {site.base}. We design and build brands, digital products and experiences.
-            </p>
+      <div className="container-x pt-14 pb-8 md:pt-20 md:pb-10">
+        <div className="grid gap-8 md:grid-cols-12 md:items-end">
+          <div className="md:col-span-8">
+            <p className="text-label text-mist">Follow the studio</p>
+            <p className="text-display-2 mt-4 italic">{site.handle}</p>
           </div>
-
-          <nav aria-label="Footer" className="grid grid-cols-2 gap-10 sm:grid-cols-4 lg:col-span-8">
-            <div className={col}>
-              <p className={head}>Company</p>
-              <Link className={link} href="/">Home</Link>
-              {mainNav.map((n) => (
-                <Link key={n.href} className={link} href={n.href}>
-                  {n.label}
-                </Link>
-              ))}
-              <Link className={link} href="/contact">Start a Project</Link>
-            </div>
-            <div className={col}>
-              <p className={head}>Services</p>
-              {services.map((s) => (
-                <Link key={s.slug} className={link} href={`/services/${s.slug}`}>
-                  {s.shortTitle}
-                </Link>
-              ))}
-            </div>
-            <div className={`${col} col-span-2 sm:col-span-1`}>
-              <p className={head}>Contact</p>
-              <a className={`${link} break-words`} href={`mailto:${site.contact.email}`}>
-                {site.contact.email}
-              </a>
-              <a className={link} href={`tel:${site.contact.phoneIntl}`}>
-                {site.contact.phoneDisplay}
-              </a>
-              <SmartLink className={link} href={site.contact.whatsapp}>
-                WhatsApp
-              </SmartLink>
-            </div>
-            <div className={col}>
-              <p className={head}>Follow</p>
-              {site.social.map((s) => (
-                <SmartLink key={s.url} className={link} href={s.url}>
-                  {s.label}
-                </SmartLink>
-              ))}
-              <p className={`${head} mt-6`}>Our product</p>
-              <SmartLink className={link} href={site.baidx.url}>
-                BAID X
-              </SmartLink>
-            </div>
-          </nav>
+          <ul className="flex gap-2 md:col-span-4 md:justify-end" aria-label="Social media">
+            {site.social.map((s) => (
+              <li key={s.label}>
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                  className="grid size-12 place-items-center border border-ivory/30 transition-colors duration-300 hover:border-ivory hover:bg-ivory hover:text-ink md:size-14"
+                >
+                  <SocialIcon name={s.label as SocialName} className="size-[1.15rem]" />
+                  <span className="sr-only">
+                    {s.label}, {s.handle} (opens in a new tab)
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-line-dark pt-8 text-sm text-mist sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col-reverse gap-4 border-t border-line-dark pt-6 text-sm text-mist sm:flex-row sm:items-center sm:justify-between md:mt-16">
           <p>
             © {year} {site.name}. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <Link className="link-draw" href="/privacy">Privacy</Link>
-            <Link className="link-draw" href="/terms">Terms</Link>
-          </div>
+          <nav aria-label="Legal" className="flex gap-6">
+            <Link className="link-draw hover:text-ivory" href="/privacy">
+              Privacy Policy
+            </Link>
+            <Link className="link-draw hover:text-ivory" href="/terms">
+              Terms
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>

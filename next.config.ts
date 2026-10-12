@@ -29,7 +29,13 @@ const nextConfig: NextConfig = {
     return [
       { source: "/start-a-project", destination: "/contact", permanent: true },
       { source: "/pricing", destination: "/contact", permanent: true },
-      { source: "/organisations", destination: "/products", permanent: true },
+      { source: "/organisations", destination: "/about", permanent: true },
+      // The site is now four pages: home, work, about and contact.
+      { source: "/services", destination: "/work", permanent: true },
+      { source: "/services/:path*", destination: "/work", permanent: true },
+      { source: "/products", destination: "/about", permanent: true },
+      { source: "/products/:path*", destination: "/about", permanent: true },
+      { source: "/work/:slug", destination: "/work", permanent: true },
       { source: "/index.html", destination: "/", permanent: true },
       { source: "/:page(about|work|pricing|organisations|start-a-project).html", destination: "/:page", permanent: true },
     ];

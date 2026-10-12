@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { projectHref } from "@/content/projects";
 import type { Project } from "@/content/types";
-import { ArrowRight, ArrowUpRight } from "./icons";
+import { ArrowRight } from "./icons";
 import { SmartLink } from "./ui";
 
 const aspect = {
@@ -28,8 +28,6 @@ export function ProjectCard({
   headingLevel?: "h2" | "h3";
 }) {
   const href = projectHref(project);
-  const external = project.publicationStatus !== "published";
-  const Icon = external ? ArrowUpRight : ArrowRight;
 
   return (
     <article className="group relative" data-reveal>
@@ -48,20 +46,13 @@ export function ProjectCard({
           {project.category}
           {project.inHouse && <span className="ml-3 border border-current px-1.5 py-0.5">Original product</span>}
         </p>
-        <Icon className="row-span-2 mt-1 size-5 transition-transform duration-300 group-hover:translate-x-1" />
+        <ArrowRight className="row-span-2 mt-1 size-5 transition-transform duration-300 group-hover:translate-x-1" />
         <H className="text-heading">
-          {href ? (
-            <SmartLink href={href} className="after:absolute after:inset-0 focus-visible:outline-none">
-              {project.title}
-            </SmartLink>
-          ) : (
-            project.title
-          )}
+          <SmartLink href={href} className="after:absolute after:inset-0 focus-visible:outline-none">
+            {project.title}
+          </SmartLink>
         </H>
         <p className="col-span-2 max-w-xl text-graphite">{project.summary}</p>
-        {external && project.externalUrl && (
-          <p className="text-label col-span-2 text-graphite">Visit the live site</p>
-        )}
       </div>
     </article>
   );

@@ -325,6 +325,7 @@ export function getCaseStudy(slug: string) {
   return caseStudies.find((p) => p.slug === slug);
 }
 
+/** Every public project has an entry in the index on /work, anchored by its slug. */
 export function projectHref(p: Project) {
-  return p.publicationStatus === "published" ? `/work/${p.slug}` : p.externalUrl;
+  return `/work#${p.slug}`;
 }

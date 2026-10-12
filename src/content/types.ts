@@ -18,8 +18,8 @@ export type ServiceSlug =
 export type ProjectCategory = "Platforms & products" | "E-commerce" | "Websites" | "Brand & graphics";
 
 /**
- * published  – has a full case study page at /work/[slug]
- * listed     – shown in the work index with a link to the live site, no case study yet
+ * published  – featured on /work with its full write-up
+ * listed     – in the /work index with a link to the live site
  * draft      – never rendered publicly, never in the sitemap
  */
 export type PublicationStatus = "published" | "listed" | "draft";

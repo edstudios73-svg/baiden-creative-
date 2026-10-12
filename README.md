@@ -67,7 +67,9 @@ Old URLs redirect permanently: `/start-a-project` and `/pricing` go to `/contact
 
 ## Routes
 
-`/` · `/services` · `/services/{web-design-development, mobile-apps-digital-products, branding-identity, graphic-design, ui-ux-dashboards, creative-technology}` · `/work` · `/work/[slug]` (published case studies only) · `/products` · `/products/baid-x` · `/about` · `/contact` · `/privacy` · `/terms` · 404 · `/sitemap.xml` · `/robots.txt` · `/manifest.webmanifest` · `/opengraph-image` · `POST /api/inquiry`
+Four pages: `/` (home) · `/work` (explore our work) · `/about` · `/contact` (start a project). Plus `/privacy` and `/terms` (linked from the footer), the 404 page, `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/opengraph-image` and `POST /api/inquiry`.
+
+Old URLs redirect permanently: `/services/*` and `/work/[slug]` go to `/work`, `/products/*` and `/organisations` go to `/about`, and `/start-a-project` and `/pricing` go to `/contact`.
 
 ## Where things live
 
@@ -91,8 +93,8 @@ tests/                  Unit tests
 
 Add an entry to `src/content/projects.ts`:
 
-- `publicationStatus: "published"` creates a case study at `/work/[slug]` and adds it to the sitemap.
-- `"listed"` shows the project in the work index, linking to its live site. It gets no case study page.
+- `publicationStatus: "published"` features the project in the case-study carousel on `/work` and in the index.
+- `"listed"` adds it to the index on `/work`, linking to its live site.
 - `"draft"` hides it everywhere. Use this for anything incomplete.
 
 Only publish verified information. `outcomes` stays empty until the client approves specific results; the case study hides that section when it is empty. Put images in `public/assets/work/` and give each one descriptive `alt` text.
