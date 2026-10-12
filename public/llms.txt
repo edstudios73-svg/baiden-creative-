@@ -22,7 +22,7 @@ Services: web design and development, mobile apps and digital products, branding
 BAID X is an original product by Baiden Creatives: "Ghana's work network". It connects workers, companies, project managers, suppliers and clients across all 16 regions of Ghana. People are verified by a person at BAID X, and job payments are held in escrow until the client approves the work. The BAID X mobile app is in development and not yet released. Live product: https://www.baid-x.com
 
 ## Featured work
-Featured on https://www.baidencreatives.org/work: BAID X, Blackboy's Vault, Christian Service Church, Eslyn Local Kitchen & Pub, TheNobles Gift & Surprise Hub, Bold Restaurant Ghana.
+Featured on https://www.baidencreatives.org/work: The Awesome Place Events Center (https://awesome-place-events-center.vercel.app), The Slushify (https://the-slushify.vercel.app), BAID X, Blackboy's Vault, Christian Service Church, Eslyn Local Kitchen & Pub, TheNobles Gift & Surprise Hub, Bold Restaurant Ghana.
 
 ## Other live work
 - BOOMiiS Restaurant: https://boomiisgh.com

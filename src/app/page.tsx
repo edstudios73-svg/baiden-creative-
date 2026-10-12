@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 // Client work for the showcase; BAID X has its own story section.
-const SHOWCASE = ["christian-service-church", "blackboys-vault", "eslyn-local-kitchen", "thenobles-gift-hub", "bold-restaurant"];
+const SHOWCASE = ["awesome-place-events-center", "the-slushify", "christian-service-church", "blackboys-vault", "eslyn-local-kitchen", "thenobles-gift-hub", "bold-restaurant"];
 
 const v = (n: number) => ({ "--i": n }) as React.CSSProperties;
 const delay = (n: number) => ({ "--reveal-delay": n }) as React.CSSProperties;
@@ -199,13 +199,24 @@ export default function HomePage() {
               label="Selected work"
               tone="dark"
               slideClassName="w-[88%] md:w-[70%] lg:w-[58%]"
-              slides={showcase.map((p) => (
+              slides={showcase.map((p, i) => (
                 <Link key={p.slug} href={`/work#${p.slug}`} className="group block">
-                  <div className="frame img-zoom aspect-[16/10]">
-                    <Image src={p.coverImage.src} alt={p.coverImage.alt} fill sizes="(min-width: 1024px) 58vw, 88vw" className="object-cover object-top" />
+                  <div className="border border-ivory/20 bg-ink-2 transition-colors duration-500 group-hover:border-ivory/60">
+                    <div className="flex items-center gap-2 border-b border-ivory/15 px-4 py-2.5" aria-hidden="true">
+                      <span className="size-2 rounded-full bg-ivory/40" />
+                      <span className="size-2 rounded-full bg-ivory/25" />
+                      <span className="size-2 rounded-full bg-ivory/15" />
+                      <span className="text-label ml-3 truncate text-mist">{p.externalUrl?.replace(/^https?:\/\/(www\.)?/, "")}</span>
+                    </div>
+                    <div className="img-zoom relative aspect-[16/10] overflow-hidden">
+                      <Image src={p.coverImage.src} alt={p.coverImage.alt} fill sizes="(min-width: 1024px) 58vw, 88vw" className="object-cover object-top" />
+                    </div>
                   </div>
                   <div className="mt-5 flex items-start justify-between gap-6">
-                    <div>
+                    <span className="font-display text-[2.6rem] leading-none italic text-ivory/90 md:text-[3.25rem]" aria-hidden="true">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex-1">
                       <p className="text-label text-mist">{p.category}</p>
                       <h3 className="text-heading mt-2">{p.title}</h3>
                       <p className="mt-2 max-w-xl text-mist">{p.summary}</p>

@@ -36,6 +36,62 @@ const phone = (file: string, alt: string): Img => ({
 
 export const projects: Project[] = [
   {
+    title: "The Awesome Place Events Center",
+    slug: "awesome-place-events-center",
+    summary:
+      "A website for a modern events centre on Boundary Road, East Legon: weddings, receptions, conferences and parties, with bookings sent straight to WhatsApp.",
+    category: "Websites",
+    services: ["web-design-development", "branding-identity"],
+    coverImage: site("awesome", "The Awesome Place Events Center website: the gold logo over the venue's glass-fronted hall at dusk"),
+    // The venue's logo already hangs in the studio wall, so it isn't repeated here.
+    gallery: [],
+    clientOrOwner: "The Awesome Place Events Center, East Legon",
+    projectRole: ["Brand identity", "Website design and development"],
+    challenge:
+      "A new venue needed a site as striking as the hall itself, one that shows every kind of occasion it hosts and makes booking a date effortless.",
+    approach: [
+      "Let the venue sell itself: full-bleed photography of the hall at dusk, the room dressed for weddings, banquets and conferences.",
+      "Keep booking one step away. The enquiry form composes a message and sends it on WhatsApp, with call and email beside it.",
+    ],
+    solution: [
+      "Occasion and styling showcases for weddings, receptions, corporate events, engagements and parties.",
+      "Location, directions and Instagram, plus a booking form that hands off to WhatsApp.",
+    ],
+    outcomes: [],
+    technologies: ["HTML", "CSS", "JavaScript"],
+    externalUrl: "https://awesome-place-events-center.vercel.app",
+    publicationStatus: "published",
+    featured: false,
+  },
+  {
+    title: "The Slushify",
+    slug: "the-slushify",
+    summary:
+      "A website for a cocktail and mocktail bar in East Legon: slushies, burgers, fries and combos, with every item ordered on WhatsApp in one tap.",
+    category: "Websites",
+    services: ["web-design-development", "graphic-design"],
+    coverImage: site("slushify", "The Slushify website: “the good food. Great Vibes” beside a burger, fries and wraps, with a GHC 150 combo badge"),
+    // The Slushify poster already hangs in the studio wall, so it isn't repeated here.
+    gallery: [],
+    clientOrOwner: "The Slushify, East Legon",
+    projectRole: ["Website design and development", "Campaign graphics"],
+    challenge:
+      "A bar known for its frozen slushies and stacked burgers needed a site that feels like the place and turns a craving into an order.",
+    approach: [
+      "Make the menu the hero: slushies, burgers, fries and combos, each with its own photo and an order button.",
+      "Order where customers already are. Every item opens WhatsApp with the order written out.",
+    ],
+    solution: [
+      "Home page and full menu with categories for slushies, burgers, fries and combos.",
+      "WhatsApp ordering and event enquiries, directions and a guest gallery.",
+    ],
+    outcomes: [],
+    technologies: ["Vite", "JavaScript"],
+    externalUrl: "https://the-slushify.vercel.app",
+    publicationStatus: "published",
+    featured: false,
+  },
+  {
     title: "BAID X",
     slug: "baid-x",
     summary:
