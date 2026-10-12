@@ -4,7 +4,7 @@ import { site } from "@/config/site";
 import { mission, philosophy, values, vision } from "@/content/company";
 import { featuredProjects, publicProjects } from "@/content/projects";
 import { baidx } from "@/content/products";
-import { breadcrumbLd, foundersLd, graph, pageMetadata } from "@/lib/seo";
+import { breadcrumbLd, foundersLd, graph, imageLd, pageMetadata } from "@/lib/seo";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Carousel } from "@/components/Carousel";
 import { ArtFrame } from "@/components/ArtFrame";
@@ -15,6 +15,7 @@ export const metadata: Metadata = pageMetadata({
   title: "About",
   description: `${site.name} is a creative and technology company founded in Accra by ${site.founders[0].name} and ${site.founders[1].name}. Our story, mission, values and way of working.`,
   path: "/about",
+  image: site.foundersPhotos[0],
 });
 
 const crumbs = [
@@ -243,7 +244,14 @@ export default function AboutPage() {
       <JsonLd
         data={graph(
           breadcrumbLd(crumbs),
-          { "@type": "AboutPage", url: `${site.url}/about`, about: { "@id": `${site.url}/#organization` }, mainEntity: { "@id": `${site.url}/#organization` } },
+          {
+            "@type": "AboutPage",
+            url: `${site.url}/about`,
+            about: { "@id": `${site.url}/#organization` },
+            mainEntity: { "@id": `${site.url}/#organization` },
+            primaryImageOfPage: imageLd(site.foundersPhotos[0]),
+            image: site.foundersPhotos.map(imageLd),
+          },
           ...foundersLd(),
         )}
       />

@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { site } from "@/config/site";
 import { baidx } from "@/content/products";
 import { getCaseStudy } from "@/content/projects";
-import { baidxLd, breadcrumbLd, graph, pageMetadata } from "@/lib/seo";
+import { baidxLd, breadcrumbLd, graph, imageLd, pageMetadata } from "@/lib/seo";
 import { ArtFrame } from "@/components/ArtFrame";
 import { Carousel } from "@/components/Carousel";
 import { CountUp } from "@/components/CountUp";
@@ -324,7 +324,15 @@ export default function BaidxPage() {
         body="We built BAID X from a problem we saw every day. Tell us yours, and we'll help you build the product that solves it."
       />
 
-      <JsonLd data={graph(baidxLd(baidx), breadcrumbLd(crumbs))} />
+      <JsonLd
+        data={graph(baidxLd(baidx), breadcrumbLd(crumbs), {
+          "@type": "WebPage",
+          url: `${site.url}/baid-x`,
+          name: "BAID X: the story",
+          primaryImageOfPage: imageLd(baidx.images.hero),
+          image: [baidx.images.hero, baidx.logoMark, ...baidx.people, ...story.gallery].map(imageLd),
+        })}
+      />
     </>
   );
 }

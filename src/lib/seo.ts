@@ -75,6 +75,23 @@ export function foundersLd() {
   }));
 }
 
+/** An image credited to the studio, so image search can show who made it. */
+export function imageLd(img: { src: string; alt: string; width: number; height: number }) {
+  return {
+    "@type": "ImageObject",
+    contentUrl: absoluteUrl(img.src),
+    url: absoluteUrl(img.src),
+    caption: img.alt,
+    width: img.width,
+    height: img.height,
+    creator: { "@id": orgId },
+    copyrightHolder: { "@id": orgId },
+    creditText: site.name,
+    copyrightNotice: `© ${site.name}`,
+    acquireLicensePage: absoluteUrl("/contact"),
+  };
+}
+
 export function websiteLd() {
   return { "@type": "WebSite", "@id": `${site.url}/#website`, url: site.url, name: site.name, publisher: { "@id": orgId } };
 }

@@ -10,6 +10,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
+  // Google Search Console HTML-tag verification: set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION in Vercel to the token.
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    : {}),
   title: { default: site.name, template: `%s | ${site.name}` },
   description: site.description,
   applicationName: site.name,
