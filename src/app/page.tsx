@@ -6,8 +6,10 @@ import { philosophy } from "@/content/company";
 import { caseStudies, publicProjects } from "@/content/projects";
 import { baidx } from "@/content/products";
 import { services } from "@/content/services";
+import { marqueeBottom, marqueeTop, studioWall } from "@/content/studio";
 import { pageMetadata } from "@/lib/seo";
 import { HeroVisual } from "@/components/HeroVisual";
+import { Marquee } from "@/components/Marquee";
 import { PhraseRotator } from "@/components/PhraseRotator";
 import { Carousel } from "@/components/Carousel";
 import { IdeaComic } from "@/components/IdeaComic";
@@ -33,44 +35,49 @@ const delay = (n: number) => ({ "--reveal-delay": n }) as React.CSSProperties;
 
 export default function HomePage() {
   const showcase = SHOWCASE.map((slug) => caseStudies.find((p) => p.slug === slug)).filter((p) => p !== undefined);
-  // Client work first; BAID X artwork closes the set since it has its own section above.
-  const graphics = [...caseStudies.filter((p) => !p.inHouse), ...caseStudies.filter((p) => p.inHouse)].flatMap((p) =>
-    p.gallery.filter((g) => g.kind === "print").map((g) => ({ ...g, project: p.title })),
+  // Studio pieces, then a few client flyers already in the case studies.
+  const flyers = ["csc-sunday-service-flyer", "eslyn-kitchen-menu-flyer", "csc-21-days-fasting-prayer", "eslyn-banku-tilapia-promo"];
+  const caseFlyers = caseStudies.flatMap((p) =>
+    p.gallery.filter((g) => flyers.some((f) => g.src.includes(f))).map((g) => ({ ...g, title: p.title, kind: "Campaign" as const })),
   );
+  const wall = [...studioWall.slice(0, 6), ...caseFlyers.slice(0, 2), ...studioWall.slice(6), ...caseFlyers.slice(2)];
 
   return (
     <>
       {/* ── Hero (black) ─────────────────────────────────────────── */}
       <section className="on-dark relative overflow-x-clip bg-ink text-ivory" aria-labelledby="hero-title">
-        <div className="container-x pt-10 pb-16 md:pt-14 md:pb-20">
+        <div className="container-x pt-8 md:pt-14">
           <div className="hero-line flex flex-wrap items-center justify-between gap-4 text-label text-mist" style={v(0)}>
             <span>Creative &amp; technology company · {site.base}</span>
             <span className="hidden sm:block">Design / Technology / Brand</span>
           </div>
           <span aria-hidden="true" className="rule-draw hero-rule mt-5 text-ivory/25" style={v(0)} />
 
-          <h1 id="hero-title" className="text-display-1 mt-10 md:mt-14">
-            <span className="line-mask">
-              <span style={v(1)}>Built from imagination.</span>
-            </span>
-            <span className="line-mask">
-              <span className="italic" style={v(2)}>
-                Made for impact.
-              </span>
-            </span>
-          </h1>
-
-          <p className="text-display-3 hero-line mt-6 text-mist" style={v(3)}>
-            Ideas into <span className="text-ivory italic"><PhraseRotator phrases={["brands", "digital products", "platforms", "experiences"]} /></span>
-          </p>
-
-          <div className="mt-12 grid gap-12 lg:mt-14 lg:grid-cols-12 lg:gap-10">
-            <div className="hero-line lg:col-span-4 lg:pt-4" style={v(4)}>
-              <p className="text-lead max-w-md text-ivory/90">{site.summary}</p>
-              <p className="mt-5 max-w-md text-mist">
-                Strategy, design and engineering under one roof, for companies, startups and founders in Ghana and around the world.
+          <div className="mt-8 grid gap-10 md:mt-12 lg:grid-cols-12 lg:gap-10">
+            <div className="lg:col-span-6 xl:col-span-5">
+              <h1 id="hero-title" className="text-display-1">
+                <span className="line-mask">
+                  <span style={v(1)}>Built from</span>
+                </span>
+                <span className="line-mask">
+                  <span style={v(2)}>imagination.</span>
+                </span>
+                <span className="line-mask">
+                  <span className="italic" style={v(3)}>
+                    Made for impact.
+                  </span>
+                </span>
+              </h1>
+              <p className="text-heading hero-line mt-6 text-mist" style={v(4)}>
+                Ideas into{" "}
+                <span className="text-ivory italic">
+                  <PhraseRotator phrases={["brands", "digital products", "platforms", "experiences"]} />
+                </span>
               </p>
-              <div className="mt-10 grid max-w-sm gap-3">
+              <p className="text-lead hero-line mt-8 max-w-md text-ivory/90" style={v(5)}>
+                {site.summary}
+              </p>
+              <div className="hero-line mt-8 grid gap-3 sm:grid-cols-2 lg:max-w-md" style={v(6)}>
                 <ButtonLink href="/contact" tone="dark">
                   Start a Project
                 </ButtonLink>
@@ -79,13 +86,20 @@ export default function HomePage() {
                 </ButtonLink>
               </div>
             </div>
-            <div className="lg:col-span-8">
+            <div className="hidden lg:col-span-6 lg:block xl:col-span-7">
               <HeroVisual />
-              <p className="text-label mt-6 text-mist" data-reveal>
-                Bold Restaurant · Christian Service Church · Eslyn · Blackboy&apos;s Vault
-              </p>
             </div>
           </div>
+        </div>
+
+        {/* Full-bleed studio marquee: the hero visual on phones, a closing band on desktop. */}
+        <div className="hero-line mt-12 grid gap-3 pb-10 md:mt-16 md:gap-4 md:pb-14" style={v(7)} role="group" aria-label="Brand, campaign, web and app design by the studio">
+          <Marquee items={marqueeTop} duration={80} />
+          <Marquee items={marqueeBottom} duration={95} reverse />
+          <p className="container-x text-label mt-3 flex items-center justify-between gap-4 text-mist">
+            <span>Brand · Campaign · Web · App</span>
+            <span className="hidden sm:inline">Hover to pause</span>
+          </p>
         </div>
       </section>
 
@@ -281,32 +295,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Graphic design gallery (white) ───────────────────────── */}
-      <section className="section-y" aria-labelledby="graphics-title">
+      {/* ── Studio wall (white) ──────────────────────────────────── */}
+      <section className="section-y" aria-labelledby="wall-title">
         <div className="container-x">
           <SectionHeading
-            label="(07) Graphic design"
-            title={<span id="graphics-title">Flyers, campaigns and identities.</span>}
-            intro="Launch artwork, event series, menus and logos for clients and for our own product."
-            action={<ArrowLink href="/services/graphic-design">Graphic design</ArrowLink>}
+            label="(07) Studio wall"
+            title={<span id="wall-title">Identities, campaigns and interfaces.</span>}
+            intro="Logos, posters, menus, websites and app screens from the studio, for clients and for our own product."
+            action={<ArrowLink href="/services/branding-identity">Branding &amp; identity</ArrowLink>}
           />
-          <div className="mt-12">
-            <Carousel
-              label="Graphic design work"
-              slideClassName="w-[72%] sm:w-[42%] lg:w-[26%]"
-              slides={graphics.map((g) => (
-                <figure key={g.src} className="group">
-                  <div className="frame img-zoom aspect-[4/5]">
-                    <Image src={g.src} alt={g.alt} fill sizes="(min-width: 1024px) 26vw, (min-width: 640px) 42vw, 72vw" className="object-contain" />
-                  </div>
-                  <figcaption className="mt-4">
-                    <span className="text-label text-graphite">{g.project}</span>
-                    <span className="mt-1 block text-[0.95rem]">{g.alt}</span>
-                  </figcaption>
-                </figure>
-              ))}
-            />
-          </div>
+          <ul className="mt-10 grid auto-rows-[44vw] grid-flow-dense grid-cols-2 gap-2 sm:auto-rows-[30vw] sm:grid-cols-3 md:gap-3 lg:auto-rows-[15rem] lg:grid-cols-4 xl:auto-rows-[17rem]">
+            {wall.map((w, i) => {
+              const ratio = w.width / w.height;
+              const span = ratio < 0.86 ? "row-span-2" : ratio > 1.16 ? "col-span-2" : "";
+              return (
+                <li key={w.src} className={`group relative overflow-hidden bg-ink ${span} ${i >= 10 ? "hidden sm:block" : ""}`} data-reveal="mask" style={delay(i % 4)}>
+                  <Image
+                    src={w.src}
+                    alt={w.alt}
+                    fill
+                    sizes={span === "col-span-2" ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
+                    className="object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+                  />
+                  <p className="text-label absolute bottom-0 left-0 bg-ink px-2.5 py-1.5 text-[0.65rem] text-ivory sm:text-xs">
+                    {w.title}
+                    <span className="hidden text-mist md:inline"> · {w.kind}</span>
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 

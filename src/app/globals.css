@@ -330,6 +330,19 @@
     opacity: 1;
   }
 
+  /* Image marquee: the track holds the set twice and slides by half its width for a seamless loop. */
+  .marquee-track {
+    animation: marquee var(--marquee-duration, 70s) linear infinite;
+  }
+  .marquee-reverse {
+    animation-direction: reverse;
+  }
+  @keyframes marquee {
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
   /* Contact form: each stage slides in; the confirmation mark draws itself. */
   .step-in {
     animation: step-in 600ms var(--ease-out-quint) both;
