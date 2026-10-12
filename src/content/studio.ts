@@ -80,7 +80,6 @@ export const studioWall = [
   studio.layera,
   studio.foodVisual,
   studio.steelJee,
-  studio.kwabszzCard,
   studio.luxeva,
   studio.burgerWeb,
   studio.foody,

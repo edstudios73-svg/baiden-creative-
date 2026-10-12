@@ -40,9 +40,9 @@ export function SiteFooter() {
                 </Link>
               ))}
             </div>
-            <div className={col}>
+            <div className={`${col} col-span-2 sm:col-span-1`}>
               <p className={head}>Contact</p>
-              <a className={`${link} break-all`} href={`mailto:${site.contact.email}`}>
+              <a className={`${link} break-words`} href={`mailto:${site.contact.email}`}>
                 {site.contact.email}
               </a>
               <a className={link} href={`tel:${site.contact.phoneIntl}`}>

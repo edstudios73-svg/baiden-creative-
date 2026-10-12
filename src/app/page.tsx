@@ -55,7 +55,7 @@ export default function HomePage() {
 
           <div className="mt-8 grid gap-10 md:mt-12 lg:grid-cols-12 lg:gap-10">
             <div className="lg:col-span-6 xl:col-span-5">
-              <h1 id="hero-title" className="text-display-1">
+              <h1 id="hero-title" className="text-display-1 lg:text-[clamp(4rem,1.2rem+4.4vw,6.75rem)]">
                 <span className="line-mask">
                   <span style={v(1)}>Built from</span>
                 </span>
