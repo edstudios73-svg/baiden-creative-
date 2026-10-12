@@ -94,12 +94,22 @@ export default function HomePage() {
         </div>
 
         {/* Full-bleed studio marquee: the hero visual on phones, a closing band on desktop. */}
-        <div className="hero-line mt-12 grid gap-3 pb-10 md:mt-16 md:gap-4 md:pb-14" style={v(7)} role="group" aria-label="Brand, campaign, web and app design by the studio">
-          <Marquee items={marqueeTop} duration={80} />
-          <Marquee items={marqueeBottom} duration={95} reverse />
-          <p className="container-x text-label mt-3 flex items-center justify-between gap-4 text-mist">
-            <span>Brand · Campaign · Web · App</span>
-            <span className="hidden sm:inline">Hover to pause</span>
+        <div className="hero-line mt-14 pb-10 md:mt-20 md:pb-14" style={v(7)} role="group" aria-label="The studio wall: brand, campaign, web and app design by the studio">
+          <div className="container-x">
+            <div className="flex items-end justify-between gap-4">
+              <p className="text-label text-mist">The studio wall</p>
+              <p className="text-label hidden text-mist sm:block">Brand · Campaign · Web · App</p>
+            </div>
+            <span aria-hidden="true" className="rule-draw hero-rule mt-4 text-ivory/30" style={v(8)} />
+          </div>
+          <div className="mt-6 grid gap-4 md:mt-8 md:gap-6">
+            <Marquee items={marqueeTop} duration={90} />
+            <Marquee items={marqueeBottom} duration={105} start={marqueeTop.length} reverse />
+          </div>
+          <p className="container-x text-label mt-4 flex items-center justify-between gap-4 text-mist">
+            <span className="sm:hidden">Brand · Campaign · Web · App</span>
+            <span className="hidden sm:inline">Hover a piece to pause the wall</span>
+            <Link href="/work#brand" className="link-draw text-ivory">The full wall</Link>
           </p>
         </div>
       </section>

@@ -316,6 +316,67 @@
   }
 }
 
+/* ── Hero studio wall (Marquee): framed pieces on black ── */
+.mq-item {
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 600ms var(--ease-out-quint);
+}
+.mq-frame {
+  border: clamp(4px, 0.45vw, 7px) solid var(--color-ivory);
+  background: var(--color-ink-2);
+  padding: clamp(5px, 0.7vw, 10px);
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.25),
+    0 24px 40px -22px rgb(0 0 0 / 0.95);
+  transition: box-shadow 600ms var(--ease-out-quint);
+}
+.mq-mat {
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.16);
+}
+.mq-mat img {
+  transition: transform 1000ms var(--ease-out-quint);
+}
+.mq-plaque {
+  margin-top: 0.6rem;
+  display: grid;
+  gap: 0.2rem;
+  border-top: 1px solid rgb(255 255 255 / 0.3);
+  padding-top: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-mist);
+  white-space: nowrap;
+  /* The plaque takes the frame's width instead of stretching the frame to fit its text. */
+  contain: inline-size;
+}
+.mq-plaque > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mq-title {
+  font-family: var(--font-display);
+  font-size: clamp(0.82rem, 0.75rem + 0.3vw, 1rem);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-ivory);
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .mq-item:hover {
+    transform: rotate(0deg) translateY(-6px);
+  }
+  .mq-item:hover .mq-frame {
+    box-shadow:
+      0 0 0 1px rgb(255 255 255 / 0.5),
+      0 36px 50px -24px rgb(0 0 0 / 1);
+  }
+  .mq-item:hover .mq-mat img {
+    transform: scale(1.04);
+  }
+}
+
 /* Everything below only runs with JS and when the user has not asked for reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
   html.js [data-reveal] {
