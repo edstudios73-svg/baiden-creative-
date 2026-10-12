@@ -24,8 +24,8 @@ export default async function OpenGraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#111318",
-          color: "#f5f2ec",
+          background: "#000000",
+          color: "#ffffff",
           padding: "72px 80px",
           fontFamily: "Instrument Serif",
         }}
@@ -33,9 +33,9 @@ export default async function OpenGraphImage() {
         <img src={logoSrc} width={250} height={68} alt="" />
         <div style={{ display: "flex", flexDirection: "column", fontSize: 104, lineHeight: 0.95, letterSpacing: -2 }}>
           <span>Built from imagination.</span>
-          <span style={{ fontStyle: "italic", color: "#c9ff54" }}>Made for impact.</span>
+          <span style={{ fontStyle: "italic", color: "#ffffff" }}>Made for impact.</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 30, color: "#a6aab0" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 30, color: "#777777" }}>
           <span>Design · Technology · Brand</span>
           <span>baidencreatives.org</span>
         </div>
