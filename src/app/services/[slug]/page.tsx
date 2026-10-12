@@ -48,7 +48,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
       </PageHeader>
 
       {service.practiceNote && (
-        <aside className="container-x pb-12" aria-label="Where this practice stands">
+        <aside className="container-x pt-12 md:pt-16" aria-label="Where this practice stands">
           <div className="grid gap-4 border-l-2 border-ink bg-paper p-6 md:grid-cols-12 md:p-8">
             <p className="text-label text-graphite md:col-span-3">Where we are today</p>
             <p className="md:col-span-9">{service.practiceNote}</p>
@@ -56,7 +56,7 @@ export default async function ServicePage({ params }: { params: Promise<Params> 
         </aside>
       )}
 
-      <section className="section-y border-t border-line" aria-labelledby="solves-title">
+      <section className="section-y" aria-labelledby="solves-title">
         <div className="container-x grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4" data-reveal>
             <Label className="text-graphite">What it solves</Label>

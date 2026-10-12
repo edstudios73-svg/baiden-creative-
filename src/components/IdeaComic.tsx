@@ -65,8 +65,8 @@ const panels: { title: string; caption: string; art: ReactNode }[] = [
         <path {...S} pathLength={1} style={d(500)} d="M88 116 H112 M90 122 H110 M94 128 H106" />
         <path {...S} pathLength={1} style={d(700)} d="M92 110 L95 86 L100 94 L105 86 L108 110" />
         {/* Rays */}
-        <path {...S} pathLength={1} style={d(1000)} d="M100 30 V22 M66 40 L60 34 M134 40 L140 34 M56 72 H46 M144 72 H154 M64 102 L57 108 M136 102 L143 108" />
-        <Bubble x={128} y={28} w={58} text="WHAT IF…?" tail="left" />
+        <path {...S} pathLength={1} style={d(1000)} d="M100 32 V24 M66 40 L60 34 M56 72 H46 M144 72 H154 M64 102 L57 108 M136 102 L143 108" />
+        <Bubble x={136} y={22} w={56} text="WHAT IF…?" tail="left" />
       </>
     ),
   },
@@ -84,7 +84,7 @@ const panels: { title: string; caption: string; art: ReactNode }[] = [
         <path {...S} pathLength={1} style={d(950)} d="M46 108 H78 V122 H46 Z M86 108 H142 M86 116 H128" />
         {/* Pencil */}
         <path {...S} strokeWidth={1.6} pathLength={1} style={d(1100)} d="M150 134 L184 100 L192 108 L158 142 L148 145 Z M180 104 L188 112 M150 134 L158 142" />
-        <Bubble x={128} y={22} w={64} text="SKETCH IT." tail="left" />
+        <Bubble x={140} y={8} w={54} text="SKETCH IT." tail="left" />
       </>
     ),
   },

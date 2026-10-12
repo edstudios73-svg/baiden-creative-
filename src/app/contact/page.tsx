@@ -35,7 +35,7 @@ export default function ContactPage() {
         lead="Tell us what you're working on. The more context you share, the more useful our first reply will be."
       />
 
-      <section className="container-x grid gap-12 pb-16 md:pb-20 lg:grid-cols-12 lg:gap-10" aria-label="Project inquiry">
+      <section className="container-x grid gap-12 pt-10 pb-16 md:pt-14 md:pb-20 lg:grid-cols-12 lg:gap-10" aria-label="Project inquiry">
         <div className="lg:col-span-7 xl:col-span-7">
           <ContactForm />
         </div>

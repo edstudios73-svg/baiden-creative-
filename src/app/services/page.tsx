@@ -38,7 +38,7 @@ export default function ServicesPage() {
         lead="We bring strategy, design and engineering to the same table, so what you sign off is what gets built. Choose a single discipline or combine them."
       />
 
-      <section className="container-x pb-16 md:pb-20" aria-label="Our services">
+      <section className="container-x pt-12 pb-16 md:pt-16 md:pb-20" aria-label="Our services">
         <CapabilityIndex headingLevel="h2" />
       </section>
 

@@ -33,7 +33,10 @@ const delay = (n: number) => ({ "--reveal-delay": n }) as React.CSSProperties;
 
 export default function HomePage() {
   const showcase = SHOWCASE.map((slug) => caseStudies.find((p) => p.slug === slug)).filter((p) => p !== undefined);
-  const graphics = caseStudies.flatMap((p) => p.gallery.filter((g) => g.kind === "print").map((g) => ({ ...g, project: p.title })));
+  // Client work first; BAID X artwork closes the set since it has its own section above.
+  const graphics = [...caseStudies.filter((p) => !p.inHouse), ...caseStudies.filter((p) => p.inHouse)].flatMap((p) =>
+    p.gallery.filter((g) => g.kind === "print").map((g) => ({ ...g, project: p.title })),
+  );
 
   return (
     <>
