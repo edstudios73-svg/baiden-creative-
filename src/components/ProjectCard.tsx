@@ -55,7 +55,6 @@ export function ProjectCard({
         <H className="text-heading">
           <SmartLink href={href} className="after:absolute after:inset-0 focus-visible:outline-none">
             {project.title}
-            {project.family && <em> by {project.family}</em>}
           </SmartLink>
         </H>
         <p className="col-span-2 max-w-xl text-graphite">{project.summary}</p>

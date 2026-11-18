@@ -4,7 +4,8 @@ import { baidx } from "@/content/products";
 import { caseStudies } from "@/content/projects";
 
 /**
- * The main pages, the BAID X story, plus the two legal pages linked from the footer.
+ * Every public page: home, our products, the BAID X story, about, contact, the site map and
+ * the two legal pages.
  * Each page lists its key images so they can appear in image search.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -27,11 +28,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const workImages = caseStudies.flatMap((p) => [...(p.coverImage ? [p.coverImage.src] : []), ...p.gallery.map((g) => g.src)]);
   const brandImages = [site.logo.square, site.logo.onDark, "/assets/character.png"];
   return [
-    entry("/", 1, "weekly", [...brandImages, baidx.images.hero.src]),
+    entry("/", 1, "weekly", [...brandImages, ...workImages.filter((src) => src.includes("/sites/"))]),
     entry("/work", 0.9, "weekly", workImages),
     entry("/baid-x", 0.8, "monthly", baidxImages),
     entry("/about", 0.8, "monthly", [...site.foundersPhotos.map((p) => p.src), site.logo.square, ...site.founders.flatMap((f) => (f.photo ? [f.photo.src] : []))]),
     entry("/contact", 0.8),
+    entry("/site-map", 0.5),
     entry("/privacy", 0.2, "yearly"),
     entry("/terms", 0.2, "yearly"),
   ];

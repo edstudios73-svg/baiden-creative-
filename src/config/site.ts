@@ -12,10 +12,10 @@ export const site = {
   url: envUrl || "https://www.baidencreatives.org",
   statement: "Built from imagination. Made for impact.",
   summary:
-    "We design and build brands, digital products and experiences that help ambitious businesses move forward.",
-  // Used as the home page's search description: who the founders are, what the studio does, and BAID X.
+    "We design, build and run digital products: five of our own, from the house plan to the sale.",
+  // Used as the home page's search description: who the founders are, what the company does, and its five products.
   description:
-    "Baiden Creatives is a creative and technology company in Accra, Ghana, founded by Baiden David and Baiden Daniel. We design and build websites, apps and brands, and created BAID X, Ghana's work network.",
+    "Baiden Creatives is a creative and technology company in Accra, Ghana, founded by Baiden David and Baiden Daniel. We build and run five products: Blueprint, SiteMart, BAID X, PropertIQ and Skin Lab.",
   base: "Accra, Ghana",
   founded: null as string | null, // TODO(company): founding year, if it should be published.
   // Approved founder photos. Which founder is in the single portrait is not confirmed yet, so it names neither.
@@ -73,8 +73,8 @@ export const site = {
 
 export const mainNav = [
   { label: "Products", href: "/work" },
-  { label: "BAID X", href: "/baid-x" },
   { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 export function absoluteUrl(path = "/") {

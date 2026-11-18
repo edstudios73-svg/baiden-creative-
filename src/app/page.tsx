@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/config/site";
 import { caseStudies } from "@/content/projects";
-import { baidx } from "@/content/products";
 import { services } from "@/content/services";
+import { ecosystemPromise } from "@/content/ecosystem";
 import { pageMetadata } from "@/lib/seo";
 import { HeroVisual } from "@/components/HeroVisual";
 import { PhraseRotator } from "@/components/PhraseRotator";
 import { CtaBand } from "@/components/CtaBand";
+import { Ecosystem } from "@/components/Ecosystem";
 import { ArrowRight } from "@/components/icons";
 import { ArrowLink, ButtonLink, Label, SectionHeading } from "@/components/ui";
 
@@ -59,7 +59,7 @@ export default function HomePage() {
               <p className="text-heading hero-line mt-6 text-mist" style={v(4)}>
                 Ideas into{" "}
                 <span className="text-ivory italic">
-                  <PhraseRotator phrases={["brands", "digital products", "platforms", "experiences"]} />
+                  <PhraseRotator phrases={["products", "platforms", "brands", "experiences"]} />
                 </span>
               </p>
               <p className="text-lead hero-line mt-8 max-w-md text-ivory/90" style={v(5)}>
@@ -85,7 +85,7 @@ export default function HomePage() {
           <div className="container-x">
             <div className="flex items-end justify-between gap-4">
               <p className="text-label text-mist">Our products</p>
-              <p className="text-label hidden text-mist sm:block">Designed, built and run in Accra</p>
+              <p className="text-label hidden text-mist sm:block">Five products · Designed, built and run in Accra</p>
             </div>
             <span aria-hidden="true" className="rule-draw hero-rule mt-4 text-ivory/30" style={v(8)} />
             <ul className="grid sm:grid-cols-2 lg:grid-cols-5">
@@ -98,7 +98,6 @@ export default function HomePage() {
                     </span>
                     <span>
                       <span className="text-display-3 block leading-[0.95]">{p.title}</span>
-                      {p.family && <span className="block font-display text-lg italic text-mist transition-colors group-hover:text-graphite">by {p.family}</span>}
                       <span className="mt-2 block text-sm text-mist transition-colors group-hover:text-graphite">{p.tagline}</span>
                     </span>
                     <span className="grid size-10 shrink-0 place-items-center border border-ivory/40 transition-colors duration-300 group-hover:border-ink sm:self-end">
@@ -118,7 +117,7 @@ export default function HomePage() {
           <Label className="text-graphite lg:col-span-3">(01) Who we are</Label>
           <div className="lg:col-span-9">
             <h2 id="intro-title" className="text-display-3 max-w-4xl" data-reveal>
-              A creative and technology company from Accra. We design, build and run digital products.
+              A creative and technology company from Accra. We design, build and run five products of our own.
             </h2>
             <span aria-hidden="true" className="rule-draw mt-10 text-ink" data-reveal="rule" />
 
@@ -184,32 +183,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── BAID X (white): one card, one tap to its page ───────── */}
-      <section className="section-y" aria-labelledby="baidx-title">
+      {/* ── How the products connect (white) ─────────────────────── */}
+      <section className="section-y" aria-labelledby="ecosystem-title">
         <div className="container-x">
-          <Label className="text-graphite">(03) Flagship product</Label>
-          <Link
-            href="/baid-x"
-            className="on-dark group mt-6 grid overflow-hidden border border-ink bg-ink text-ivory transition-shadow duration-500 hover:shadow-[0_40px_60px_-30px_rgb(0_0_0/0.6)] md:grid-cols-12"
-            data-reveal
-          >
-            <div className="flex flex-col p-6 md:col-span-5 md:p-10">
-              <Image src="/assets/brand-baidx-logo.png" alt="BAID X" width={881} height={217} className="h-9 w-auto self-start md:h-11" />
-              <h2 id="baidx-title" className="text-display-3 mt-8">
-                {baidx.tagline} <em>Built by {site.name}.</em>
-              </h2>
-              <p className="mt-4 text-mist">Hire verified people. Pay only when the work is done.</p>
-              <span className="mt-10 flex items-center justify-between gap-4 border-t border-ivory/20 pt-5 md:mt-auto">
-                <span className="text-label">Read the story</span>
-                <span className="grid size-11 place-items-center border border-ivory/40 transition-colors duration-300 group-hover:bg-ivory group-hover:text-ink">
-                  <ArrowRight className="size-4" />
-                </span>
+          <SectionHeading
+            label="(03) One ecosystem"
+            title={
+              <span id="ecosystem-title">
+                From the plan <em>to the sale.</em>
               </span>
-            </div>
-            <div className="img-zoom relative aspect-[16/10] overflow-hidden border-t border-ivory/15 md:col-span-7 md:aspect-auto md:min-h-[24rem] md:border-t-0 md:border-l">
-              <Image src={baidx.images.hero.src} alt={baidx.images.hero.alt} fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover object-top" />
-            </div>
-          </Link>
+            }
+            intro={ecosystemPromise}
+            action={<ArrowLink href="/work">All five products</ArrowLink>}
+          />
+          <Ecosystem hrefFor={productHref} />
+          <p className="mt-8 text-sm text-graphite" data-reveal>
+            And Skin Lab, our laptop sticker and skin shop in Accra.{" "}
+            <Link href="/work#skin-lab" className="link-draw text-ink">
+              See Skin Lab
+            </Link>
+          </p>
         </div>
       </section>
 

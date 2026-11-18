@@ -36,8 +36,6 @@ export type Project = {
   clientOrOwner: string;
   /** True when the project belongs to Baiden Creatives itself rather than a client. */
   inHouse?: boolean;
-  /** The product family it belongs to, e.g. "BAID X" for "Blueprint by BAID X". */
-  family?: string;
   /** One short line for product lists, e.g. "Ghana's work network". */
   tagline?: string;
   /** Three short points for the products page, a few words each. */

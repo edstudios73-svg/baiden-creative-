@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { site } from "@/config/site";
-import { graph, organizationLd, websiteLd } from "@/lib/seo";
+import { graph, organizationLd, productsLd, websiteLd } from "@/lib/seo";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { RevealObserver } from "@/components/RevealObserver";
@@ -50,7 +50,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main id="main">{children}</main>
         <SiteFooter />
         <RevealObserver />
-        <JsonLd data={graph(organizationLd(), websiteLd())} />
+        <JsonLd data={graph(organizationLd(), websiteLd(), ...productsLd())} />
       </body>
     </html>
   );

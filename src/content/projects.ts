@@ -3,8 +3,8 @@ import type { Img, Project, ProjectCategory } from "./types";
 /*
  * Portfolio content.
  *
- * The public site shows only Baiden Creatives' own products: BAID X with Blueprint and
- * SiteMart, Skin Lab and PropertIQ.
+ * The public site shows only Baiden Creatives' own five products: Blueprint, SiteMart, BAID X,
+ * PropertIQ and Skin Lab. The first four connect: plan, supply, build, sell (see ecosystem.ts).
  * Client projects stay here as drafts so they can be shown again by changing their status.
  *
  * Sources: the previous baidencreatives.org portfolio, the live client sites and the
@@ -59,7 +59,6 @@ export const projects: Project[] = [
     title: "Blueprint",
     slug: "blueprint",
     highlights: ["Plans from Ghana's architects", "Search by budget, rooms and plot", "One tap to build with BAID X"],
-    family: "BAID X",
     tagline: "House plans and designs from architects in Ghana",
     status: "Coming soon",
     summary:
@@ -87,7 +86,6 @@ export const projects: Project[] = [
     title: "SiteMart",
     slug: "sitemart",
     highlights: ["Equipment to rent or buy", "Building materials in one place", "Safe payment, delivered to site"],
-    family: "BAID X",
     tagline: "Equipment and building materials for construction",
     status: "Coming soon",
     summary:
@@ -527,8 +525,8 @@ export const projects: Project[] = [
 
 export const projectCategories: ProjectCategory[] = ["Platforms & products", "E-commerce", "Websites", "Brand & graphics"];
 
-/** Our products lead, in this order. */
-const ORDER = ["baid-x", "blueprint", "sitemart", "skin-lab", "propertiq"];
+/** Our products, in the order of the ecosystem: plan, supply, build, sell, then Skin Lab. */
+const ORDER = ["blueprint", "sitemart", "baid-x", "propertiq", "skin-lab"];
 const rank = (p: Project) => (ORDER.includes(p.slug) ? ORDER.indexOf(p.slug) : ORDER.length);
 
 /**

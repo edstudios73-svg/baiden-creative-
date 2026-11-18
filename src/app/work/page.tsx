@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { caseStudies } from "@/content/projects";
+import { ecosystemPromise } from "@/content/ecosystem";
 import { breadcrumbLd, graph, pageMetadata } from "@/lib/seo";
 import { site } from "@/config/site";
 import { CtaBand } from "@/components/CtaBand";
+import { Ecosystem } from "@/components/Ecosystem";
 import { ProductPoster } from "@/components/ProductPoster";
 import { ArrowUpRight } from "@/components/icons";
 import { Breadcrumbs, ButtonLink, JsonLd, Label, SectionHeading } from "@/components/ui";
@@ -11,7 +13,7 @@ import { Breadcrumbs, ButtonLink, JsonLd, Label, SectionHeading } from "@/compon
 export const metadata: Metadata = pageMetadata({
   title: "Our Products",
   description:
-    "The products Baiden Creatives designs, builds and runs from Accra: BAID X, Ghana's work network, with Blueprint for house plans and SiteMart for equipment and materials; Skin Lab, laptop stickers and skins; and PropertIQ, property in Accra.",
+    "Baiden Creatives builds and runs five products from Accra: Blueprint for house plans, SiteMart for building materials and equipment, BAID X for running the build, PropertIQ for selling the property, and Skin Lab.",
   path: "/work",
 });
 
@@ -22,12 +24,6 @@ const crumbs = [
 
 const v = (n: number) => ({ "--i": n }) as React.CSSProperties;
 
-// How the BAID X family fits together, from the drawing to the finished building.
-const journey = [
-  { step: "Plan", slug: "blueprint", product: "Blueprint", body: "Choose and buy your house design." },
-  { step: "Supply", slug: "sitemart", product: "SiteMart", body: "Get the equipment and building materials." },
-  { step: "Build", slug: "baid-x", product: "BAID X", body: "Hire verified workers and manage the project." },
-];
 
 const statusOf = (p: { externalUrl?: string; status?: string }) => (p.externalUrl ? "Live" : (p.status ?? "Coming soon"));
 
@@ -65,7 +61,6 @@ export default function WorkPage() {
                   <span className="text-label text-mist">{String(i + 1).padStart(2, "0")}</span>
                   <span className="text-display-3">
                     {p.title}
-                    {p.family && <em className="whitespace-nowrap text-mist"> by {p.family}</em>}
                   </span>
                   <span className="hidden text-mist md:block">{p.tagline}</span>
                   <span className="text-label text-mist">{statusOf(p)}</span>
@@ -77,31 +72,19 @@ export default function WorkPage() {
         <span aria-hidden="true" className="rule-draw hero-rule absolute inset-x-0 bottom-0 text-ivory/20" />
       </header>
 
-      {/* ── Plan, supply, build: the BAID X family (white) ────────── */}
-      <section className="section-y" aria-labelledby="journey-title">
+      {/* ── How the products connect (white) ─────────────────────── */}
+      <section className="section-y" aria-labelledby="ecosystem-title">
         <div className="container-x">
           <SectionHeading
-            label="The BAID X family"
+            label="One ecosystem"
             title={
-              <span id="journey-title">
-                Plan. Supply. <em>Build.</em>
+              <span id="ecosystem-title">
+                Plan. Supply. Build. <em>Sell.</em>
               </span>
             }
-            intro="Verified people, safe payments and everything needed to build, in one place."
+            intro={ecosystemPromise}
           />
-          <ol className="mt-10 grid border-t border-ink md:mt-14 md:grid-cols-3">
-            {journey.map((j, i) => (
-              <li key={j.step} className={`border-b border-ink md:border-b-0 ${i > 0 ? "md:border-l" : ""}`}>
-                <a href={`#${j.slug}`} className="group flex h-full flex-col gap-6 py-8 transition-colors duration-500 hover:bg-ink hover:text-ivory md:px-8 md:py-10 md:first:pl-0">
-                  <span className="text-label text-graphite group-hover:text-mist">
-                    {String(i + 1).padStart(2, "0")} · {j.step}
-                  </span>
-                  <span className="text-display-2 leading-none">{j.product}</span>
-                  <span className="text-graphite group-hover:text-mist">{j.body}</span>
-                </a>
-              </li>
-            ))}
-          </ol>
+          <Ecosystem />
         </div>
       </section>
 
@@ -123,7 +106,6 @@ export default function WorkPage() {
                   </Label>
                   <h2 id={`${p.slug}-title`} className="text-display-2 mt-4">
                     {p.title}
-                    {p.family && <em className="whitespace-nowrap"> by {p.family}</em>}
                   </h2>
                   <p className={`text-lead mt-3 ${dark ? "text-mist" : "text-graphite"}`}>{p.tagline}</p>
                 </div>

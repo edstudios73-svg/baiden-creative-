@@ -1,31 +1,37 @@
 # Baiden Creatives
 
-> Baiden Creatives is a creative and technology company from Accra, Ghana, working with companies, startups and founders internationally. It designs and builds websites, web platforms, digital products, brand identities, graphics and motion work. Statement: "Built from imagination. Made for impact." It also creates its own products, including BAID X.
+> Baiden Creatives is a creative and technology company in Accra, Ghana, founded by Baiden David and Baiden Daniel. It designs, builds and runs five products of its own: Blueprint, SiteMart, BAID X, PropertIQ and Skin Lab. Statement: "Built from imagination. Made for impact."
 
 Founders: Baiden David and Baiden Daniel (co-founders).
 Website: https://www.baidencreatives.org/
 Email: edstudios77@gmail.com
 Phone / WhatsApp: +233 55 836 2423
 Social: @baidencreatives on TikTok (https://www.tiktok.com/@baidencreatives), Instagram (https://www.instagram.com/baidencreatives), X (https://x.com/baidencreatives) and LinkedIn (https://www.linkedin.com/company/baidencreatives).
-Based in: Accra, Ghana. Works remotely with clients anywhere. Language: English.
+Based in: Accra, Ghana. Language: English.
+
+## Products
+- Blueprint: a marketplace where architects and designers in Ghana sell ready-made house plans, and homeowners and developers find, compare and buy them, or ask the architect to adjust one. Status: coming soon.
+- SiteMart: a marketplace for construction equipment to rent or buy (excavators, trucks, mixers, tools) and building materials (cement, blocks, sand, iron rods, tiles, roofing), paid safely and delivered to site. Status: coming soon.
+- BAID X: Ghana's work network. Verified workers, companies, project managers, suppliers and clients across all 16 regions; job payments are held in escrow until the client approves the work. Live: https://www.baid-x.com
+- PropertIQ: homes, apartments, offices and stores in Accra, with prices, payment plans, floor plans, brochures and a live map, listed by developers and agents. Status: launching soon.
+- Skin Lab: a laptop sticker and skin shop in Accra, with a 3D laptop designer and mobile money checkout. Live: https://shop.baidencreatives.org
+
+## How the products connect
+Blueprint, SiteMart, BAID X and PropertIQ form one building and property ecosystem:
+1. Plan, with Blueprint: get the house plan from architects in Ghana.
+2. Supply, with SiteMart: buy the materials and rent the equipment.
+3. Build, with BAID X: hire verified workers and run the project.
+4. Sell, with PropertIQ: list and sell the finished property.
+One promise across all four: verified people, safe payments and everything needed to build, in one place. Skin Lab is a separate consumer product.
+
+## What Baiden Creatives does
+Web design and development, mobile apps and digital products, branding and visual identity, graphic design and campaigns, UI/UX and dashboards, creative technology.
 
 ## Pages
 - Home: https://www.baidencreatives.org/
-- Explore our work (featured case studies, every live project, web, app and brand design): https://www.baidencreatives.org/work
+- Products: https://www.baidencreatives.org/work
 - BAID X, the story: https://www.baidencreatives.org/baid-x
 - About: https://www.baidencreatives.org/about
-- Start a project: https://www.baidencreatives.org/contact
-
-Services: web design and development, mobile apps and digital products, branding and visual identity, graphic design and campaigns, UI/UX and dashboards, creative technology.
-
-## Original product: BAID X
-BAID X is an original product by Baiden Creatives: "Ghana's work network". It connects workers, companies, project managers, suppliers and clients across all 16 regions of Ghana. People are verified by a person at BAID X, and job payments are held in escrow until the client approves the work. The BAID X mobile app is in development and not yet released. Live product: https://www.baid-x.com
-
-## Featured work
-Featured on https://www.baidencreatives.org/work: The Awesome Place Events Center (https://awesome-place-events-center.vercel.app), The Slushify (https://the-slushify.vercel.app), BAID X, Blackboy's Vault, Christian Service Church, Eslyn Local Kitchen & Pub, TheNobles Gift & Surprise Hub, Bold Restaurant Ghana.
-
-## Other live work
-- BOOMiiS Restaurant: https://boomiisgh.com
-- Resilience Estate: https://www.resilienceghana.com
-- EatConnect Ghana: https://eatconnect.vercel.app
-- Ompad Media: https://ompadmedia.netlify.app
+- Contact: https://www.baidencreatives.org/contact
+- Site map: https://www.baidencreatives.org/site-map
+- XML sitemap: https://www.baidencreatives.org/sitemap.xml

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { absoluteUrl, site } from "@/config/site";
+import { ecosystem } from "@/content/ecosystem";
+import { publicProjects } from "@/content/projects";
 
 type PageMeta = {
   title: string;
@@ -53,13 +55,9 @@ export function organizationLd() {
     founder: site.founders.map((f) => ({ "@id": personId(f.name) })),
     image: absoluteUrl(site.foundersPhotos[0].src),
     foundingLocation: { "@type": "Place", name: "Accra, Ghana" },
-    owns: [
-      { "@type": "WebApplication", name: site.baidx.name, url: site.baidx.url },
-      { "@type": "OnlineStore", name: "Skin Lab", url: "https://shop.baidencreatives.org" },
-      { "@type": "WebApplication", name: "PropertIQ" },
-    ],
+    owns: ownProducts().map((p) => ({ "@id": productId(p.slug) })),
     sameAs: site.social.map((s) => s.url),
-    knowsAbout: ["Web design", "Web development", "Digital product design", "Branding", "Graphic design", "UI/UX design"],
+    knowsAbout: ["Digital product design", "Web platforms", "Construction technology", "Property technology", "Web design", "Web development", "Branding", "UI/UX design"],
   };
 }
 
@@ -120,7 +118,8 @@ export function serviceLd(s: { title: string; summary: string; path: string }) {
 
 export function baidxLd(b: { name: string; url: string; overview: string }) {
   return {
-    "@type": "WebApplication",
+    "@type": "SoftwareApplication",
+    "@id": productId("baid-x"),
     name: b.name,
     url: b.url,
     description: b.overview,
@@ -128,6 +127,45 @@ export function baidxLd(b: { name: string; url: string; overview: string }) {
     operatingSystem: "Web",
     creator: { "@id": orgId },
   };
+}
+
+const ownProducts = () => publicProjects.filter((p) => p.inHouse);
+const productId = (slug: string) => `${site.url}/work#${slug}`;
+
+/**
+ * Our five products for search engines: what each one is, and how Blueprint, SiteMart, BAID X
+ * and PropertIQ connect (plan, supply, build, sell). Emitted on every page with the organization.
+ */
+export function productsLd() {
+  const products = ownProducts();
+  const nodes = products.map((p) => {
+    const i = ecosystem.findIndex((e) => e.slug === p.slug);
+    const step = ecosystem[i];
+    const next = ecosystem[i + 1];
+    const chain = step
+      ? ` Step ${i + 1} of ${ecosystem.length} in the Baiden Creatives building ecosystem (${step.step}): ${step.body}${next ? ` Next: ${next.product}.` : ""}`
+      : "";
+    return {
+      "@type": p.slug === "skin-lab" ? "OnlineStore" : "SoftwareApplication",
+      "@id": productId(p.slug),
+      name: p.title,
+      description: `${p.summary}${chain}`,
+      ...(p.tagline ? { disambiguatingDescription: p.tagline } : {}),
+      ...(p.externalUrl ? { url: p.externalUrl } : {}),
+      ...(p.coverImage ? { image: absoluteUrl(p.coverImage.src) } : {}),
+      ...(p.slug === "skin-lab"
+        ? { parentOrganization: { "@id": orgId }, areaServed: "Ghana" }
+        : { applicationCategory: "BusinessApplication", operatingSystem: "Web", creator: { "@id": orgId }, publisher: { "@id": orgId } }),
+    };
+  });
+  const list = {
+    "@type": "ItemList",
+    "@id": `${site.url}/work#products`,
+    name: `${site.name} products`,
+    description: `Five products by ${site.name}. Blueprint, SiteMart, BAID X and PropertIQ connect: get the plan, supply the site, build with verified workers, then sell the property. Skin Lab is a laptop sticker and skin shop.`,
+    itemListElement: products.map((p, i) => ({ "@type": "ListItem", position: i + 1, item: { "@id": productId(p.slug) } })),
+  };
+  return [...nodes, list];
 }
 
 export function graph(...nodes: object[]) {
