@@ -171,9 +171,9 @@ export default function HomePage() {
             title={<span id="services-title">Six disciplines. One team.</span>}
             action={<ArrowLink href="/contact">Start a project</ArrowLink>}
           />
-          <ul className="mt-12 grid border-t border-ivory/25 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-12 grid gap-x-10 border-t border-ivory/25 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((sv, i) => (
-              <li key={sv.slug} className="border-b border-ivory/25 py-7 sm:px-6 sm:[&:nth-child(odd)]:pl-0 lg:[&:nth-child(odd)]:pl-6 lg:[&:nth-child(3n+1)]:pl-0" data-reveal style={delay(i % 3)}>
+              <li key={sv.slug} className="border-b border-ivory/25 py-7" data-reveal style={delay(i % 3)}>
                 <span className="text-label text-mist">{sv.index}</span>
                 <h3 className="text-heading mt-4">{sv.title}</h3>
                 <p className="mt-2 text-sm text-mist">{sv.summary}</p>
