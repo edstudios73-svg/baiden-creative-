@@ -66,7 +66,7 @@ export default function WorkPage() {
                   <span className="text-label text-mist">{String(i + 1).padStart(2, "0")}</span>
                   <span className="text-display-3">
                     {p.title}
-                    {p.family && <em className="text-mist"> by {p.family}</em>}
+                    {p.family && <em className="whitespace-nowrap text-mist"> by {p.family}</em>}
                   </span>
                   <span className="hidden text-mist md:block">{p.tagline}</span>
                   <span className="text-label text-mist">{statusOf(p)}</span>
