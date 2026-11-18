@@ -34,7 +34,51 @@ const phone = (file: string, alt: string): Img => ({
   kind: "phone",
 });
 
+const skinlab = (file: string, alt: string): Img => ({
+  src: `/assets/work/skinlab/${file}.jpg`,
+  alt,
+  width: 585,
+  height: 1266,
+  kind: "phone",
+});
+
 export const projects: Project[] = [
+  {
+    title: "Skin Lab",
+    slug: "skin-lab",
+    summary:
+      "Our own laptop sticker and skin shop in Accra: 94 sticker sheets, laptop skins and a 3D designer for 757 laptop models, paid with MoMo and tracked from print to delivery.",
+    category: "E-commerce",
+    services: ["web-design-development", "ui-ux-dashboards", "creative-technology", "branding-identity"],
+    coverImage: site("skinlab", "Skin Lab shop homepage: “Your laptop, your story.” beside photos of stickered laptops, with a strip of free stickers below"),
+    gallery: [
+      skinlab("01-home", "Skin Lab mobile home screen with search, the free sticker picker and new sticker drops"),
+      skinlab("02-design", "Skin Lab Design: step one, find your laptop among 757 models by brand and use"),
+      skinlab("03-pack", "Skin Lab sticker pack page showing a printed A4 sheet of nine die-cut vinyl stickers"),
+    ],
+    clientOrOwner: "Baiden Creatives (own brand)",
+    inHouse: true,
+    projectRole: ["Brand", "Shop design and development", "3D laptop designer", "Print production"],
+    challenge:
+      "Students in Accra want laptops that look like them, but good stickers are hard to find locally and ordering usually means a long WhatsApp back-and-forth with no idea when the order will arrive.",
+    approach: [
+      "Price it for students: every sticker from GH₵3, sheets from GH₵30, and a free sticker picked at checkout on every order.",
+      "Let people see it before they buy. Design places skins and stickers at real size on their exact laptop model, in 3D.",
+      "Keep the trust of a WhatsApp order with the certainty of a real checkout: pay with MoMo or card, then follow the order step by step.",
+    ],
+    solution: [
+      "94 ready-made sheets and 2,154 designs across 15 categories, from coding and anime to football, cars and Gen Z Ghana.",
+      "Laptop skins in four sizes, plus custom stickers and skins made from a customer's own picture, name or logo.",
+      "Design: pick from 757 laptop models (Apple, HP, Dell, Lenovo and more), turn the laptop in 3D and lay out the lid, keyboard area and bottom.",
+      "Paystack checkout for MTN MoMo, Telecel Cash, AirtelTigo Money and cards, with an order page that tracks payment, printing, quality check and delivery.",
+      "An Inspiration board of real laptop setups customers can tap to have recreated.",
+    ],
+    outcomes: [],
+    technologies: ["Paystack", "3D laptop designer", "WhatsApp ordering"],
+    externalUrl: "https://shop.baidencreatives.org",
+    publicationStatus: "published",
+    featured: true,
+  },
   {
     title: "The Awesome Place Events Center",
     slug: "awesome-place-events-center",

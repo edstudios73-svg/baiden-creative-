@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 // Client work for the showcase; BAID X has its own story section.
-const SHOWCASE = ["awesome-place-events-center", "the-slushify", "christian-service-church", "blackboys-vault", "eslyn-local-kitchen", "thenobles-gift-hub", "bold-restaurant"];
+const SHOWCASE = ["skin-lab", "awesome-place-events-center", "the-slushify", "christian-service-church", "blackboys-vault", "eslyn-local-kitchen", "thenobles-gift-hub", "bold-restaurant"];
 
 const v = (n: number) => ({ "--i": n }) as React.CSSProperties;
 const delay = (n: number) => ({ "--reveal-delay": n }) as React.CSSProperties;

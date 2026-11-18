@@ -53,7 +53,10 @@ export function organizationLd() {
     founder: site.founders.map((f) => ({ "@id": personId(f.name) })),
     image: absoluteUrl(site.foundersPhotos[0].src),
     foundingLocation: { "@type": "Place", name: "Accra, Ghana" },
-    owns: { "@type": "WebApplication", name: site.baidx.name, url: site.baidx.url },
+    owns: [
+      { "@type": "WebApplication", name: site.baidx.name, url: site.baidx.url },
+      { "@type": "OnlineStore", name: "Skin Lab", url: "https://shop.baidencreatives.org" },
+    ],
     sameAs: site.social.map((s) => s.url),
     knowsAbout: ["Web design", "Web development", "Digital product design", "Branding", "Graphic design", "UI/UX design"],
   };
