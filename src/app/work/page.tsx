@@ -41,7 +41,7 @@ export default function WorkPage() {
     { n: publicProjects.length, label: "Live projects" },
     { n: caseStudies.length, label: "Featured case studies" },
     { n: studioCount, label: "Studio pieces" },
-    { n: 1, label: "Original product" },
+    { n: publicProjects.filter((p) => p.inHouse).length, label: "Our own brands" },
   ];
   const chapters = [
     ["#featured", "Featured"],

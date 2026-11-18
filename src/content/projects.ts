@@ -58,7 +58,7 @@ export const projects: Project[] = [
     ],
     clientOrOwner: "Baiden Creatives (own brand)",
     inHouse: true,
-    projectRole: ["Brand", "Shop design and development", "3D laptop designer", "Print production"],
+    projectRole: ["Shop design and development", "3D laptop designer", "Brand", "Print production"],
     challenge:
       "Students in Accra want laptops that look like them, but good stickers are hard to find locally and ordering usually means a long WhatsApp back-and-forth with no idea when the order will arrive.",
     approach: [
