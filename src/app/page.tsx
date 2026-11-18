@@ -3,18 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/config/site";
 import { philosophy } from "@/content/company";
-import { caseStudies, publicProjects } from "@/content/projects";
+import { caseStudies } from "@/content/projects";
 import { baidx } from "@/content/products";
 import { services } from "@/content/services";
-import { marqueeBottom, marqueeTop, studioWall } from "@/content/studio";
 import { pageMetadata } from "@/lib/seo";
 import { HeroVisual } from "@/components/HeroVisual";
-import { Marquee } from "@/components/Marquee";
 import { PhraseRotator } from "@/components/PhraseRotator";
 import { Carousel } from "@/components/Carousel";
 import { IdeaStory } from "@/components/IdeaStory";
 import { CtaBand } from "@/components/CtaBand";
-import { ArtFrame } from "@/components/ArtFrame";
 import { ArrowRight } from "@/components/icons";
 import { ArrowLink, ButtonLink, Label, SectionHeading } from "@/components/ui";
 
@@ -28,20 +25,18 @@ export const metadata: Metadata = {
   title: { absolute: site.name },
 };
 
-// Client work for the showcase; BAID X has its own story section.
-const SHOWCASE = ["skin-lab", "awesome-place-events-center", "the-slushify", "christian-service-church", "blackboys-vault", "eslyn-local-kitchen", "thenobles-gift-hub", "bold-restaurant"];
+// Our own products, as they appear under the hero.
+const PRODUCTS = [
+  { slug: "baid-x", name: "BAID X", line: "Ghana's work network", href: "/baid-x" },
+  { slug: "skin-lab", name: "Skin Lab", line: "Laptop stickers and skins", href: "/work#skin-lab" },
+  { slug: "propertiq", name: "PropertIQ", line: "Property in Accra", href: "/work#propertiq" },
+];
 
 const v = (n: number) => ({ "--i": n }) as React.CSSProperties;
 const delay = (n: number) => ({ "--reveal-delay": n }) as React.CSSProperties;
 
 export default function HomePage() {
-  const showcase = SHOWCASE.map((slug) => caseStudies.find((p) => p.slug === slug)).filter((p) => p !== undefined);
-  // Studio pieces, then a few client flyers already in the case studies.
-  const flyers = ["csc-sunday-service-flyer", "eslyn-kitchen-menu-flyer", "csc-21-days-fasting-prayer", "eslyn-banku-tilapia-promo"];
-  const caseFlyers = caseStudies.flatMap((p) =>
-    p.gallery.filter((g) => flyers.some((f) => g.src.includes(f))).map((g) => ({ ...g, title: p.title, kind: "Campaign" as const })),
-  );
-  const wall = [...studioWall.slice(0, 6), ...caseFlyers.slice(0, 2), ...studioWall.slice(6), ...caseFlyers.slice(2)];
+  const showcase = caseStudies.filter((p) => p.inHouse);
 
   return (
     <>
@@ -83,7 +78,7 @@ export default function HomePage() {
                   Start a Project
                 </ButtonLink>
                 <ButtonLink href="/work" tone="dark" variant="secondary">
-                  Explore Our Work
+                  Our Products
                 </ButtonLink>
               </div>
             </div>
@@ -93,25 +88,32 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Full-bleed studio marquee: the hero visual on phones, a closing band on desktop. */}
-        <div className="hero-line mt-14 pb-10 md:mt-20 md:pb-14" style={v(7)} role="group" aria-label="The studio wall: brand, campaign, web and app design by the studio">
+        {/* Our products, set as type: the hero's closing band on every screen. */}
+        <nav className="hero-line mt-14 pb-10 md:mt-20 md:pb-14" style={v(7)} aria-label="Our products">
           <div className="container-x">
             <div className="flex items-end justify-between gap-4">
-              <p className="text-label text-mist">The studio wall</p>
-              <p className="text-label hidden text-mist sm:block">Brand · Campaign · Web · App</p>
+              <p className="text-label text-mist">Our products</p>
+              <p className="text-label hidden text-mist sm:block">Designed, built and run in Accra</p>
             </div>
             <span aria-hidden="true" className="rule-draw hero-rule mt-4 text-ivory/30" style={v(8)} />
+            <ul className="grid md:grid-cols-3">
+              {PRODUCTS.map((p, i) => (
+                <li key={p.slug} className={`border-b border-ivory/20 md:border-b-0 ${i > 0 ? "md:border-l md:border-ivory/20" : ""}`}>
+                  <Link href={p.href} className="group flex items-end justify-between gap-4 py-6 transition-colors duration-500 hover:bg-ivory hover:text-ink md:min-h-[13rem] md:flex-col md:items-start md:px-6 md:py-8 md:first:pl-0">
+                    <span className="text-label text-mist transition-colors group-hover:text-graphite">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="flex-1 md:flex-none">
+                      <span className="text-display-2 block leading-[0.95]">{p.name}</span>
+                      <span className="mt-2 block font-display text-xl italic text-mist transition-colors group-hover:text-graphite md:text-2xl">{p.line}</span>
+                    </span>
+                    <span className="grid size-11 shrink-0 place-items-center border border-ivory/40 transition-colors duration-300 group-hover:border-ink md:self-end">
+                      <ArrowRight className="size-4" />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div className="mt-6 grid gap-4 md:mt-8 md:gap-6">
-            <Marquee items={marqueeTop} duration={90} />
-            <Marquee items={marqueeBottom} duration={105} start={marqueeTop.length} reverse />
-          </div>
-          <p className="container-x text-label mt-4 flex items-center justify-between gap-4 text-mist">
-            <span className="sm:hidden">Brand · Campaign · Web · App</span>
-            <span className="hidden sm:inline">Hover a piece to pause the wall</span>
-            <Link href="/work#brand" className="link-draw text-ivory">The full wall</Link>
-          </p>
-        </div>
+        </nav>
       </section>
 
       {/* ── Introduction (white) ─────────────────────────────────── */}
@@ -159,7 +161,7 @@ export default function HomePage() {
 
             <div className="mt-8 flex flex-wrap items-center justify-between gap-6" data-reveal>
               <p className="max-w-xl text-graphite">
-                We work with clients across brand, interface, code and motion, and we build products of our own.
+                We design and build across brand, interface, code and motion, for the businesses we partner with and for products of our own.
               </p>
               <ArrowLink href="/about">About the studio</ArrowLink>
             </div>
@@ -233,23 +235,23 @@ export default function HomePage() {
         <div className="container-x">
           <SectionHeading
             tone="dark"
-            label="(04) Selected work"
-            title={<span id="work-title">Websites, stores and brands, designed and built.</span>}
-            action={<ArrowLink href="/work">All work ({publicProjects.length})</ArrowLink>}
+            label="(04) Our products"
+            title={<span id="work-title">Products we design, build and run.</span>}
+            action={<ArrowLink href="/work">All products</ArrowLink>}
           />
           <div className="mt-12">
             <Carousel
-              label="Selected work"
+              label="Our products"
               tone="dark"
               slideClassName="w-[88%] md:w-[70%] lg:w-[58%]"
               slides={showcase.map((p, i) => (
-                <Link key={p.slug} href={`/work#${p.slug}`} className="group block">
+                <Link key={p.slug} href={p.slug === "baid-x" ? "/baid-x" : `/work#${p.slug}`} className="group block">
                   <div className="border border-ivory/20 bg-ink-2 transition-colors duration-500 group-hover:border-ivory/60">
                     <div className="flex items-center gap-2 border-b border-ivory/15 px-4 py-2.5" aria-hidden="true">
                       <span className="size-2 rounded-full bg-ivory/40" />
                       <span className="size-2 rounded-full bg-ivory/25" />
                       <span className="size-2 rounded-full bg-ivory/15" />
-                      <span className="text-label ml-3 truncate text-mist">{p.externalUrl?.replace(/^https?:\/\/(www\.)?/, "")}</span>
+                      <span className="text-label ml-3 truncate text-mist">{p.externalUrl?.replace(/^https?:\/\/(www\.)?/, "") ?? `${p.title} · launching soon`}</span>
                     </div>
                     <div className="img-zoom relative aspect-[16/10] overflow-hidden">
                       <Image src={p.coverImage.src} alt={p.coverImage.alt} fill sizes="(min-width: 1024px) 58vw, 88vw" className="object-cover object-top" />
@@ -278,7 +280,7 @@ export default function HomePage() {
       {/* ── BAID X (white): one card, one tap to its page ───────── */}
       <section className="section-y" aria-labelledby="baidx-title">
         <div className="container-x">
-          <Label className="text-graphite">(05) Original product</Label>
+          <Label className="text-graphite">(05) Flagship product</Label>
           <Link
             href="/baid-x"
             className="on-dark group mt-6 grid overflow-hidden border border-ink bg-ink text-ivory transition-shadow duration-500 hover:shadow-[0_40px_60px_-30px_rgb(0_0_0/0.6)] md:grid-cols-12"
@@ -315,27 +317,6 @@ export default function HomePage() {
           />
           <div className="mt-12">
             <IdeaStory />
-          </div>
-        </div>
-      </section>
-
-      {/* ── Studio wall (white) ──────────────────────────────────── */}
-      <section className="section-y" aria-labelledby="wall-title">
-        <div className="container-x">
-          <SectionHeading
-            label="(07) Graphic design"
-            title={<span id="wall-title">Identities, campaigns and interfaces.</span>}
-            intro="Logos, posters, menus, websites and app screens from the studio, for clients and for our own product."
-            action={<ArrowLink href="/work#brand">The full wall</ArrowLink>}
-          />
-          <div className="mt-10 md:mt-12">
-            <Carousel
-              label="Graphic design"
-              slideClassName="w-[74%] sm:w-[44%] lg:w-[30%] xl:w-[23%]"
-              slides={wall.map((w, i) => (
-                <ArtFrame key={w.src} piece={w} index={i} reveal={false} matAspect="4 / 5" sizes="(min-width: 1280px) 23vw, (min-width: 1024px) 30vw, (min-width: 640px) 44vw, 74vw" />
-              ))}
-            />
           </div>
         </div>
       </section>

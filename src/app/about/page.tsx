@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { site } from "@/config/site";
 import { mission, philosophy, values, vision } from "@/content/company";
-import { featuredProjects, publicProjects } from "@/content/projects";
+import { featuredProjects } from "@/content/projects";
 import { baidx } from "@/content/products";
 import { breadcrumbLd, foundersLd, graph, imageLd, pageMetadata } from "@/lib/seo";
 import { ProjectCard } from "@/components/ProjectCard";
@@ -28,7 +28,7 @@ const chapters = [
   { title: "Two founders, one studio", body: `${site.founders[0].name} and ${site.founders[1].name} start Baiden Creatives in Accra, Ghana.` },
   { title: "Websites that work for a living", body: "Restaurants, churches, stores and service businesses: sites built for phones first, often with an admin the client runs themselves." },
   { title: "Brand, campaigns and motion", body: "Logos, menus, launch flyers and event series, then promotional films composed in code from live products." },
-  { title: "BAID X", body: "Our own product: Ghana's work network, with human-checked badges and escrow payments. Live on the web, with a mobile app in development." },
+  { title: "Products of our own", body: "BAID X, Ghana's work network with human-checked badges and escrow payments. Skin Lab, laptop stickers and skins printed in Accra. PropertIQ, property in Accra with prices, plans and a live map." },
   { title: "The next chapter", body: "Working with ambitious founders and companies, in Ghana and beyond. Yours could be part of it." },
 ];
 
@@ -221,16 +221,16 @@ export default function AboutPage() {
         <div className="container-x">
           <div className="flex flex-wrap items-end justify-between gap-6" data-reveal>
             <div>
-              <Label className="text-graphite">Products &amp; work</Label>
+              <Label className="text-graphite">Our products</Label>
               <h2 id="proof-title" className="text-display-3 mt-4 max-w-2xl">
                 Judge us by what&apos;s live.
               </h2>
             </div>
-            <ArrowLink href="/work">See all {publicProjects.length} projects</ArrowLink>
+            <ArrowLink href="/work">All products</ArrowLink>
           </div>
           <div className="mt-12">
             <Carousel
-              label="Featured work"
+              label="Our products"
               slideClassName="w-[86%] sm:w-[56%] lg:w-[36%]"
               slides={featuredProjects.map((p) => (
                 <ProjectCard key={p.slug} project={p} sizes="(min-width: 1024px) 36vw, (min-width: 640px) 56vw, 86vw" />

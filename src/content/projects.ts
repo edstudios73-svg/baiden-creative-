@@ -3,6 +3,9 @@ import type { Img, Project, ProjectCategory } from "./types";
 /*
  * Portfolio content.
  *
+ * The public site shows only Baiden Creatives' own products (BAID X, Skin Lab, PropertIQ).
+ * Client projects stay here as drafts so they can be shown again by changing their status.
+ *
  * Sources: the previous baidencreatives.org portfolio, the live client sites and the
  * project repositories in the edstudios73-svg GitHub account. Nothing here is estimated:
  * no metrics, testimonials or outcomes have been supplied, so `outcomes` is empty on
@@ -34,6 +37,14 @@ const phone = (file: string, alt: string): Img => ({
   kind: "phone",
 });
 
+const propertiq = (file: string, alt: string, width: number, height: number): Img => ({
+  src: `/assets/work/propertiq/${file}.jpg`,
+  alt,
+  width,
+  height,
+  kind: "phone",
+});
+
 const skinlab = (file: string, alt: string): Img => ({
   src: `/assets/work/skinlab/${file}.jpg`,
   alt,
@@ -43,6 +54,40 @@ const skinlab = (file: string, alt: string): Img => ({
 });
 
 export const projects: Project[] = [
+  {
+    title: "PropertIQ",
+    slug: "propertiq",
+    summary:
+      "Our property platform for Accra: homes, apartments, offices and stores with prices, payment plans, floor plans, brochures and a live map, listed by developers and agents.",
+    category: "Platforms & products",
+    services: ["web-design-development", "ui-ux-dashboards", "mobile-apps-digital-products", "branding-identity"],
+    coverImage: site("propertiq", "PropertIQ property page: The Parkchester Residence in Ridge at dusk, USD 900,000, with beds, baths and units below"),
+    gallery: [
+      propertiq("01-listings", "PropertIQ on a phone: Accra properties with search, filters for sale, rent and type, and a listing card", 360, 800),
+      propertiq("02-property", "PropertIQ property page on a phone with price, key facts, overview, amenities, payment plan and floor plan tabs", 360, 800),
+      propertiq("03-map", "PropertIQ map of Accra with clustered developments, prices on the map and directions", 360, 800),
+    ],
+    clientOrOwner: "Baiden Creatives (own brand)",
+    inHouse: true,
+    projectRole: ["Product design and development", "Brand", "Maps and search"],
+    challenge:
+      "Buying or renting in Accra means chasing agents for basics: the real price, what the payment plan looks like, where exactly a development is and whether it is even finished.",
+    approach: [
+      "Put the facts first: price, status (off-plan, under construction, coming soon) and the key numbers on every card.",
+      "Show the whole property, not a teaser: full galleries, floor plans, brochures to download and the payment plan worked out.",
+      "Keep the conversation one tap away, with call, email and WhatsApp on every listing.",
+    ],
+    solution: [
+      "Listings for sale and rent across homes, apartments, townhouses, offices and stores, with search and filters.",
+      "Property pages with galleries, amenities, floor plans, PDF brochures and a payment-plan guide.",
+      "A map of Accra with every development, distances from the viewer and directions.",
+      "Profiles for the developers and agents behind each listing.",
+    ],
+    outcomes: [],
+    technologies: [],
+    publicationStatus: "published",
+    featured: true,
+  },
   {
     title: "Skin Lab",
     slug: "skin-lab",
@@ -104,7 +149,7 @@ export const projects: Project[] = [
     outcomes: [],
     technologies: ["HTML", "CSS", "JavaScript"],
     externalUrl: "https://awesome-place-events-center.vercel.app",
-    publicationStatus: "published",
+    publicationStatus: "draft",
     featured: false,
   },
   {
@@ -132,7 +177,7 @@ export const projects: Project[] = [
     outcomes: [],
     technologies: ["Vite", "JavaScript"],
     externalUrl: "https://the-slushify.vercel.app",
-    publicationStatus: "published",
+    publicationStatus: "draft",
     featured: false,
   },
   {
@@ -218,7 +263,7 @@ export const projects: Project[] = [
     outcomes: [],
     technologies: ["HTML, CSS and JavaScript", "Supabase", "Vercel", "WhatsApp ordering"],
     externalUrl: "https://blackboys-vault-store.vercel.app",
-    publicationStatus: "published",
+    publicationStatus: "draft",
     featured: true,
   },
   {
@@ -252,7 +297,7 @@ export const projects: Project[] = [
     outcomes: [],
     technologies: ["HTML, CSS and JavaScript", "Supabase", "Google Analytics"],
     externalUrl: "https://www.christianservicechurch.org",
-    publicationStatus: "published",
+    publicationStatus: "draft",
     featured: true,
   },
   {
@@ -286,7 +331,7 @@ export const projects: Project[] = [
     outcomes: [],
     technologies: [],
     externalUrl: "https://eslyn.vercel.app",
-    publicationStatus: "published",
+    publicationStatus: "draft",
     featured: false,
     todo: ["Confirm the website stack before listing technologies."],
   },
@@ -315,7 +360,7 @@ export const projects: Project[] = [
     outcomes: [],
     technologies: ["HTML, CSS and JavaScript", "Supabase", "Vercel"],
     externalUrl: "https://nobles-gift-hub-accra.vercel.app",
-    publicationStatus: "published",
+    publicationStatus: "draft",
     featured: false,
   },
   {
@@ -341,7 +386,7 @@ export const projects: Project[] = [
     outcomes: [],
     technologies: ["HTML and CSS", "Vercel"],
     externalUrl: "https://bold-restaurant-ghana.vercel.app",
-    publicationStatus: "published",
+    publicationStatus: "draft",
     featured: false,
   },
 
@@ -359,7 +404,7 @@ export const projects: Project[] = [
     outcomes: [],
     technologies: [],
     externalUrl: "https://boomiisgh.com",
-    publicationStatus: "listed",
+    publicationStatus: "draft",
     featured: false,
     todo: ["Write the case study: brief, approach, what was built and stack."],
   },
@@ -376,7 +421,7 @@ export const projects: Project[] = [
     outcomes: [],
     technologies: [],
     externalUrl: "https://www.resilienceghana.com",
-    publicationStatus: "listed",
+    publicationStatus: "draft",
     featured: false,
     todo: ["Write the case study: brief, approach, what was built and stack."],
   },
@@ -393,7 +438,7 @@ export const projects: Project[] = [
     outcomes: [],
     technologies: [],
     externalUrl: "https://eatconnect.vercel.app/#/discover",
-    publicationStatus: "listed",
+    publicationStatus: "draft",
     featured: false,
     todo: ["Confirm whether EatConnect is a client project or a concept, and whether its listings are live data, before writing a case study."],
   },
@@ -410,7 +455,7 @@ export const projects: Project[] = [
     outcomes: [],
     technologies: [],
     externalUrl: "https://ompadmedia.netlify.app",
-    publicationStatus: "listed",
+    publicationStatus: "draft",
     featured: false,
     todo: ["Confirm the client description and write the case study."],
   },
@@ -418,9 +463,16 @@ export const projects: Project[] = [
 
 export const projectCategories: ProjectCategory[] = ["Platforms & products", "E-commerce", "Websites", "Brand & graphics"];
 
-/** Everything the public site may show. Drafts are excluded here and nowhere else. */
-export const publicProjects = projects.filter((p) => p.publicationStatus !== "draft");
-export const caseStudies = projects.filter((p) => p.publicationStatus === "published");
+/** Our products lead, in this order. */
+const ORDER = ["baid-x", "skin-lab", "propertiq"];
+const rank = (p: Project) => (ORDER.includes(p.slug) ? ORDER.indexOf(p.slug) : ORDER.length);
+
+/**
+ * Everything the public site may show. Drafts are excluded here and nowhere else.
+ * The site shows our own products only; client projects are kept as drafts.
+ */
+export const publicProjects = projects.filter((p) => p.publicationStatus !== "draft").sort((a, b) => rank(a) - rank(b));
+export const caseStudies = publicProjects.filter((p) => p.publicationStatus === "published");
 export const featuredProjects = caseStudies.filter((p) => p.featured);
 
 export function getCaseStudy(slug: string) {

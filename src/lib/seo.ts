@@ -56,6 +56,7 @@ export function organizationLd() {
     owns: [
       { "@type": "WebApplication", name: site.baidx.name, url: site.baidx.url },
       { "@type": "OnlineStore", name: "Skin Lab", url: "https://shop.baidencreatives.org" },
+      { "@type": "WebApplication", name: "PropertIQ" },
     ],
     sameAs: site.social.map((s) => s.url),
     knowsAbout: ["Web design", "Web development", "Digital product design", "Branding", "Graphic design", "UI/UX design"],

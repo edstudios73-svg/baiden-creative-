@@ -1,23 +1,28 @@
 import Image from "next/image";
-import { studio } from "@/content/studio";
+import type { Img } from "@/content/types";
+import { getCaseStudy } from "@/content/projects";
 import { HeroStage } from "./HeroStage";
 
+const baidx = getCaseStudy("baid-x");
+const skinLab = getCaseStudy("skin-lab");
+const propertiq = getCaseStudy("propertiq");
+
 const layers = [
-  { piece: studio.foody, pos: "top-[3%] left-0 w-[64%]", z: "-80px", sizes: "(min-width: 1024px) 38vw, 1px" },
-  { piece: studio.furnitureBlue, pos: "top-[40%] right-0 w-[56%]", z: "30px", sizes: "(min-width: 1024px) 34vw, 1px" },
-  { piece: studio.kwabszzMonogram, pos: "top-0 right-[3%] w-[27%]", z: "110px", sizes: "(min-width: 1024px) 16vw, 1px" },
-  { piece: studio.slushify, pos: "bottom-0 left-[6%] w-[22%]", z: "170px", sizes: "(min-width: 1024px) 13vw, 1px" },
-];
+  { piece: baidx?.coverImage, pos: "top-[3%] left-0 w-[64%]", z: "-80px", sizes: "(min-width: 1024px) 38vw, 1px" },
+  { piece: skinLab?.coverImage, pos: "top-[40%] right-0 w-[56%]", z: "30px", sizes: "(min-width: 1024px) 34vw, 1px" },
+  { piece: propertiq?.gallery[1], pos: "top-0 right-[6%] w-[20%]", z: "110px", sizes: "(min-width: 1024px) 12vw, 1px" },
+  { piece: skinLab?.gallery[1], pos: "bottom-0 left-[8%] w-[17%]", z: "170px", sizes: "(min-width: 1024px) 10vw, 1px" },
+].filter((l): l is typeof l & { piece: Img } => l.piece !== undefined);
 
 /**
- * Desktop hero composition in depth, built from the studio's own work. Each layer is unmasked on load
+ * Desktop hero composition in depth, built from our own products. Each layer is unmasked on load
  * and the stack tilts and moves through depth with scroll (see .stage3d in globals.css).
- * Phones get the lighter image marquee instead.
+ * Phones get the products band instead.
  */
 export function HeroVisual() {
   return (
     <HeroStage className="stage3d relative aspect-[16/11] w-full">
-      <div className="stage3d-inner absolute inset-0" role="group" aria-label="Studio work: Foody website, furniture app, Kwabszz identity and The Slushify poster">
+      <div className="stage3d-inner absolute inset-0" role="group" aria-label="Our products: BAID X, Skin Lab and PropertIQ">
         {/* Fine construction lines behind the work */}
         <div className="absolute inset-0 [--z:-140px]" aria-hidden="true">
           <div className="h-full w-full" data-reveal>

@@ -94,7 +94,7 @@ export default function BaidxPage() {
                 Visit baid-x.com
               </ButtonLink>
               <ButtonLink href="/work#baid-x" tone="dark" variant="secondary">
-                See it in our work
+                See all our products
               </ButtonLink>
             </div>
           </div>

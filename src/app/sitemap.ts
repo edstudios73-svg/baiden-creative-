@@ -2,7 +2,6 @@ import type { MetadataRoute } from "next";
 import { absoluteUrl, site } from "@/config/site";
 import { baidx } from "@/content/products";
 import { caseStudies } from "@/content/projects";
-import { studio } from "@/content/studio";
 
 /**
  * The main pages, the BAID X story, plus the two legal pages linked from the footer.
@@ -25,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...baidx.people.map((p) => p.src),
     ...(baidxStory?.gallery.map((g) => g.src) ?? []),
   ];
-  const workImages = [...caseStudies.flatMap((p) => [p.coverImage.src, ...p.gallery.map((g) => g.src)]), ...Object.values(studio).map((s) => s.src)];
+  const workImages = caseStudies.flatMap((p) => [p.coverImage.src, ...p.gallery.map((g) => g.src)]);
   const brandImages = [site.logo.square, site.logo.onDark, "/assets/character.png"];
   return [
     entry("/", 1, "weekly", [...brandImages, baidx.images.hero.src]),

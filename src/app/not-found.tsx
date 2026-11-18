@@ -17,7 +17,7 @@ export default function NotFound() {
       <div className="mt-10 grid max-w-xl gap-3 sm:grid-cols-3">
         <ButtonLink href="/">Home</ButtonLink>
         <ButtonLink href="/work" variant="secondary">
-          Work
+          Products
         </ButtonLink>
         <ButtonLink href="/contact" variant="secondary">
           Contact
