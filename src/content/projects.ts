@@ -58,6 +58,7 @@ export const projects: Project[] = [
   {
     title: "Blueprint",
     slug: "blueprint",
+    highlights: ["Plans from Ghana's architects", "Search by budget, rooms and plot", "One tap to build with BAID X"],
     family: "BAID X",
     tagline: "House plans and designs from architects in Ghana",
     status: "Coming soon",
@@ -85,6 +86,7 @@ export const projects: Project[] = [
   {
     title: "SiteMart",
     slug: "sitemart",
+    highlights: ["Equipment to rent or buy", "Building materials in one place", "Safe payment, delivered to site"],
     family: "BAID X",
     tagline: "Equipment and building materials for construction",
     status: "Coming soon",
@@ -112,6 +114,7 @@ export const projects: Project[] = [
   {
     title: "PropertIQ",
     slug: "propertiq",
+    highlights: ["Homes, offices and stores", "Prices, plans and brochures", "A live map of Accra"],
     tagline: "Homes, apartments, offices and stores in Accra",
     status: "Launching soon",
     summary:
@@ -148,6 +151,7 @@ export const projects: Project[] = [
   {
     title: "Skin Lab",
     slug: "skin-lab",
+    highlights: ["2,154 sticker designs", "A 3D laptop designer", "MoMo checkout with order tracking"],
     tagline: "Laptop stickers and skins, printed in Accra",
     summary:
       "Our own laptop sticker and skin shop in Accra: 94 sticker sheets, laptop skins and a 3D designer for 757 laptop models, paid with MoMo and tracked from print to delivery.",
@@ -241,6 +245,7 @@ export const projects: Project[] = [
   {
     title: "BAID X",
     slug: "baid-x",
+    highlights: ["Human-checked badges", "Payments held in escrow", "50 trades across 16 regions"],
     tagline: "Ghana's work network: verified people, safe payments",
     summary:
       "Ghana's work network: verified professionals, companies, project managers, suppliers and clients in one place, with job payments held in escrow until the work is approved.",

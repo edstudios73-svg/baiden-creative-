@@ -24,10 +24,6 @@ const crumbs = [
 ];
 
 const v = (n: number) => ({ "--i": n }) as React.CSSProperties;
-// Phones: a swipeable row of cards. Larger screens: a grid.
-const swipe =
-  "relative -mx-[clamp(1rem,0.4rem+3vw,3rem)] flex snap-x snap-mandatory scroll-px-[clamp(1rem,0.4rem+3vw,3rem)] gap-3 overflow-x-auto px-[clamp(1rem,0.4rem+3vw,3rem)] pb-2 [scrollbar-width:none] md:mx-0 md:grid md:gap-px md:overflow-visible md:px-0 md:pb-0 [&::-webkit-scrollbar]:hidden";
-const swipeItem = "w-[82%] shrink-0 snap-start sm:w-[60%] md:w-auto";
 // What BAID X does, as a running band under the hero.
 const ticker = ["Human-checked badges", "Escrow payments", "50 trades", "16 regions", "Payouts to mobile money", "Badge checker", "Price guide"];
 const delay = (n: number) => ({ "--reveal-delay": n }) as React.CSSProperties;
@@ -147,7 +143,7 @@ export default function BaidxPage() {
         </div>
       </div>
 
-      {/* ── The problem and how we built it (white) ─────────────── */}
+      {/* ── The problem (white) ─────────────── */}
       <section className="section-y" aria-labelledby="problem-title">
         <div className="container-x">
           <div className="grid gap-10 lg:grid-cols-12">
@@ -168,19 +164,6 @@ export default function BaidxPage() {
             </div>
           </div>
 
-          <span aria-hidden="true" className="rule-draw mt-14 block text-line md:mt-20" data-reveal="rule" />
-          <div className="mt-10 flex items-baseline justify-between gap-4">
-            <Label className="text-graphite">How we built it</Label>
-            <span className="text-label text-graphite md:hidden">Swipe &rarr;</span>
-          </div>
-          <ol className={`mt-6 md:grid-cols-3 md:bg-line ${swipe}`}>
-            {(story.approach ?? []).map((a, i) => (
-              <li key={a} className={`group border border-ink bg-paper p-6 transition-colors duration-500 hover:bg-ink hover:text-ivory md:border-0 md:p-8 ${swipeItem}`}>
-                <span className="font-display text-[3.5rem] leading-none italic">{String(i + 1).padStart(2, "0")}</span>
-                <p className="mt-6 text-[1.02rem] leading-relaxed">{a}</p>
-              </li>
-            ))}
-          </ol>
         </div>
       </section>
 
@@ -212,94 +195,11 @@ export default function BaidxPage() {
         </div>
       </section>
 
-      {/* ── Who it's for (white) ─────────────────────────────────── */}
-      <section className="section-y" aria-labelledby="users-title">
-        <div className="container-x">
-          <SectionHeading label="(03) Who it's for" title={<span id="users-title">Every side of the build.</span>} intro="Five account types, each shaped around its own work." />
-          <ol className="mt-12 border-t border-ink">
-            {baidx.users.map((u, i) => (
-              <li
-                key={u.title}
-                className="group grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-2 border-b border-ink px-2 py-6 transition-colors duration-500 hover:bg-ink hover:text-ivory md:grid-cols-[4rem_1fr_1.3fr] md:items-baseline md:px-4 md:py-8"
-                data-reveal
-                style={delay(i % 3)}
-              >
-                <span className="text-label text-graphite group-hover:text-mist">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="text-display-3 leading-none">{u.title}</h3>
-                <p className="col-start-2 text-graphite group-hover:text-mist md:col-start-3">{u.body}</p>
-              </li>
-            ))}
-          </ol>
-
-          {/* The people on the platform, as BAID X pictures them */}
-          <div className="mt-14 md:mt-20">
-            <Carousel
-              label="The people BAID X is built for"
-              slideClassName="w-[64%] sm:w-[40%] lg:w-[24%]"
-              slides={baidx.people.map((p, i) => (
-                <figure key={p.src} className="group">
-                  <div className="relative aspect-[3/4] overflow-hidden border border-ink bg-cloud">
-                    <span aria-hidden="true" className="absolute top-3 left-3 z-10 font-display text-[1.6rem] leading-none italic">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <Image
-                      src={p.src}
-                      alt={p.alt}
-                      fill
-                      sizes="(min-width: 1024px) 24vw, (min-width: 640px) 40vw, 64vw"
-                      className="object-contain object-bottom transition-transform duration-700 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  <figcaption className="mt-3 flex items-baseline justify-between gap-3 border-t border-ink pt-2">
-                    <span className="font-display text-[1.15rem]">{p.role}</span>
-                    <span className="text-label text-graphite">BAID X</span>
-                  </figcaption>
-                </figure>
-              ))}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ── What's live (black) ──────────────────────────────────── */}
-      <section className="on-dark section-y bg-ink text-ivory" aria-labelledby="live-title">
-        <div className="container-x">
-          <SectionHeading tone="dark" label="(04) Live today" title={<span id="live-title">What&apos;s live, and what&apos;s next.</span>} />
-          <p className="text-label mt-10 text-mist md:hidden">Swipe &rarr;</p>
-          <ul className={`mt-4 md:mt-12 md:grid-cols-2 md:border md:border-ivory/15 md:bg-ivory/15 lg:grid-cols-3 ${swipe}`}>
-            {baidx.live.map((f, i) => (
-              <li key={f.title} className={`border border-ivory/20 bg-ink p-6 transition-colors duration-500 hover:bg-ivory hover:text-ink md:border-0 md:p-8 [&:hover_p]:text-graphite ${swipeItem}`}>
-                <span className="flex items-center justify-between gap-4">
-                  <span className="text-label inline-flex items-center gap-2 text-mist">
-                    <span className="size-1.5 rounded-full bg-current" aria-hidden="true" /> Live
-                  </span>
-                  <span className="font-display text-[1.6rem] leading-none italic">{String(i + 1).padStart(2, "0")}</span>
-                </span>
-                <h3 className="text-heading mt-4">{f.title}</h3>
-                <p className="mt-3 text-mist">{f.body}</p>
-              </li>
-            ))}
-          </ul>
-          {baidx.inDevelopment.map((f) => (
-            <div key={f.title} className="mt-12 grid items-center gap-10 border border-ivory/15 p-6 md:grid-cols-12 md:p-10" data-reveal>
-              <div className="md:col-span-7">
-                <span className="text-label inline-flex items-center gap-2 border border-ivory/30 px-2 py-1 text-ivory">In development</span>
-                <h3 className="text-display-3 mt-6">{f.title}</h3>
-                <p className="mt-4 max-w-lg text-mist">{f.body}</p>
-              </div>
-              <div className="mx-auto w-full max-w-[16rem] md:col-span-4 md:col-start-9 md:max-w-[18rem]">
-                <ArtFrame piece={{ ...baidx.images.app, title: "BAID X app", kind: "Coming soon" }} tone="dark" sizes="(min-width: 768px) 28vw, 80vw" />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ── Launch campaign (white) ──────────────────────────────── */}
       <section className="section-y" aria-labelledby="launch-title">
         <div className="container-x">
           <SectionHeading
-            label="(05) The launch"
+            label="(03) The launch"
             title={<span id="launch-title">Brand and launch campaign.</span>}
             intro={`Designed in-house alongside the product. Our role: ${story.projectRole.join(", ").toLowerCase()}.`}
           />

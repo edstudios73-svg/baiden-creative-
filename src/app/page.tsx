@@ -2,18 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/config/site";
-import { philosophy } from "@/content/company";
 import { caseStudies } from "@/content/projects";
 import { baidx } from "@/content/products";
 import { services } from "@/content/services";
 import { pageMetadata } from "@/lib/seo";
 import { HeroVisual } from "@/components/HeroVisual";
 import { PhraseRotator } from "@/components/PhraseRotator";
-import { Carousel } from "@/components/Carousel";
-import { IdeaStory } from "@/components/IdeaStory";
 import { CtaBand } from "@/components/CtaBand";
 import { ArrowRight } from "@/components/icons";
-import { ProductPoster } from "@/components/ProductPoster";
 import { ArrowLink, ButtonLink, Label, SectionHeading } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -122,7 +118,7 @@ export default function HomePage() {
           <Label className="text-graphite lg:col-span-3">(01) Who we are</Label>
           <div className="lg:col-span-9">
             <h2 id="intro-title" className="text-display-3 max-w-4xl" data-reveal>
-              A creative and technology company from Accra. We design the idea, build the product and give it a brand worth remembering.
+              A creative and technology company from Accra. We design, build and run digital products.
             </h2>
             <span aria-hidden="true" className="rule-draw mt-10 text-ink" data-reveal="rule" />
 
@@ -160,134 +156,38 @@ export default function HomePage() {
             </ul>
 
             <div className="mt-8 flex flex-wrap items-center justify-between gap-6" data-reveal>
-              <p className="max-w-xl text-graphite">
-                We design and build across brand, interface, code and motion, for the businesses we partner with and for products of our own.
-              </p>
+              <p className="max-w-xl text-graphite">Brand, interface, code and motion, under one roof.</p>
               <ArrowLink href="/about">About the studio</ArrowLink>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Services carousel (black) ────────────────────────────── */}
+      {/* ── Services (black) ────────────────────────────── */}
       <section className="on-dark section-y bg-ink text-ivory" aria-labelledby="services-title">
         <div className="container-x">
           <SectionHeading
             tone="dark"
-            label="(02) Services"
-            title={<span id="services-title">Six disciplines. One team that designs and builds.</span>}
+            label="(02) What we do"
+            title={<span id="services-title">Six disciplines. One team.</span>}
             action={<ArrowLink href="/contact">Start a project</ArrowLink>}
           />
-          <div className="mt-12">
-            <Carousel
-              label="Services"
-              tone="dark"
-              slideClassName="w-[86%] sm:w-[58%] lg:w-[36%]"
-              slides={services.map((s) => (
-                <article
-                  key={s.slug}
-                  className="group flex h-full min-h-[22rem] flex-col border border-ivory/25 p-7 transition-colors duration-500 hover:border-ivory hover:bg-ivory hover:text-ink md:p-9"
-                >
-                  <span className="text-label text-mist transition-colors group-hover:text-graphite">{s.index} / 06</span>
-                  <h3 className="text-display-3 mt-8">{s.title}</h3>
-                  <p className="mt-5 text-mist transition-colors group-hover:text-graphite">{s.summary}</p>
-                  <ul className="mt-auto grid gap-1.5 pt-8 text-sm">
-                    {s.deliverables[0].items.map((it) => (
-                      <li key={it} className="flex items-center gap-3">
-                        <span aria-hidden="true" className="h-px w-4 bg-current" />
-                        {it}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              ))}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ── Philosophy (white) ───────────────────────────────────── */}
-      <section className="section-y" aria-labelledby="philosophy-title">
-        <div className="container-x">
-          <div className="grid gap-10 lg:grid-cols-12">
-            <Label className="text-graphite lg:col-span-3">(03) Philosophy</Label>
-            <h2 id="philosophy-title" className="text-display-1 lg:col-span-9" data-reveal>
-              Black. White.
-              <br />
-              <em>Ideas in motion.</em>
-            </h2>
-          </div>
-          <ol className="mt-14 md:mt-20">
-            {philosophy.map((p, i) => (
-              <li key={p.title} className="grid gap-4 py-8 md:grid-cols-12 md:gap-10" data-reveal style={delay(i)}>
-                <span aria-hidden="true" className="rule-draw text-ink md:col-span-12" data-reveal="rule" />
-                <span className="text-label pt-2 text-graphite md:col-span-3">0{i + 1}</span>
-                <h3 className="text-heading md:col-span-4">{p.title}</h3>
-                <p className="text-graphite md:col-span-5">{p.body}</p>
+          <ul className="mt-12 grid border-t border-ivory/25 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((sv, i) => (
+              <li key={sv.slug} className="border-b border-ivory/25 py-7 sm:px-6 sm:[&:nth-child(odd)]:pl-0 lg:[&:nth-child(odd)]:pl-6 lg:[&:nth-child(3n+1)]:pl-0" data-reveal style={delay(i % 3)}>
+                <span className="text-label text-mist">{sv.index}</span>
+                <h3 className="text-heading mt-4">{sv.title}</h3>
+                <p className="mt-2 text-sm text-mist">{sv.summary}</p>
               </li>
             ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* ── Project showcase (black) ─────────────────────────────── */}
-      <section className="on-dark section-y bg-ink text-ivory" aria-labelledby="work-title">
-        <div className="container-x">
-          <SectionHeading
-            tone="dark"
-            label="(04) Our products"
-            title={<span id="work-title">Products we design, build and run.</span>}
-            action={<ArrowLink href="/work">All products</ArrowLink>}
-          />
-          <div className="mt-12">
-            <Carousel
-              label="Our products"
-              tone="dark"
-              slideClassName="w-[88%] md:w-[70%] lg:w-[58%]"
-              slides={showcase.map((p, i) => (
-                <Link key={p.slug} href={productHref(p.slug)} className="group block">
-                  <div className="border border-ivory/20 bg-ink-2 transition-colors duration-500 group-hover:border-ivory/60">
-                    <div className="flex items-center gap-2 border-b border-ivory/15 px-4 py-2.5" aria-hidden="true">
-                      <span className="size-2 rounded-full bg-ivory/40" />
-                      <span className="size-2 rounded-full bg-ivory/25" />
-                      <span className="size-2 rounded-full bg-ivory/15" />
-                      <span className="text-label ml-3 truncate text-mist">{p.externalUrl?.replace(/^https?:\/\/(www\.)?/, "") ?? `${p.title}${p.family ? ` by ${p.family}` : ""} · ${(p.status ?? "Coming soon").toLowerCase()}`}</span>
-                    </div>
-                    <div className="img-zoom relative aspect-[16/10] overflow-hidden">
-                      {p.coverImage ? (
-                        <Image src={p.coverImage.src} alt={p.coverImage.alt} fill sizes="(min-width: 1024px) 58vw, 88vw" className="object-cover object-top" />
-                      ) : (
-                        <ProductPoster project={p} />
-                      )}
-                    </div>
-                  </div>
-                  <div className="mt-5 flex items-start justify-between gap-6">
-                    <span className="font-display text-[2.6rem] leading-none italic text-ivory/90 md:text-[3.25rem]" aria-hidden="true">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div className="flex-1">
-                      <p className="text-label text-mist">{p.category}</p>
-                      <h3 className="text-heading mt-2">
-                        {p.title}
-                        {p.family && <em> by {p.family}</em>}
-                      </h3>
-                      <p className="mt-2 max-w-xl text-mist">{p.summary}</p>
-                    </div>
-                    <span className="mt-1 grid size-11 shrink-0 place-items-center border border-ivory/40 transition-colors duration-300 group-hover:bg-ivory group-hover:text-ink">
-                      <ArrowRight className="size-4" />
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            />
-          </div>
+          </ul>
         </div>
       </section>
 
       {/* ── BAID X (white): one card, one tap to its page ───────── */}
       <section className="section-y" aria-labelledby="baidx-title">
         <div className="container-x">
-          <Label className="text-graphite">(05) Flagship product</Label>
+          <Label className="text-graphite">(03) Flagship product</Label>
           <Link
             href="/baid-x"
             className="on-dark group mt-6 grid overflow-hidden border border-ink bg-ink text-ivory transition-shadow duration-500 hover:shadow-[0_40px_60px_-30px_rgb(0_0_0/0.6)] md:grid-cols-12"
@@ -299,7 +199,6 @@ export default function HomePage() {
                 {baidx.tagline} <em>Built by {site.name}.</em>
               </h2>
               <p className="mt-4 text-mist">Hire verified people. Pay only when the work is done.</p>
-              <p className="mt-3 text-sm text-mist">Coming to the family: Blueprint for house plans, and SiteMart for equipment and building materials.</p>
               <span className="mt-10 flex items-center justify-between gap-4 border-t border-ivory/20 pt-5 md:mt-auto">
                 <span className="text-label">Read the story</span>
                 <span className="grid size-11 place-items-center border border-ivory/40 transition-colors duration-300 group-hover:bg-ivory group-hover:text-ink">
@@ -311,21 +210,6 @@ export default function HomePage() {
               <Image src={baidx.images.hero.src} alt={baidx.images.hero.alt} fill sizes="(min-width: 768px) 58vw, 100vw" className="object-cover object-top" />
             </div>
           </Link>
-        </div>
-      </section>
-
-      {/* ── Idea to opportunity comic (black) ────────────────────── */}
-      <section className="on-dark section-y bg-ink text-ivory" aria-labelledby="comic-title">
-        <div className="container-x">
-          <SectionHeading
-            tone="dark"
-            label="(06) How it happens"
-            title={<span id="comic-title">From an idea to an opportunity.</span>}
-            intro="Every project we take on follows the same arc. Here it is in four chapters."
-          />
-          <div className="mt-12">
-            <IdeaStory />
-          </div>
         </div>
       </section>
 

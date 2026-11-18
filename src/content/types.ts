@@ -40,6 +40,8 @@ export type Project = {
   family?: string;
   /** One short line for product lists, e.g. "Ghana's work network". */
   tagline?: string;
+  /** Three short points for the products page, a few words each. */
+  highlights?: string[];
   /** Shown when there is no live link yet, e.g. "Launching soon". Defaults to "Coming soon". */
   status?: string;
   projectRole: string[];

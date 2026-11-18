@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { caseStudies } from "@/content/projects";
-import { getService } from "@/content/services";
 import { breadcrumbLd, graph, pageMetadata } from "@/lib/seo";
 import { site } from "@/config/site";
 import { CtaBand } from "@/components/CtaBand";
@@ -52,7 +51,7 @@ export default function WorkPage() {
             </span>
           </h1>
           <p className="text-lead hero-line mt-8 max-w-xl text-mist" style={v(3)}>
-            Alongside the businesses we partner with, we design, build and run products of our own. Each one started as an idea in the studio.
+            Products we design, build and run from Accra.
           </p>
 
           {/* The products, as an index */}
@@ -88,7 +87,7 @@ export default function WorkPage() {
                 Plan. Supply. <em>Build.</em>
               </span>
             }
-            intro="Three products, one promise: verified people, safe payments and everything needed to build, in one place."
+            intro="Verified people, safe payments and everything needed to build, in one place."
           />
           <ol className="mt-10 grid border-t border-ink md:mt-14 md:grid-cols-3">
             {journey.map((j, i) => (
@@ -106,11 +105,9 @@ export default function WorkPage() {
         </div>
       </section>
 
-      {/* ── Each product, in full ─────────────────────────────────── */}
+      {/* ── Each product: name, cover, three points ────────────────── */}
       {products.map((p, i) => {
         const dark = i % 2 === 0;
-        const services = p.services.map(getService).filter((s) => s !== undefined);
-        const phones = p.gallery.filter((g) => g.kind === "phone").slice(0, 3);
         return (
           <section
             key={p.slug}
@@ -119,19 +116,40 @@ export default function WorkPage() {
             aria-labelledby={`${p.slug}-title`}
           >
             <div className="container-x">
-              <SectionHeading
-                tone={dark ? "dark" : undefined}
-                label={`(${String(i + 1).padStart(2, "0")}) ${p.category}`}
-                title={
-                  <span id={`${p.slug}-title`}>
+              <div className="grid gap-6 md:grid-cols-12 md:items-end">
+                <div className="md:col-span-8">
+                  <Label className={dark ? "text-mist" : "text-graphite"}>
+                    {String(i + 1).padStart(2, "0")} · {statusOf(p)}
+                  </Label>
+                  <h2 id={`${p.slug}-title`} className="text-display-2 mt-4">
                     {p.title}
-                    {p.family && <em> by {p.family}</em>}
-                  </span>
-                }
-                intro={p.summary}
-              />
+                    {p.family && <em className="whitespace-nowrap"> by {p.family}</em>}
+                  </h2>
+                  <p className={`text-lead mt-3 ${dark ? "text-mist" : "text-graphite"}`}>{p.tagline}</p>
+                </div>
+                <div className="grid gap-3 md:col-span-4">
+                  {p.slug === "baid-x" && (
+                    <ButtonLink href="/baid-x" tone={dark ? "dark" : "light"}>
+                      Read the story
+                    </ButtonLink>
+                  )}
+                  {p.externalUrl && (
+                    <a
+                      href={p.externalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex items-center justify-between border px-5 py-3.5 text-sm transition-colors duration-300 ${
+                        dark ? "border-ivory/40 hover:bg-ivory hover:text-ink" : "border-ink hover:bg-ink hover:text-ivory"
+                      }`}
+                    >
+                      Visit {p.externalUrl.replace(/^https?:\/\/(www\.)?/, "")}
+                      <ArrowUpRight className="size-4" />
+                    </a>
+                  )}
+                </div>
+              </div>
 
-              <div className="frame relative mt-10 aspect-[16/10] overflow-hidden md:mt-12">
+              <div className="frame relative mt-8 aspect-[16/10] overflow-hidden md:mt-10">
                 {p.coverImage ? (
                   <Image src={p.coverImage.src} alt={p.coverImage.alt} fill sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover object-top" />
                 ) : (
@@ -139,68 +157,17 @@ export default function WorkPage() {
                 )}
               </div>
 
-              <div className="mt-10 grid gap-10 md:mt-14 md:grid-cols-12">
-                <div className="md:col-span-7">
-                  {p.challenge && (
-                    <>
-                      <Label className={dark ? "text-mist" : "text-graphite"}>{p.externalUrl ? "Why we built it" : "Why we're building it"}</Label>
-                      <p className="text-heading mt-4">{p.challenge}</p>
-                    </>
-                  )}
-                  {p.solution && p.solution.length > 0 && (
-                    <ul className="mt-8 grid gap-3">
-                      {p.solution.map((s) => (
-                        <li key={s} className={`flex gap-4 border-t pt-3 ${dark ? "border-ivory/20 text-mist" : "border-ink/15 text-graphite"}`}>
-                          <span aria-hidden="true" className="mt-3 h-px w-4 shrink-0 bg-current" />
-                          {s}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-                <div className="md:col-span-4 md:col-start-9">
-                  <dl className={`grid content-start gap-4 border-t pt-4 text-sm ${dark ? "border-ivory" : "border-ink"}`}>
-                    <div>
-                      <dt className={`text-label ${dark ? "text-mist" : "text-graphite"}`}>Our role</dt>
-                      <dd className="mt-1">{p.projectRole.join(", ")}</dd>
-                    </div>
-                    <div>
-                      <dt className={`text-label ${dark ? "text-mist" : "text-graphite"}`}>Disciplines</dt>
-                      <dd className="mt-1">{services.map((s) => s.shortTitle).join(" · ")}</dd>
-                    </div>
-                    <div>
-                      <dt className={`text-label ${dark ? "text-mist" : "text-graphite"}`}>Status</dt>
-                      <dd className="mt-1">{statusOf(p)}</dd>
-                    </div>
-                  </dl>
-                  <div className="mt-6 grid gap-3">
-                    {p.slug === "baid-x" && (
-                      <ButtonLink href="/baid-x" tone={dark ? "dark" : undefined}>
-                        Read the BAID X story
-                      </ButtonLink>
-                    )}
-                    {p.externalUrl && (
-                      <a
-                        href={p.externalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex items-center justify-between border px-5 py-3.5 text-sm transition-colors duration-300 ${
-                          dark ? "border-ivory/40 hover:bg-ivory hover:text-ink" : "border-ink hover:bg-ink hover:text-ivory"
-                        }`}
-                      >
-                        Visit {p.externalUrl.replace(/^https?:\/\/(www\.)?/, "")}
-                        <ArrowUpRight className="size-4" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {phones.length > 0 && (
-                <ul className="mt-12 grid grid-cols-3 gap-3 md:mt-16 md:gap-8" aria-label={`${p.title} on a phone`}>
-                  {phones.map((g) => (
-                    <li key={g.src} className={`frame overflow-hidden ${dark ? "border-ivory/20" : ""}`}>
-                      <Image src={g.src} alt={g.alt} width={g.width} height={g.height} sizes="(min-width: 768px) 30vw, 32vw" className="block h-auto w-full" />
+              {p.highlights && (
+                <ul className={`mt-8 grid border-t sm:grid-cols-3 ${dark ? "border-ivory/25" : "border-ink"}`}>
+                  {p.highlights.map((h, j) => (
+                    <li
+                      key={h}
+                      className={`flex items-baseline gap-4 border-b py-5 sm:border-b-0 sm:px-6 sm:first:pl-0 ${dark ? "border-ivory/25" : "border-ink/15"} ${
+                        j > 0 ? (dark ? "sm:border-l sm:border-ivory/25" : "sm:border-l sm:border-ink/15") : ""
+                      }`}
+                    >
+                      <span className={`text-label ${dark ? "text-mist" : "text-graphite"}`}>{String(j + 1).padStart(2, "0")}</span>
+                      <span className="text-heading">{h}</span>
                     </li>
                   ))}
                 </ul>
