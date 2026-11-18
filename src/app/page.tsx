@@ -91,12 +91,12 @@ export default function HomePage() {
             <ul className="grid sm:grid-cols-2 lg:grid-cols-5">
               {showcase.map((p, i) => (
                 <li key={p.slug} className="border-b border-ivory/20 lg:border-b-0 lg:[&:not(:first-child)]:border-l lg:[&:not(:first-child)]:border-ivory/20">
-                  <Link href={productHref(p.slug)} className="group flex h-full items-end justify-between gap-4 py-6 transition-colors duration-500 hover:bg-ivory hover:text-ink sm:flex-col sm:items-start sm:px-4 lg:min-h-[14rem] lg:px-5 lg:py-7">
-                    <span className="text-label text-mist transition-colors group-hover:text-graphite">
+                  <Link href={productHref(p.slug)} className="group grid h-full grid-cols-[1fr_auto] items-end gap-x-4 gap-y-3 py-6 transition-colors duration-500 hover:bg-ivory hover:text-ink sm:flex sm:flex-col sm:items-start sm:justify-between sm:px-4 lg:min-h-[14rem] lg:px-5 lg:py-7">
+                    <span className="text-label col-span-2 text-mist transition-colors group-hover:text-graphite">
                       {String(i + 1).padStart(2, "0")}
                       {p.externalUrl ? "" : ` · ${p.status ?? "Coming soon"}`}
                     </span>
-                    <span className="flex-1 sm:flex-none">
+                    <span>
                       <span className="text-display-3 block leading-[0.95]">{p.title}</span>
                       {p.family && <span className="block font-display text-lg italic text-mist transition-colors group-hover:text-graphite">by {p.family}</span>}
                       <span className="mt-2 block text-sm text-mist transition-colors group-hover:text-graphite">{p.tagline}</span>
