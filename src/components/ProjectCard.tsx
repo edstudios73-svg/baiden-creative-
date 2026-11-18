@@ -2,6 +2,7 @@ import Image from "next/image";
 import { projectHref } from "@/content/projects";
 import type { Project } from "@/content/types";
 import { ArrowRight } from "./icons";
+import { ProductPoster } from "./ProductPoster";
 import { SmartLink } from "./ui";
 
 const aspect = {
@@ -32,14 +33,18 @@ export function ProjectCard({
   return (
     <article className="group relative" data-reveal>
       <div className={`frame img-zoom ${aspect[variant]}`}>
-        <Image
-          src={project.coverImage.src}
-          alt={project.coverImage.alt}
-          fill
-          sizes={sizes}
-          priority={priority}
-          className="object-cover object-top"
-        />
+        {project.coverImage ? (
+          <Image
+            src={project.coverImage.src}
+            alt={project.coverImage.alt}
+            fill
+            sizes={sizes}
+            priority={priority}
+            className="object-cover object-top"
+          />
+        ) : (
+          <ProductPoster project={project} />
+        )}
       </div>
       <div className="mt-5 grid grid-cols-[1fr_auto] gap-x-6 gap-y-2">
         <p className="text-label text-graphite">
@@ -50,6 +55,7 @@ export function ProjectCard({
         <H className="text-heading">
           <SmartLink href={href} className="after:absolute after:inset-0 focus-visible:outline-none">
             {project.title}
+            {project.family && <em> by {project.family}</em>}
           </SmartLink>
         </H>
         <p className="col-span-2 max-w-xl text-graphite">{project.summary}</p>

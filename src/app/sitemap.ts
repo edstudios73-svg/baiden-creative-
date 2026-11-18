@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...baidx.people.map((p) => p.src),
     ...(baidxStory?.gallery.map((g) => g.src) ?? []),
   ];
-  const workImages = caseStudies.flatMap((p) => [p.coverImage.src, ...p.gallery.map((g) => g.src)]);
+  const workImages = caseStudies.flatMap((p) => [...(p.coverImage ? [p.coverImage.src] : []), ...p.gallery.map((g) => g.src)]);
   const brandImages = [site.logo.square, site.logo.onDark, "/assets/character.png"];
   return [
     entry("/", 1, "weekly", [...brandImages, baidx.images.hero.src]),

@@ -5,13 +5,14 @@ import { getService } from "@/content/services";
 import { breadcrumbLd, graph, pageMetadata } from "@/lib/seo";
 import { site } from "@/config/site";
 import { CtaBand } from "@/components/CtaBand";
+import { ProductPoster } from "@/components/ProductPoster";
 import { ArrowUpRight } from "@/components/icons";
 import { Breadcrumbs, ButtonLink, JsonLd, Label, SectionHeading } from "@/components/ui";
 
 export const metadata: Metadata = pageMetadata({
   title: "Our Products",
   description:
-    "The products Baiden Creatives designs, builds and runs from Accra: BAID X, Ghana's work network; Skin Lab, laptop stickers and skins; and PropertIQ, property in Accra.",
+    "The products Baiden Creatives designs, builds and runs from Accra: BAID X, Ghana's work network, with Blueprint for house plans and SiteMart for equipment and materials; Skin Lab, laptop stickers and skins; and PropertIQ, property in Accra.",
   path: "/work",
 });
 
@@ -21,6 +22,15 @@ const crumbs = [
 ];
 
 const v = (n: number) => ({ "--i": n }) as React.CSSProperties;
+
+// How the BAID X family fits together, from the drawing to the finished building.
+const journey = [
+  { step: "Plan", slug: "blueprint", product: "Blueprint", body: "Choose and buy your house design." },
+  { step: "Supply", slug: "sitemart", product: "SiteMart", body: "Get the equipment and building materials." },
+  { step: "Build", slug: "baid-x", product: "BAID X", body: "Hire verified workers and manage the project." },
+];
+
+const statusOf = (p: { externalUrl?: string; status?: string }) => (p.externalUrl ? "Live" : (p.status ?? "Coming soon"));
 
 export default function WorkPage() {
   const products = caseStudies.filter((p) => p.inHouse);
@@ -54,9 +64,12 @@ export default function WorkPage() {
                   className="-mx-3 grid grid-cols-[2.25rem_1fr_auto] items-center gap-x-4 gap-y-1 px-3 py-5 transition-colors duration-300 hover:bg-ivory hover:text-ink md:grid-cols-[3.5rem_1.2fr_1.4fr_auto] md:py-6"
                 >
                   <span className="text-label text-mist">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="text-display-3">{p.title}</span>
-                  <span className="hidden text-mist md:block">{p.category}</span>
-                  <span className="text-label text-mist">{p.externalUrl ? "Live" : "Launching soon"}</span>
+                  <span className="text-display-3">
+                    {p.title}
+                    {p.family && <em className="text-mist"> by {p.family}</em>}
+                  </span>
+                  <span className="hidden text-mist md:block">{p.tagline}</span>
+                  <span className="text-label text-mist">{statusOf(p)}</span>
                 </a>
               </li>
             ))}
@@ -65,9 +78,37 @@ export default function WorkPage() {
         <span aria-hidden="true" className="rule-draw hero-rule absolute inset-x-0 bottom-0 text-ivory/20" />
       </header>
 
+      {/* ── Plan, supply, build: the BAID X family (white) ────────── */}
+      <section className="section-y" aria-labelledby="journey-title">
+        <div className="container-x">
+          <SectionHeading
+            label="The BAID X family"
+            title={
+              <span id="journey-title">
+                Plan. Supply. <em>Build.</em>
+              </span>
+            }
+            intro="Three products, one promise: verified people, safe payments and everything needed to build, in one place."
+          />
+          <ol className="mt-10 grid border-t border-ink md:mt-14 md:grid-cols-3">
+            {journey.map((j, i) => (
+              <li key={j.step} className={`border-b border-ink md:border-b-0 ${i > 0 ? "md:border-l" : ""}`}>
+                <a href={`#${j.slug}`} className="group flex h-full flex-col gap-6 py-8 transition-colors duration-500 hover:bg-ink hover:text-ivory md:px-8 md:py-10 md:first:pl-0">
+                  <span className="text-label text-graphite group-hover:text-mist">
+                    {String(i + 1).padStart(2, "0")} · {j.step}
+                  </span>
+                  <span className="text-display-2 leading-none">{j.product}</span>
+                  <span className="text-graphite group-hover:text-mist">{j.body}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       {/* ── Each product, in full ─────────────────────────────────── */}
       {products.map((p, i) => {
-        const dark = i % 2 === 1;
+        const dark = i % 2 === 0;
         const services = p.services.map(getService).filter((s) => s !== undefined);
         const phones = p.gallery.filter((g) => g.kind === "phone").slice(0, 3);
         return (
@@ -81,19 +122,28 @@ export default function WorkPage() {
               <SectionHeading
                 tone={dark ? "dark" : undefined}
                 label={`(${String(i + 1).padStart(2, "0")}) ${p.category}`}
-                title={<span id={`${p.slug}-title`}>{p.title}</span>}
+                title={
+                  <span id={`${p.slug}-title`}>
+                    {p.title}
+                    {p.family && <em> by {p.family}</em>}
+                  </span>
+                }
                 intro={p.summary}
               />
 
-              <div className={`frame relative mt-10 aspect-[16/10] overflow-hidden md:mt-12 ${dark ? "border-ivory/20" : ""}`}>
-                <Image src={p.coverImage.src} alt={p.coverImage.alt} fill sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover object-top" />
+              <div className="frame relative mt-10 aspect-[16/10] overflow-hidden md:mt-12">
+                {p.coverImage ? (
+                  <Image src={p.coverImage.src} alt={p.coverImage.alt} fill sizes="(min-width: 1280px) 1200px, 100vw" className="object-cover object-top" />
+                ) : (
+                  <ProductPoster project={p} tone={dark ? "light" : "dark"} />
+                )}
               </div>
 
               <div className="mt-10 grid gap-10 md:mt-14 md:grid-cols-12">
                 <div className="md:col-span-7">
                   {p.challenge && (
                     <>
-                      <Label className={dark ? "text-mist" : "text-graphite"}>Why we built it</Label>
+                      <Label className={dark ? "text-mist" : "text-graphite"}>{p.externalUrl ? "Why we built it" : "Why we're building it"}</Label>
                       <p className="text-heading mt-4">{p.challenge}</p>
                     </>
                   )}
@@ -120,7 +170,7 @@ export default function WorkPage() {
                     </div>
                     <div>
                       <dt className={`text-label ${dark ? "text-mist" : "text-graphite"}`}>Status</dt>
-                      <dd className="mt-1">{p.externalUrl ? "Live" : "Launching soon"}</dd>
+                      <dd className="mt-1">{statusOf(p)}</dd>
                     </div>
                   </dl>
                   <div className="mt-6 grid gap-3">

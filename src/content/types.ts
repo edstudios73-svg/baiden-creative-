@@ -30,11 +30,18 @@ export type Project = {
   summary: string;
   category: ProjectCategory;
   services: ServiceSlug[];
-  coverImage: Img;
+  /** A screenshot of the live product. Products without one yet get a typographic poster. */
+  coverImage?: Img;
   gallery: Img[];
   clientOrOwner: string;
   /** True when the project belongs to Baiden Creatives itself rather than a client. */
   inHouse?: boolean;
+  /** The product family it belongs to, e.g. "BAID X" for "Blueprint by BAID X". */
+  family?: string;
+  /** One short line for product lists, e.g. "Ghana's work network". */
+  tagline?: string;
+  /** Shown when there is no live link yet, e.g. "Launching soon". Defaults to "Coming soon". */
+  status?: string;
   projectRole: string[];
   challenge?: string;
   approach?: string[];

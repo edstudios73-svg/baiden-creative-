@@ -13,6 +13,7 @@ import { Carousel } from "@/components/Carousel";
 import { IdeaStory } from "@/components/IdeaStory";
 import { CtaBand } from "@/components/CtaBand";
 import { ArrowRight } from "@/components/icons";
+import { ProductPoster } from "@/components/ProductPoster";
 import { ArrowLink, ButtonLink, Label, SectionHeading } from "@/components/ui";
 
 export const metadata: Metadata = {
@@ -25,18 +26,13 @@ export const metadata: Metadata = {
   title: { absolute: site.name },
 };
 
-// Our own products, as they appear under the hero.
-const PRODUCTS = [
-  { slug: "baid-x", name: "BAID X", line: "Ghana's work network", href: "/baid-x" },
-  { slug: "skin-lab", name: "Skin Lab", line: "Laptop stickers and skins", href: "/work#skin-lab" },
-  { slug: "propertiq", name: "PropertIQ", line: "Property in Accra", href: "/work#propertiq" },
-];
 
 const v = (n: number) => ({ "--i": n }) as React.CSSProperties;
 const delay = (n: number) => ({ "--reveal-delay": n }) as React.CSSProperties;
 
 export default function HomePage() {
   const showcase = caseStudies.filter((p) => p.inHouse);
+  const productHref = (slug: string) => (slug === "baid-x" ? "/baid-x" : `/work#${slug}`);
 
   return (
     <>
@@ -96,16 +92,20 @@ export default function HomePage() {
               <p className="text-label hidden text-mist sm:block">Designed, built and run in Accra</p>
             </div>
             <span aria-hidden="true" className="rule-draw hero-rule mt-4 text-ivory/30" style={v(8)} />
-            <ul className="grid md:grid-cols-3">
-              {PRODUCTS.map((p, i) => (
-                <li key={p.slug} className={`border-b border-ivory/20 md:border-b-0 ${i > 0 ? "md:border-l md:border-ivory/20" : ""}`}>
-                  <Link href={p.href} className="group flex items-end justify-between gap-4 py-6 transition-colors duration-500 hover:bg-ivory hover:text-ink md:min-h-[13rem] md:flex-col md:items-start md:px-6 md:py-8 md:first:pl-0">
-                    <span className="text-label text-mist transition-colors group-hover:text-graphite">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="flex-1 md:flex-none">
-                      <span className="text-display-2 block leading-[0.95]">{p.name}</span>
-                      <span className="mt-2 block font-display text-xl italic text-mist transition-colors group-hover:text-graphite md:text-2xl">{p.line}</span>
+            <ul className="grid sm:grid-cols-2 lg:grid-cols-5">
+              {showcase.map((p, i) => (
+                <li key={p.slug} className="border-b border-ivory/20 lg:border-b-0 lg:[&:not(:first-child)]:border-l lg:[&:not(:first-child)]:border-ivory/20">
+                  <Link href={productHref(p.slug)} className="group flex h-full items-end justify-between gap-4 py-6 transition-colors duration-500 hover:bg-ivory hover:text-ink sm:flex-col sm:items-start sm:px-4 lg:min-h-[14rem] lg:px-5 lg:py-7">
+                    <span className="text-label text-mist transition-colors group-hover:text-graphite">
+                      {String(i + 1).padStart(2, "0")}
+                      {p.externalUrl ? "" : ` · ${p.status ?? "Coming soon"}`}
                     </span>
-                    <span className="grid size-11 shrink-0 place-items-center border border-ivory/40 transition-colors duration-300 group-hover:border-ink md:self-end">
+                    <span className="flex-1 sm:flex-none">
+                      <span className="text-display-3 block leading-[0.95]">{p.title}</span>
+                      {p.family && <span className="block font-display text-lg italic text-mist transition-colors group-hover:text-graphite">by {p.family}</span>}
+                      <span className="mt-2 block text-sm text-mist transition-colors group-hover:text-graphite">{p.tagline}</span>
+                    </span>
+                    <span className="grid size-10 shrink-0 place-items-center border border-ivory/40 transition-colors duration-300 group-hover:border-ink sm:self-end">
                       <ArrowRight className="size-4" />
                     </span>
                   </Link>
@@ -245,16 +245,20 @@ export default function HomePage() {
               tone="dark"
               slideClassName="w-[88%] md:w-[70%] lg:w-[58%]"
               slides={showcase.map((p, i) => (
-                <Link key={p.slug} href={p.slug === "baid-x" ? "/baid-x" : `/work#${p.slug}`} className="group block">
+                <Link key={p.slug} href={productHref(p.slug)} className="group block">
                   <div className="border border-ivory/20 bg-ink-2 transition-colors duration-500 group-hover:border-ivory/60">
                     <div className="flex items-center gap-2 border-b border-ivory/15 px-4 py-2.5" aria-hidden="true">
                       <span className="size-2 rounded-full bg-ivory/40" />
                       <span className="size-2 rounded-full bg-ivory/25" />
                       <span className="size-2 rounded-full bg-ivory/15" />
-                      <span className="text-label ml-3 truncate text-mist">{p.externalUrl?.replace(/^https?:\/\/(www\.)?/, "") ?? `${p.title} · launching soon`}</span>
+                      <span className="text-label ml-3 truncate text-mist">{p.externalUrl?.replace(/^https?:\/\/(www\.)?/, "") ?? `${p.title}${p.family ? ` by ${p.family}` : ""} · ${(p.status ?? "Coming soon").toLowerCase()}`}</span>
                     </div>
                     <div className="img-zoom relative aspect-[16/10] overflow-hidden">
-                      <Image src={p.coverImage.src} alt={p.coverImage.alt} fill sizes="(min-width: 1024px) 58vw, 88vw" className="object-cover object-top" />
+                      {p.coverImage ? (
+                        <Image src={p.coverImage.src} alt={p.coverImage.alt} fill sizes="(min-width: 1024px) 58vw, 88vw" className="object-cover object-top" />
+                      ) : (
+                        <ProductPoster project={p} />
+                      )}
                     </div>
                   </div>
                   <div className="mt-5 flex items-start justify-between gap-6">
@@ -263,7 +267,10 @@ export default function HomePage() {
                     </span>
                     <div className="flex-1">
                       <p className="text-label text-mist">{p.category}</p>
-                      <h3 className="text-heading mt-2">{p.title}</h3>
+                      <h3 className="text-heading mt-2">
+                        {p.title}
+                        {p.family && <em> by {p.family}</em>}
+                      </h3>
                       <p className="mt-2 max-w-xl text-mist">{p.summary}</p>
                     </div>
                     <span className="mt-1 grid size-11 shrink-0 place-items-center border border-ivory/40 transition-colors duration-300 group-hover:bg-ivory group-hover:text-ink">
@@ -292,6 +299,7 @@ export default function HomePage() {
                 {baidx.tagline} <em>Built by {site.name}.</em>
               </h2>
               <p className="mt-4 text-mist">Hire verified people. Pay only when the work is done.</p>
+              <p className="mt-3 text-sm text-mist">Coming to the family: Blueprint for house plans, and SiteMart for equipment and building materials.</p>
               <span className="mt-10 flex items-center justify-between gap-4 border-t border-ivory/20 pt-5 md:mt-auto">
                 <span className="text-label">Read the story</span>
                 <span className="grid size-11 place-items-center border border-ivory/40 transition-colors duration-300 group-hover:bg-ivory group-hover:text-ink">

@@ -28,7 +28,7 @@ const chapters = [
   { title: "Two founders, one studio", body: `${site.founders[0].name} and ${site.founders[1].name} start Baiden Creatives in Accra, Ghana.` },
   { title: "Websites that work for a living", body: "Restaurants, churches, stores and service businesses: sites built for phones first, often with an admin the client runs themselves." },
   { title: "Brand, campaigns and motion", body: "Logos, menus, launch flyers and event series, then promotional films composed in code from live products." },
-  { title: "Products of our own", body: "BAID X, Ghana's work network with human-checked badges and escrow payments. Skin Lab, laptop stickers and skins printed in Accra. PropertIQ, property in Accra with prices, plans and a live map." },
+  { title: "Products of our own", body: "BAID X, Ghana's work network with human-checked badges and escrow payments, joined soon by Blueprint for house plans and SiteMart for equipment and materials. Skin Lab, laptop stickers and skins printed in Accra. PropertIQ, property in Accra with prices, plans and a live map." },
   { title: "The next chapter", body: "Working with ambitious founders and companies, in Ghana and beyond. Yours could be part of it." },
 ];
 

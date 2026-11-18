@@ -3,7 +3,8 @@ import type { Img, Project, ProjectCategory } from "./types";
 /*
  * Portfolio content.
  *
- * The public site shows only Baiden Creatives' own products (BAID X, Skin Lab, PropertIQ).
+ * The public site shows only Baiden Creatives' own products: BAID X with Blueprint and
+ * SiteMart, Skin Lab and PropertIQ.
  * Client projects stay here as drafts so they can be shown again by changing their status.
  *
  * Sources: the previous baidencreatives.org portfolio, the live client sites and the
@@ -55,8 +56,64 @@ const skinlab = (file: string, alt: string): Img => ({
 
 export const projects: Project[] = [
   {
+    title: "Blueprint",
+    slug: "blueprint",
+    family: "BAID X",
+    tagline: "House plans and designs from architects in Ghana",
+    status: "Coming soon",
+    summary:
+      "A marketplace where architects and designers in Ghana sell ready-made house plans, and homeowners and developers find, compare and buy the one that fits.",
+    category: "Platforms & products",
+    services: ["web-design-development", "ui-ux-dashboards", "mobile-apps-digital-products", "branding-identity"],
+    gallery: [],
+    clientOrOwner: "Baiden Creatives (own brand)",
+    inHouse: true,
+    projectRole: ["Product concept", "Product design and development", "Brand"],
+    challenge:
+      "Many people in Ghana build without proper plans, or spend a long time finding a good architect. Blueprint makes good designs easy to find and puts them straight into building.",
+    solution: [
+      "Architects and designers upload plans with drawings, photos, the number of rooms, the land size needed and an estimated building cost.",
+      "Homeowners and developers search by budget, bedrooms, plot size or style, and compare plans side by side.",
+      "Buy a plan as it is, or ask its architect to adjust it.",
+      "Take the plan to BAID X in one tap to hire verified workers and run the build.",
+    ],
+    outcomes: [],
+    technologies: [],
+    publicationStatus: "published",
+    featured: true,
+  },
+  {
+    title: "SiteMart",
+    slug: "sitemart",
+    family: "BAID X",
+    tagline: "Equipment and building materials for construction",
+    status: "Coming soon",
+    summary:
+      "A marketplace where businesses rent out and sell equipment and sell building materials, so contractors, companies and homeowners can compare prices and order in one place.",
+    category: "Platforms & products",
+    services: ["web-design-development", "ui-ux-dashboards", "mobile-apps-digital-products", "branding-identity"],
+    gallery: [],
+    clientOrOwner: "Baiden Creatives (own brand)",
+    inHouse: true,
+    projectRole: ["Product concept", "Product design and development", "Brand"],
+    challenge:
+      "Finding reliable suppliers and fair prices takes calls, visits and guesswork. SiteMart puts verified suppliers and clear prices in one place.",
+    solution: [
+      "Suppliers list excavators, trucks, mixers and tools for rent or sale.",
+      "Building materials in one catalogue: cement, blocks, sand, iron rods, tiles and roofing.",
+      "Search by item, price or location, then order or book a rental and pay safely through BAID X.",
+      "The supplier delivers straight to the site.",
+    ],
+    outcomes: [],
+    technologies: [],
+    publicationStatus: "published",
+    featured: true,
+  },
+  {
     title: "PropertIQ",
     slug: "propertiq",
+    tagline: "Homes, apartments, offices and stores in Accra",
+    status: "Launching soon",
     summary:
       "Our property platform for Accra: homes, apartments, offices and stores with prices, payment plans, floor plans, brochures and a live map, listed by developers and agents.",
     category: "Platforms & products",
@@ -91,6 +148,7 @@ export const projects: Project[] = [
   {
     title: "Skin Lab",
     slug: "skin-lab",
+    tagline: "Laptop stickers and skins, printed in Accra",
     summary:
       "Our own laptop sticker and skin shop in Accra: 94 sticker sheets, laptop skins and a 3D designer for 757 laptop models, paid with MoMo and tracked from print to delivery.",
     category: "E-commerce",
@@ -183,6 +241,7 @@ export const projects: Project[] = [
   {
     title: "BAID X",
     slug: "baid-x",
+    tagline: "Ghana's work network: verified people, safe payments",
     summary:
       "Ghana's work network: verified professionals, companies, project managers, suppliers and clients in one place, with job payments held in escrow until the work is approved.",
     category: "Platforms & products",
@@ -464,7 +523,7 @@ export const projects: Project[] = [
 export const projectCategories: ProjectCategory[] = ["Platforms & products", "E-commerce", "Websites", "Brand & graphics"];
 
 /** Our products lead, in this order. */
-const ORDER = ["baid-x", "skin-lab", "propertiq"];
+const ORDER = ["baid-x", "blueprint", "sitemart", "skin-lab", "propertiq"];
 const rank = (p: Project) => (ORDER.includes(p.slug) ? ORDER.indexOf(p.slug) : ORDER.length);
 
 /**
