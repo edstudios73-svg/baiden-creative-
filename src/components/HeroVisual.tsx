@@ -39,7 +39,7 @@ export function HeroVisual() {
         {layers.map((l, i) => (
           <div key={l.piece.src} className={`absolute ${l.pos}`} style={{ "--z": l.z } as React.CSSProperties}>
             <div className="frame hero-unmask" style={{ "--i": i } as React.CSSProperties}>
-              <Image src={l.piece.src} alt={l.piece.alt} width={l.piece.width} height={l.piece.height} sizes={l.sizes} className="block w-full" />
+              <Image src={l.piece.src} alt={l.piece.alt} width={l.piece.width} height={l.piece.height} sizes={l.sizes} loading="eager" className="block w-full" />
             </div>
           </div>
         ))}
