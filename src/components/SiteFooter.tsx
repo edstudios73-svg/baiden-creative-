@@ -2,7 +2,7 @@ import Link from "next/link";
 import { site } from "@/config/site";
 import { SocialIcon, type SocialName } from "./SocialIcon";
 
-/** Minimal footer: the social handle and icons, copyright, the two legal pages and the site map. */
+/** Minimal footer: the social handle and icons, copyright, and the two legal pages. */
 export function SiteFooter() {
   const year = new Date().getFullYear();
 
@@ -43,9 +43,6 @@ export function SiteFooter() {
             </Link>
             <Link className="link-draw hover:text-ivory" href="/terms">
               Terms
-            </Link>
-            <Link className="link-draw hover:text-ivory" href="/site-map">
-              Site map
             </Link>
           </nav>
         </div>

@@ -33,5 +33,4 @@ Web design and development, mobile apps and digital products, branding and visua
 - BAID X, the story: https://www.baidencreatives.org/baid-x
 - About: https://www.baidencreatives.org/about
 - Contact: https://www.baidencreatives.org/contact
-- Site map: https://www.baidencreatives.org/site-map
 - XML sitemap: https://www.baidencreatives.org/sitemap.xml

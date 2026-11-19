@@ -7,6 +7,7 @@ import { breadcrumbLd, foundersLd, graph, imageLd, pageMetadata } from "@/lib/se
 import { ProjectCard } from "@/components/ProjectCard";
 import { Carousel } from "@/components/Carousel";
 import { CtaBand } from "@/components/CtaBand";
+import { faq } from "@/content/faq";
 import { ArrowLink, Breadcrumbs, JsonLd, Label } from "@/components/ui";
 
 export const metadata: Metadata = pageMetadata({
@@ -139,6 +140,31 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── Questions (white, ruled off from the products above) ── */}
+      <section className="section-y border-t border-ink" aria-labelledby="faq-title">
+        <div className="container-x grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <Label className="text-graphite">Questions</Label>
+            <h2 id="faq-title" className="text-display-3 mt-4">
+              In short.
+            </h2>
+          </div>
+          <div className="border-t border-ink lg:col-span-8">
+            {faq.map((f) => (
+              <details key={f.q} className="group border-b border-ink/15">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-heading [&::-webkit-details-marker]:hidden">
+                  {f.q}
+                  <span aria-hidden="true" className="text-xl leading-none transition-transform duration-300 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="max-w-2xl pb-6 text-graphite">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CtaBand title={<>Let&apos;s build something <em>together.</em></>} />
       <JsonLd
         data={graph(
@@ -152,6 +178,11 @@ export default function AboutPage() {
             image: imageLd(site.foundersPortrait),
           },
           ...foundersLd(),
+          {
+            "@type": "FAQPage",
+            "@id": `${site.url}/about#faq`,
+            mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+          },
         )}
       />
     </>

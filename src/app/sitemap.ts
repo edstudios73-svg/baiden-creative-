@@ -4,8 +4,8 @@ import { baidx } from "@/content/products";
 import { caseStudies } from "@/content/projects";
 
 /**
- * Every public page: home, our products, the BAID X story, about, contact, the site map and
- * the two legal pages.
+ * Every public page: home, our products, the BAID X story, about, contact and the two legal
+ * pages. The site map page is left out: it is not meant to appear in search.
  * Each page lists its key images so they can appear in image search.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -33,7 +33,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/baid-x", 0.8, "monthly", baidxImages),
     entry("/about", 0.8, "monthly", [site.foundersPortrait.src, site.logo.square, ...site.founders.flatMap((f) => (f.photo ? [f.photo.src] : []))]),
     entry("/contact", 0.8),
-    entry("/site-map", 0.5),
     entry("/privacy", 0.2, "yearly"),
     entry("/terms", 0.2, "yearly"),
   ];

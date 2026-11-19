@@ -2,7 +2,7 @@ import { site } from "@/config/site";
 import { ecosystem } from "./ecosystem";
 
 /**
- * Plain answers about the company, shown on /site-map and given to search engines as an FAQ.
+ * Plain answers about the company, shown on /about and given to search engines as an FAQ.
  * Every answer comes from verified site content; nothing here is new information.
  */
 export const faq = [
