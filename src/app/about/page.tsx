@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({
   title: "About",
   description: `${site.name} is a creative and technology company founded in Accra by ${site.founders[0].name} and ${site.founders[1].name}. Our mission, our founders and the products we build.`,
   path: "/about",
-  image: site.foundersPhotos[0],
+  image: site.foundersPortrait,
 });
 
 const crumbs = [
@@ -148,8 +148,8 @@ export default function AboutPage() {
             url: `${site.url}/about`,
             about: { "@id": `${site.url}/#organization` },
             mainEntity: { "@id": `${site.url}/#organization` },
-            primaryImageOfPage: imageLd(site.foundersPhotos[0]),
-            image: [site.foundersPhotos[0], site.foundersPortrait].map(imageLd),
+            primaryImageOfPage: imageLd(site.foundersPortrait),
+            image: imageLd(site.foundersPortrait),
           },
           ...foundersLd(),
         )}

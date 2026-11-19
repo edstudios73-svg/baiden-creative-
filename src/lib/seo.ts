@@ -51,9 +51,20 @@ export function organizationLd() {
     slogan: site.statement,
     email: site.contact.email,
     telephone: site.contact.phoneIntl,
-    address: { "@type": "PostalAddress", addressLocality: "Accra", addressCountry: "GH" },
+    address: { "@type": "PostalAddress", addressLocality: "Accra", addressRegion: "Greater Accra", addressCountry: "GH" },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "customer service",
+        email: site.contact.email,
+        telephone: site.contact.phoneIntl,
+        areaServed: "GH",
+        availableLanguage: ["English"],
+      },
+    ],
+    areaServed: { "@type": "Country", name: "Ghana" },
     founder: site.founders.map((f) => ({ "@id": personId(f.name) })),
-    image: absoluteUrl(site.foundersPhotos[0].src),
+    image: absoluteUrl(site.foundersPortrait.src),
     foundingLocation: { "@type": "Place", name: "Accra, Ghana" },
     owns: ownProducts().map((p) => ({ "@id": productId(p.slug) })),
     sameAs: site.social.map((s) => s.url),
@@ -72,8 +83,9 @@ export function foundersLd() {
     jobTitle: f.role,
     worksFor: { "@id": orgId },
     url: `${site.url}/about`,
-    // Their own portrait once confirmed; until then the photo of both founders.
-    image: absoluteUrl(f.photo?.src ?? site.foundersPhotos[0].src),
+    // Their own portrait once confirmed; until then the portrait of both founders.
+    image: absoluteUrl(f.photo?.src ?? site.foundersPortrait.src),
+    knowsAbout: ["Digital products", "Construction technology", "Property technology", "Design"],
   }));
 }
 
@@ -95,7 +107,15 @@ export function imageLd(img: { src: string; alt: string; width: number; height: 
 }
 
 export function websiteLd() {
-  return { "@type": "WebSite", "@id": `${site.url}/#website`, url: site.url, name: site.name, publisher: { "@id": orgId } };
+  return {
+    "@type": "WebSite",
+    "@id": `${site.url}/#website`,
+    url: site.url,
+    name: site.name,
+    description: site.description,
+    inLanguage: "en",
+    publisher: { "@id": orgId },
+  };
 }
 
 export function breadcrumbLd(items: { name: string; path: string }[]) {

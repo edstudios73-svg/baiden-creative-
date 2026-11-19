@@ -18,17 +18,8 @@ export const site = {
     "Baiden Creatives is a creative and technology company in Accra, Ghana, founded by Baiden David and Baiden Daniel. We build and run five products: Blueprint, SiteMart, BAID X, PropertIQ and Skin Lab.",
   base: "Accra, Ghana",
   founded: null as string | null, // TODO(company): founding year, if it should be published.
-  // Approved founder photos. Which founder is in the single portrait is not confirmed yet, so it names neither.
-  foundersPhotos: [
-    {
-      src: "/assets/founders/baiden-creatives-founders.jpg",
-      width: 720,
-      height: 956,
-      alt: "Baiden David and Baiden Daniel, the founders of Baiden Creatives",
-      caption: "Baiden David & Baiden Daniel",
-    },
-  ],
-  // The founders' faces and shoulders, cropped square from the photo above, shown in a round frame on /about.
+  // The only published photo of the founders: faces and shoulders, square, shown in a round frame on /about
+  // and used for the founders and the company in search results.
   foundersPortrait: {
     src: "/assets/founders/baiden-creatives-founders-portrait.jpg",
     width: 720,

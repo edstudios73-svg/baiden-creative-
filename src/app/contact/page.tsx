@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { site } from "@/config/site";
 import { breadcrumbLd, graph, pageMetadata } from "@/lib/seo";
 import { ContactForm } from "@/components/ContactForm";
+import { SocialIcon, type SocialName } from "@/components/SocialIcon";
 import { JsonLd, Label, PageHeader, SmartLink } from "@/components/ui";
 
 export const metadata: Metadata = pageMetadata({
@@ -65,6 +66,25 @@ export default function ContactPage() {
               <li className="border-b border-line py-5">
                 <p className="text-label text-graphite">Based in</p>
                 <p className="mt-1 text-lg">{site.base}, working worldwide</p>
+              </li>
+              <li className="border-b border-line py-5">
+                <p className="text-label text-graphite">Socials · {site.handle}</p>
+                <ul className="mt-3 flex flex-wrap gap-2">
+                  {site.social.map((s) => (
+                    <li key={s.label}>
+                      <a
+                        href={s.url}
+                        target="_blank"
+                        rel="noopener noreferrer me"
+                        className="inline-flex items-center gap-2 border border-ink px-3 py-2 text-sm transition-colors duration-300 hover:bg-ink hover:text-ivory"
+                      >
+                        <SocialIcon name={s.label as SocialName} className="size-4" />
+                        {s.label}
+                        <span className="sr-only"> (opens in a new tab)</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </li>
             </ul>
 

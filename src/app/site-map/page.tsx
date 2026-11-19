@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { site } from "@/config/site";
 import { ecosystemPromise } from "@/content/ecosystem";
+import { faq } from "@/content/faq";
 import { publicProjects } from "@/content/projects";
 import { services } from "@/content/services";
 import { breadcrumbLd, graph, pageMetadata } from "@/lib/seo";
@@ -133,7 +134,42 @@ export default function SiteMapPage() {
         </div>
       </section>
 
-      <JsonLd data={graph(breadcrumbLd(crumbs), { "@type": "WebPage", url: `${site.url}/site-map`, name: "Site map", about: { "@id": `${site.url}/#organization` } })} />
+      {/* ── Questions (white) ────────────────────────────────────── */}
+      <section className="section-y" aria-labelledby="faq-title">
+        <div className="container-x grid gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <Label className="text-graphite">05 · Questions</Label>
+            <h2 id="faq-title" className="text-display-3 mt-4">
+              In short.
+            </h2>
+          </div>
+          <div className="border-t border-ink lg:col-span-8">
+            {faq.map((f) => (
+              <details key={f.q} className="group border-b border-ink/15">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-heading [&::-webkit-details-marker]:hidden">
+                  {f.q}
+                  <span aria-hidden="true" className="text-xl leading-none transition-transform duration-300 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="max-w-2xl pb-6 text-graphite">{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <JsonLd
+        data={graph(
+          breadcrumbLd(crumbs),
+          { "@type": "WebPage", url: `${site.url}/site-map`, name: "Site map", about: { "@id": `${site.url}/#organization` } },
+          {
+            "@type": "FAQPage",
+            "@id": `${site.url}/site-map#faq`,
+            mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+          },
+        )}
+      />
     </>
   );
 }
