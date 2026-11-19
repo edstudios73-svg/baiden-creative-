@@ -313,20 +313,6 @@
   }
 }
 
-/* Hero 3D stage: a fixed tilt on larger screens. */
-@media (min-width: 48rem) {
-  .stage3d {
-    perspective: 1800px;
-  }
-  .stage3d-inner {
-    transform-style: preserve-3d;
-    transform: rotateX(8deg) rotateY(-14deg);
-  }
-  .stage3d-inner > * {
-    transform: translateZ(var(--z, 0px));
-  }
-}
-
 /* ── Hero studio wall (Marquee): framed pieces on black ── */
 .mq-item {
   transform: rotate(var(--tilt, 0deg));

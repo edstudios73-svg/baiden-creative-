@@ -74,7 +74,7 @@ export default function HomePage() {
                 </ButtonLink>
               </div>
             </div>
-            <div className="hidden lg:col-span-6 lg:block xl:col-span-7">
+            <div className="hidden lg:col-span-6 lg:block lg:self-center xl:col-span-7">
               <HeroVisual />
             </div>
           </div>
