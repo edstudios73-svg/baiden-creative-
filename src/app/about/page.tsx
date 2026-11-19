@@ -6,7 +6,6 @@ import { featuredProjects } from "@/content/projects";
 import { breadcrumbLd, foundersLd, graph, imageLd, pageMetadata } from "@/lib/seo";
 import { ProjectCard } from "@/components/ProjectCard";
 import { Carousel } from "@/components/Carousel";
-import { ArtFrame } from "@/components/ArtFrame";
 import { CtaBand } from "@/components/CtaBand";
 import { ArrowLink, Breadcrumbs, JsonLd, Label } from "@/components/ui";
 
@@ -64,18 +63,23 @@ export default function AboutPage() {
           <h2 id="founders-title" className="text-display-3 mt-4">
             The people behind <em>the studio.</em>
           </h2>
-          <div className="mt-10 grid items-end gap-8 md:mt-12 md:grid-cols-12 md:gap-10">
-            {site.foundersPhotos.map((p, i) => (
-              <div key={p.src} className={i === 0 ? "md:col-span-7" : "max-w-sm md:col-span-4 md:col-start-9 md:max-w-none"}>
-                <ArtFrame
-                  piece={{ ...p, title: p.caption, kind: site.name }}
-                  index={i}
-                  sizes={i === 0 ? "(min-width: 768px) 55vw, 100vw" : "(min-width: 768px) 30vw, 90vw"}
-                />
+          <div className="mt-10 grid items-center gap-10 md:mt-14 md:grid-cols-12">
+            {/* Round portrait: a fine ring set off the photo, like a passe-partout */}
+            <figure className="md:col-span-4" data-reveal>
+              <div className="relative mx-auto size-44 rounded-full border border-ink p-2 sm:size-52 md:mx-0 md:size-56">
+                <div className="relative size-full overflow-hidden rounded-full bg-paper">
+                  <Image
+                    src={site.foundersPortrait.src}
+                    alt={site.foundersPortrait.alt}
+                    fill
+                    sizes="(min-width: 768px) 14rem, 13rem"
+                    className="object-cover grayscale-[15%]"
+                  />
+                </div>
               </div>
-            ))}
-          </div>
-          <ul className="mt-14">
+              <figcaption className="text-label mt-5 text-center text-graphite md:text-left">Baiden David &amp; Baiden Daniel</figcaption>
+            </figure>
+          <ul className="border-b border-ink md:col-span-8">
             {site.founders.map((f, i) => (
               <li key={f.name} className="group grid items-end gap-4 border-t border-ink py-8 md:grid-cols-12" data-reveal style={delay(i)}>
                 {f.photo && (
@@ -87,11 +91,12 @@ export default function AboutPage() {
                     </div>
                   </div>
                 )}
-                <p className={`text-display-1 ${f.photo ? "md:col-span-6" : "md:col-span-9"}`}>{f.name}</p>
+                <p className={`text-display-2 ${f.photo ? "md:col-span-6" : "md:col-span-9"}`}>{f.name}</p>
                 <p className="text-label text-graphite md:col-span-3 md:justify-self-end">{f.role}</p>
               </li>
             ))}
           </ul>
+          </div>
         </div>
       </section>
 
@@ -144,7 +149,7 @@ export default function AboutPage() {
             about: { "@id": `${site.url}/#organization` },
             mainEntity: { "@id": `${site.url}/#organization` },
             primaryImageOfPage: imageLd(site.foundersPhotos[0]),
-            image: site.foundersPhotos.map(imageLd),
+            image: [site.foundersPhotos[0], site.foundersPortrait].map(imageLd),
           },
           ...foundersLd(),
         )}

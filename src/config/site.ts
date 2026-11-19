@@ -27,14 +27,14 @@ export const site = {
       alt: "Baiden David and Baiden Daniel, the founders of Baiden Creatives",
       caption: "Baiden David & Baiden Daniel",
     },
-    {
-      src: "/assets/founders/baiden-creatives-co-founder.jpg",
-      width: 720,
-      height: 956,
-      alt: "A co-founder of Baiden Creatives",
-      caption: "Co-founder",
-    },
   ],
+  // The founders' faces and shoulders, cropped square from the photo above, shown in a round frame on /about.
+  foundersPortrait: {
+    src: "/assets/founders/baiden-creatives-founders-portrait.jpg",
+    width: 720,
+    height: 720,
+    alt: "Baiden David and Baiden Daniel, the founders of Baiden Creatives",
+  },
   // photo: add an approved portrait (file in public/assets/founders/) and it appears on /about and in search data.
   founders: [
     { name: "Baiden David", role: "Co-founder", photo: null as { src: string; width: number; height: number } | null },
