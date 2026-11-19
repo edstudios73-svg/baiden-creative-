@@ -230,7 +230,7 @@ export default function BaidxPage() {
           url: `${site.url}/baid-x`,
           name: "BAID X: the story",
           primaryImageOfPage: imageLd(baidx.images.hero),
-          image: [baidx.images.hero, baidx.logoMark, ...baidx.people, ...story.gallery].map(imageLd),
+          image: [baidx.images.hero, baidx.logoMark, ...story.gallery].map(imageLd),
         })}
       />
     </>
