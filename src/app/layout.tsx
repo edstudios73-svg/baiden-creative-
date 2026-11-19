@@ -3,7 +3,6 @@ import { site } from "@/config/site";
 import { graph, organizationLd, productsLd, websiteLd } from "@/lib/seo";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { RevealObserver } from "@/components/RevealObserver";
 import { JsonLd } from "@/components/ui";
 import { geist, geistMono, instrument } from "./fonts";
 import "./globals.css";
@@ -38,10 +37,6 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${instrument.variable} ${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
-      <head>
-        {/* Enables reveal animations only when JavaScript runs; without it, all content stays visible. */}
-        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
-      </head>
       <body>
         <a href="#main" className="skip-link">
           Skip to content
@@ -49,7 +44,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
-        <RevealObserver />
         <JsonLd data={graph(organizationLd(), websiteLd(), ...productsLd())} />
       </body>
     </html>
